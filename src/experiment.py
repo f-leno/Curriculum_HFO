@@ -50,7 +50,7 @@ def get_args():
     parser.add_argument('-e','--learning_time',type=int, default=4000)
     parser.add_argument('-te','--type_evaluation',choices=['episode','steps'], default='episode')
     parser.add_argument('-i','--evaluation_interval',type=int, default=100)
-    parser.add_argument('-d','--evaluation_duration',type=int, default=10)
+    parser.add_argument('-d','--evaluation_duration',type=int, default=100)
     parser.add_argument('-s','--seed',type=int, default=12345)
     parser.add_argument('-l','--log_folder',default='./log/')
     parser.add_argument('-sf','--source_folder',default='./tasks/')

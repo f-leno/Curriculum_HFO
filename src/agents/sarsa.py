@@ -33,7 +33,7 @@ class SARSA(Agent):
     qTable = None
     
     initQ = None #Value to initiate Q-table
-
+    foundState = {}
     
 
     def __init__(self, seed=12345,alpha=0.2,epsilon=0.1,initQ = 0, decayRate = 0.9):
@@ -59,7 +59,13 @@ class SARSA(Agent):
             The allowExploration can be turned of to select one action without risk of getting
             a random action.
         """
+        
         state = self.tileManager.get_tiles(state)
+        
+        #if state not in self.foundState:
+        #    print ("NEW")
+        #self.foundState[state] = 1
+        
         #If exploring, an exploration strategy is executed
         if self.exploring and allowExploration:
             action =  self.exp_strategy(state)
@@ -81,11 +87,15 @@ class SARSA(Agent):
     def max_Q_action(self,state,forExploration):
         """Returns the action that corresponds to the highest Q-value"""
         actions = self.environment.all_actions(forExploration=forExploration)
+        if len(actions)==1:
+            return actions[0]
         v,a =  self.functions.get_max_Q_value_action(self.qTable,state,actions,self.exploring,self)
         return a
     def get_max_Q_value(self,state,forExploration):
         """Returns the maximum Q value for a state"""
         actions = self.environment.all_actions(forExploration=forExploration)
+        if len(actions)==1:
+            return self.readQTable(state,actions[0])
         v,a =  self.functions.get_max_Q_value_action(self.qTable,state,actions,self.exploring,self)
         return v
         
@@ -133,6 +143,7 @@ class SARSA(Agent):
         """Returns one value from the Qtable"""
         if not (state,action) in self.qTable:
             self.qTable[(state,action)] = self.initQ
+        
         return self.qTable[(state,action)] 
         
     def finish_episode(self):

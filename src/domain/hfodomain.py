@@ -310,7 +310,7 @@ def connect_server(self):
             #Wait until one action is chosen
             while self.applyAction is None and not self.clearServer:
                 #print("Waiting action")
-                time.sleep(0.01)
+                time.sleep(0.0001)
             #Verifies if the agent should stop learning
             if self.clearServer:
                 continue
@@ -326,7 +326,7 @@ def connect_server(self):
             self.actionParameter = None
             #Perform HFO step
             while not self.stepRequest and not self.clearServer:
-                time.sleep(0.01)
+                time.sleep(0.0001)
             #Should the agent stop learning?
             if self.clearServer:
                 continue
