@@ -1,0 +1,1 @@
+cmd='/home/leno/anaconda3/envs/hfo/bin/cmake;-DCMAKE_BUILD_TYPE=RelwithDebInfo;-GUnix Makefiles;/home/leno/gitProjects/HFO_original/build/librcsc-prefix/src/librcsc'

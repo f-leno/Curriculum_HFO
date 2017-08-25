@@ -1,0 +1,4 @@
+/home/leno/gitProjects/HFO_original/build/soccerwindow2-prefix/src/soccerwindow2-build/CMakeFiles/edit_cache.dir
+/home/leno/gitProjects/HFO_original/build/soccerwindow2-prefix/src/soccerwindow2-build/CMakeFiles/rebuild_cache.dir
+/home/leno/gitProjects/HFO_original/build/soccerwindow2-prefix/src/soccerwindow2-build/CMakeFiles/soccerwindow2.dir
+/home/leno/gitProjects/HFO_original/build/soccerwindow2-prefix/src/soccerwindow2-build/CMakeFiles/soccerwindow2_automoc.dir

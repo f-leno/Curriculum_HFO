@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../src/HFO.hpp
+string
+-
+vector
+-
+common.hpp
+../src/common.hpp
+
+../src/common.hpp
+assert.h
+-
+stdlib.h
+-
+iostream
+-
+sstream
+-
+
+/home/leno/gitProjects/HFO_original/example/hand_coded_defense_agent.cpp
+vector
+-
+HFO.hpp
+-
+cstdlib
+-
+math.h
+-
+fstream
+-
+

@@ -1,0 +1,1 @@
+cmd='/home/leno/anaconda3/envs/hfo/bin/cmake;-DCMAKE_BUILD_TYPE=MinSizeRel;-DLIBRCSC_INCLUDE_DIR=/home/leno/gitProjects/HFO_original/build/librcsc-prefix/src/librcsc;-DLIBRCSC_LINK_DIR=/home/leno/gitProjects/HFO_original/build/librcsc-prefix/src/librcsc-build/lib;-GUnix Makefiles;/home/leno/gitProjects/HFO_original/build/soccerwindow2-prefix/src/soccerwindow2'

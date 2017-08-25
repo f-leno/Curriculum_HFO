@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+13fc7beb27259b22652e9d0bf9304417 CMakeFiles/soccerwindow2_automoc
