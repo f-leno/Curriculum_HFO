@@ -137,7 +137,8 @@ class HFOEnv(object):
         
         #Kill the HFO server
         subprocess.call("kill -9 -"+str(self.serverProcess.pid), shell=True)
-        portmanager.release_port(self.serverPort)
+        time.sleep(2)
+        #portmanager.release_port(self.serverPort)
         
     def finish_learning(self):
         self.clean_connections()
@@ -192,7 +193,7 @@ class HFOEnv(object):
                                    stateFeatures[f.FRIEND4_Y]- stateFeatures[f.Y_POSITION]))
                         listIDs.append(stateFeatures[f.FRIEND4_NUMBER])
             #Get list of friends' indexes in descending order according to proximity
-            idsOrder = sorted(range(len(listProx)), key=lambda k: listProx[k],reverse=True)
+            idsOrder = sorted(range(len(listProx)), key=lambda k: listProx[k])
             #To whom the agent should pass
             indexFriend = idsOrder[indexAction]
             #Id according to HFO internal code

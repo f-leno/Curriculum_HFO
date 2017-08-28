@@ -47,7 +47,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-t','--task_path', default='./tasks/')
     parser.add_argument('-a','--algorithm',  default='Dummy') 
-    parser.add_argument('-e','--learning_time',type=int, default=4000)
+    parser.add_argument('-e','--learning_time',type=int, default=8000)
     parser.add_argument('-te','--type_evaluation',choices=['episode','steps'], default='episode')
     parser.add_argument('-i','--evaluation_interval',type=int, default=100)
     parser.add_argument('-d','--evaluation_duration',type=int, default=100)
@@ -204,7 +204,6 @@ def main():
         
         
         #Load target Task
-        
         environment_target,target_task = domain.build_environment(taskFile=parameter.task_path,limitSteps=200,taskName = 'target')
         
         #Generate Curriculum for target task
@@ -221,6 +220,7 @@ def main():
             termination.init_task()
             #Initiate task
             environment = domain.build_environment_from_task(task=task,limitSteps=200)
+            
             #environment = environment_target
             environment.start_episode()
             if debugImage:
@@ -236,6 +236,7 @@ def main():
                 #Check if it is time to policy evaluation and the agent is training in the target task
                 if task==target_task and evaluate_now(totalEpisodes,totalSteps,parameter,lastEpisodeFinished):
 #--------------------------------------- Policy Evaluation---------------------------------------------
+                    
                     agent.set_exploring(False)
                     agent.connect_env(environment_target)
                     stepsToFinish = 0
@@ -277,8 +278,11 @@ def main():
                     eval_csv_writer.writerow((time,"{:.2f}".format(stepsToFinish),"{:.15f}".format(sumR),"{:.2f}".format(numGoals)))
                     eval_csv_file.flush()
                     agent.set_exploring(True) 
+                    environment_target.finish_learning() 
+                    #Rebuild environment for target task
+                    environment_target = domain.build_environment_from_task(task=target_task,limitSteps=200)
                     
-                    print("*******Eval OK: EP:"+str(episodes)+" Steps:"+str(totalSteps)+" - Duration: "+str(stepsToFinish))
+                    print("*******Eval OK: EP:"+str(episodes)+" Steps:"+str(totalSteps)+" - Duration: "+str(stepsToFinish) + " - Goal Perc: "+ "{:.2f}".format(numGoals))
 #-----------------------------------End Policy Evaluation---------------------------------------------
                 #One larning step is performed
                 totalSteps += 1

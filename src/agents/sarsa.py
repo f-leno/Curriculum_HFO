@@ -6,7 +6,7 @@ SARSA(lambda) simple implementation
 """
 
 import random
-import math
+
 
 from .agent import Agent
 from .common_features import Agent_Utilities

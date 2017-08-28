@@ -6,6 +6,7 @@ Code to make it easier to deal with the state space in HFO
 @author: Felipe Leno
 """
 import numpy as np
+import math
 class HFOStateManager(object):
     """Performs all needed transformations in the state space"""
     #Number of friends and opponents in the task
@@ -33,8 +34,9 @@ class HFOStateManager(object):
                   #self.GOAL_ANGLE,
                   #self.GOAL_OPENING,
                   #self.OPPONENT_PROXIMITY,
+                  #self.FRIEND1_GOAL_OPENING,self.FRIEND2_GOAL_OPENING,self.FRIEND3_GOAL_OPENING,self.FRIEND4_GOAL_OPENING,
                   self.FRIEND1_OPP_PROXIMITY,self.FRIEND2_OPP_PROXIMITY,self.FRIEND3_OPP_PROXIMITY,self.FRIEND4_OPP_PROXIMITY,
-                  #self.FRIEND1_PASS_OPENING,self.FRIEND2_PASS_OPENING,self.FRIEND3_PASS_OPENING,self.FRIEND4_PASS_OPENING,
+                  self.FRIEND1_PASS_OPENING,self.FRIEND2_PASS_OPENING,self.FRIEND3_PASS_OPENING,self.FRIEND4_PASS_OPENING,
                   self.FRIEND1_X,self.FRIEND2_X,self.FRIEND3_X,self.FRIEND4_X,
                   self.FRIEND1_Y,self.FRIEND2_Y,self.FRIEND3_Y,self.FRIEND4_Y,
                   self.FRIEND1_NUMBER,self.FRIEND2_NUMBER,self.FRIEND3_NUMBER,self.FRIEND4_NUMBER,
@@ -43,14 +45,69 @@ class HFOStateManager(object):
                   self.OPP1_NUMBER,self.OPP2_NUMBER,self.OPP3_NUMBER,self.OPP4_NUMBER,self.OPP5_NUMBER,
                   self.LAST_ACTION_SUCESS,
                  ]
+        #Sorts friends by distance
+        self.reorderFeatures(stateFeatures)
+        
         #Remove from the list attributes that do not exist
         remove = [x for x in remove if x is not None]
         stateFeatures = np.delete(stateFeatures,remove)
+        
+
 
         return tuple(stateFeatures.tolist())
     
-    
-    
+    def reorderFeatures(self,stateFeatures):
+        """
+            Calculates the distance between the agent and each friendly unit
+            and then sorts the attributes according to the distance
+            (for example, FRIEND1_Y corresponds to the closest friend)
+            This is needed because of the PASS actions, which take into account
+            the distance of friendly agents
+        """
+        
+        #if there is at least two friends
+        if self.FRIEND2_X != None:
+                #Sort Friends by euclidian distance
+                listProx = [math.hypot(stateFeatures[self.FRIEND1_X]- stateFeatures[self.X_POSITION], 
+                                   stateFeatures[self.FRIEND1_Y]- stateFeatures[self.Y_POSITION])]
+                listProx.append(math.hypot(stateFeatures[self.FRIEND2_X]- stateFeatures[self.X_POSITION], 
+                                   stateFeatures[self.FRIEND2_Y]- stateFeatures[self.Y_POSITION]))
+                
+                
+                if self.FRIEND3_X != None:
+                    listProx.append(math.hypot(stateFeatures[self.FRIEND3_X]- stateFeatures[self.X_POSITION], 
+                                   stateFeatures[self.FRIEND3_Y]- stateFeatures[self.Y_POSITION]))
+                    
+                    if self.FRIEND4_X != None:
+                        listProx.append(math.hypot(stateFeatures[self.FRIEND4_X]- stateFeatures[self.X_POSITION], 
+                                   stateFeatures[self.FRIEND4_Y]- stateFeatures[self.Y_POSITION]))
+                        
+            
+                #Get list of friends' indexes in descending order according to proximity
+                idsOrder = sorted(range(len(listProx)), key=lambda k: listProx[k])
+                
+                #Get the sorted list and prepares the values to be changed
+                copyList = []
+                for i in range(len(listProx)):
+                    #Values from one of the friends
+                    copyList.append([
+                            stateFeatures[getattr(self, 'FRIEND'+str(idsOrder[i]+1)+'_GOAL_OPENING')],
+                            stateFeatures[getattr(self, 'FRIEND'+str(idsOrder[i]+1)+'_OPP_PROXIMITY')],
+                            stateFeatures[getattr(self, 'FRIEND'+str(idsOrder[i]+1)+'_PASS_OPENING')],
+                            stateFeatures[getattr(self, 'FRIEND'+str(idsOrder[i]+1)+'_X')],
+                            stateFeatures[getattr(self, 'FRIEND'+str(idsOrder[i]+1)+'_Y')],
+                            stateFeatures[getattr(self, 'FRIEND'+str(idsOrder[i]+1)+'_NUMBER')]
+                                   ])
+                #Finally sets the values
+                for i in range(1,len(listProx)+1):
+                     stateFeatures[getattr(self, 'FRIEND'+str(i)+'_GOAL_OPENING')] = copyList[i-1][0]
+                     stateFeatures[getattr(self, 'FRIEND'+str(i)+'_OPP_PROXIMITY')] = copyList[i-1][1]
+                     stateFeatures[getattr(self, 'FRIEND'+str(i)+'_PASS_OPENING')] = copyList[i-1][2]
+                     stateFeatures[getattr(self, 'FRIEND'+str(i)+'_X')] = copyList[i-1][3]
+                     stateFeatures[getattr(self, 'FRIEND'+str(i)+'_Y')] = copyList[i-1][4]
+                     stateFeatures[getattr(self, 'FRIEND'+str(i)+'_NUMBER')] = copyList[i-1][5]
+                    
+          
     
     
     #-----------------------------------
