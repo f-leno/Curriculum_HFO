@@ -36,7 +36,7 @@ class SARSA(Agent):
     foundState = {}
     
 
-    def __init__(self, seed=12345,alpha=0.2,epsilon=0.1,initQ = 0, decayRate = 0.9):
+    def __init__(self, seed=12345,alpha=0.5,epsilon=0.1,initQ = 0, decayRate = 0.9):
         
         self.functions = Agent_Utilities()
         self.alpha = alpha
@@ -137,6 +137,8 @@ class SARSA(Agent):
                 #Decays the trace
                 self.stateActionTrace[stateAction] = self.stateActionTrace[stateAction] * self.gamma * self.decayRate
                 self.qTable[stateAction] = newQ
+            if self.alpha > 0.1:
+                self.alpha -= 0.001
         
 
     def readQTable(self,state,action):             

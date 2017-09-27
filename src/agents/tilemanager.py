@@ -9,7 +9,7 @@ import Tiles.tiles as tiles
 class TileManager():
     
     #Default parameters for tiles
-    memct = 1024 #memory for hashtable
+    memct = 48 #memory for hashtable
     numtilings = 5 #Number of tiles
     
     def get_tiles(self,state):
