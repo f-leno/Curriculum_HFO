@@ -233,7 +233,8 @@ class HFOEnv(object):
         return self.filter_features(self.hfoObj.getState())
     
     def filter_features(self,stateFeatures):
-        """Removes the irrelevant features from the HFO standard feature set"""     
+        """Removes the irrelevant features from the HFO standard feature set"""   
+        stateFeatures = self.stateSpaceManager.reorderFeatures(stateFeatures)
         return self.stateSpaceManager.filter_features(stateFeatures)
 
 
@@ -352,7 +353,7 @@ def init_server(self,taskParam,limitFrames):
            [2] - strategy of the enemy team - 'base','helios'
            [3] - avg initial distance from goal - from 0 to 1
            [4] - seed for server
-            
+           [5] - Boolean indicating if all the players are npcs
             
         """
         numberFriends   = taskParam[0]
@@ -360,6 +361,7 @@ def init_server(self,taskParam,limitFrames):
         opStrategy      = taskParam[2]
         avgDist         = taskParam[3]
         seed            = taskParam[4]
+        
         
         
 

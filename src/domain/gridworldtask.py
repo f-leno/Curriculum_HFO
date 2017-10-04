@@ -7,7 +7,7 @@ Class to store all task parameters (can be built from text files)
 
 @author: Felipe Leno
 """
-from task import Task
+from domain.task import Task
 class GridWorldTask(Task):
     
     #Task Parameters and initial state
@@ -102,6 +102,52 @@ class GridWorldTask(Task):
         taskInfo.sort(key=operator.itemgetter(0, 1, 2))
     
         return taskInfo
+        
+    def transfer_potential(self,targetTask):
+        """Calculates the transfer potential between two tasks"""
+        sourceTask = self
+        sizeXSource = sourceTask.get_sizeX()
+        sizeYSource = sourceTask.get_sizeY()
+        
+        sizeXTarget = targetTask.get_sizeX()
+        sizeYTarget = targetTask.get_sizeY()
+        
+        locationTraceSource = []
+        locationTraceTarget = []
+        #For all possible position, calculates the distance between the objects
+        for x in range(1,sizeXSource+1):
+            for y in range(1,sizeYSource+1):
+                distances = []
+                #Iterates over all objects in the source task
+                for obj in sourceTask.init_state():
+                    #If it is an obstacle, stores the distance
+                    if obj[0] in sourceTask.relevantClasses :
+                        distances.append([(x - obj[1],y - obj[2],obj[0])]) 
+                #Stores distances for that position
+                locationTraceSource.append(distances)
+        #Now, the same thing is done for the targetTask
+        
+        for x in range(1,sizeXTarget+1):
+            for y in range(1,sizeYTarget+1):
+                distances = []
+                #Iterates over all objects in the source task
+                for obj in targetTask.init_state():
+                    #If it is an obstacle, stores the distance
+                    if obj[0] in targetTask.relevantClasses :
+                        distances.append([(x - obj[1],y - obj[2],obj[0])]) 
+                #Stores distances for that position
+                locationTraceTarget.append(distances)
+        
+        applicable = 0
+        for distSource in locationTraceSource:
+            for distTarget in locationTraceTarget:
+                #If equivalent state exists
+                if all(x in distTarget for x in distSource):
+                    applicable += 1
+                    
+        #Now, calculates potential
+        pot = float(applicable) / (1 + sizeXTarget*sizeYTarget - sizeXSource*sizeYSource)
+        return pot
         
         
 

@@ -10,7 +10,7 @@ import random
 
 from .agent import Agent
 from .common_features import Agent_Utilities
-from .tilemanager import TileManager
+from .tilemanager import TileManager,TileCoding
 
 
 
@@ -36,7 +36,7 @@ class SARSA(Agent):
     foundState = {}
     
 
-    def __init__(self, seed=12345,alpha=0.5,epsilon=0.1,initQ = 0, decayRate = 0.9):
+    def __init__(self, seed=12345,alpha=0.7,epsilon=0.1,initQ = 0, decayRate = 0.92):
         
         self.functions = Agent_Utilities()
         self.alpha = alpha
@@ -45,6 +45,7 @@ class SARSA(Agent):
         self.stateActionTrace = {}
         self.decayRate = decayRate
         self.initQ = initQ
+        #self.tileManager = TileManager()
         self.tileManager = TileManager()
         super(SARSA, self).__init__(seed=seed)
         

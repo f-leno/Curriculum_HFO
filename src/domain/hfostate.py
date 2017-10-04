@@ -106,10 +106,148 @@ class HFOStateManager(object):
                      stateFeatures[getattr(self, 'FRIEND'+str(i)+'_X')] = copyList[i-1][3]
                      stateFeatures[getattr(self, 'FRIEND'+str(i)+'_Y')] = copyList[i-1][4]
                      stateFeatures[getattr(self, 'FRIEND'+str(i)+'_NUMBER')] = copyList[i-1][5]
+        #if there are two or more opponents
+        if self.OPP2_X != None:
+            listProx = []
+            #Sort by euclidian distance
+            for i in range(self.numberOpponents):
+                   listProx.append(math.hypot(stateFeatures[getattr(self, 'OPP'+str(i+1)+'_X')]- stateFeatures[self.X_POSITION], 
+                          stateFeatures[getattr(self, 'OPP'+str(i+1)+'_Y')]- stateFeatures[self.Y_POSITION]))
+                            #Get list of friends' indexes in descending order according to proximity
+            idsOrder = sorted(range(len(listProx)), key=lambda k: listProx[k])
+                            #Get the sorted list and prepares the values to be changed
+            copyList = []
+            for i in range(len(listProx)):
+                #Values from one of the friends
+                copyList.append([
+                        stateFeatures[getattr(self, 'OPP'+str(idsOrder[i]+1)+'_X')],
+                        stateFeatures[getattr(self, 'OPP'+str(idsOrder[i]+1)+'_Y')],
+                        stateFeatures[getattr(self, 'OPP'+str(idsOrder[i]+1)+'_NUMBER')]
+                               ])
+            #Finally sets the values
+            for i in range(1,len(listProx)+1):
+                 stateFeatures[getattr(self, 'OPP'+str(i)+'_X')] = copyList[i-1][0]
+                 stateFeatures[getattr(self, 'OPP'+str(i)+'_Y')] = copyList[i-1][1]
+                 stateFeatures[getattr(self, 'OPP'+str(i)+'_NUMBER')] = copyList[i-1][2]
+                
+        return stateFeatures
                     
           
+    def get_friend_info(self,stateFeatures):
+        """Returns a list containing all features corresponding to friendly agents.
+        The return will be a list in which each position corresponds to an agent
+        """
+        
+        friendInfo = []
+        #Returns all attributes for each friend
+        for i in range(self.numberFriends):
+                    #Values from one of the friends
+                    friendInfo.append([
+                            stateFeatures[getattr(self, 'FRIEND'+str(i+1)+'_GOAL_OPENING')],
+                            stateFeatures[getattr(self, 'FRIEND'+str(i+1)+'_OPP_PROXIMITY')],
+                            stateFeatures[getattr(self, 'FRIEND'+str(i+1)+'_PASS_OPENING')],
+                            stateFeatures[getattr(self, 'FRIEND'+str(i+1)+'_X')],
+                            stateFeatures[getattr(self, 'FRIEND'+str(i+1)+'_Y')],
+                            stateFeatures[getattr(self, 'FRIEND'+str(i+1)+'_NUMBER')]
+                            ])
+        
+        
+        return friendInfo
+   
+    def get_enemy_info(self,stateFeatures):
+        """Likewise get_friend_info, returns a list containing features correspondings
+        to enemy agents."""
+        enemyInfo = []
+        #Returns all attributes for each friend
+        for i in range(self.numberOpponents):
+                    #Values from one of the friends
+                    enemyInfo.append([
+                            stateFeatures[getattr(self, 'OPP'+str(i+1)+'_X')],
+                            stateFeatures[getattr(self, 'OPP'+str(i+1)+'_Y')],
+                            stateFeatures[getattr(self, 'OPP'+str(i+1)+'_NUMBER')]
+                            ])
+        
+        
+        return enemyInfo
+    def get_independent_info(self,stateFeatures):
+        """Returns the portion of the state that is not dependent on the number of 
+          opponents and friends. An extra position is used in case at least one enemy
+          is in the enviornment for the OPPONENT_PROXIMITY attribute"""
+        independentInfo = []
+        if self.numberOpponents > 0:
+            independentInfo.append(stateFeatures[self.OPPONENT_PROXIMITY])
+            
+        independentInfo.extend([stateFeatures[self.X_POSITION],
+                               stateFeatures[self.Y_POSITION],
+                               stateFeatures[self.ORIENTATION],
+                               stateFeatures[self.BALL_X],
+                               stateFeatures[self.BALL_Y],
+                               stateFeatures[self.ABLE_KICK],
+                               stateFeatures[self.CENTER_PROXIMITY],
+                               stateFeatures[self.GOAL_ANGLE],
+                               stateFeatures[self.GOAL_OPENING]#,
+                               #stateFeatures[self.LAST_ACTION_SUCESS]                               
+                               ])
+        
+        return independentInfo
     
-    
+    def build_state(self,infoFriend,infoEnemies,infoIndependent):
+        """Given all the features, creates a state for this state manager.
+           The given features will be validated. In case of an invalid entry (in
+           terms of number of features), an error will be thrown."""
+        #Validating number of objects
+        if len(infoFriend) != self.numberFriends:
+            raise ValueError("A wrong number of parameters was specified for the 'build_state' function. "+
+                              str(len(infoFriend))+" friend parameters informed, "+str(self.numberFriends)+" required.")
+        if len(infoEnemies) != self.numberOpponents:
+            raise ValueError("A wrong number of parameters was specified for the 'build_state' function. "+
+                              str(len(infoEnemies))+" opponent parameters informed, "+str(self.numberOpponents)+" required.")
+        if self.numberOpponents > 0:
+            if len(infoIndependent) != 10:
+                raise ValueError("A wrong number of parameters was specified for the 'build_state' function. "+
+                              str(len(infoIndependent))+" opponent parameters informed, 11 required.")
+        else:
+            if len(infoIndependent) != 9:
+                    raise ValueError("A wrong number of parameters was specified for the 'build_state' function. "+
+                              str(len(infoIndependent))+" opponent parameters informed, 10 required.")
+                    
+        newState = [None]*(self.LAST_ACTION_SUCESS)
+       
+        #---- Independent Features
+        if self.numberOpponents > 0:
+           newState[self.OPPONENT_PROXIMITY] = infoIndependent[0]
+           
+        newState[self.X_POSITION] = infoIndependent[1]
+        newState[self.Y_POSITION] = infoIndependent[2]
+        newState[self.ORIENTATION] = infoIndependent[3]
+        newState[self.BALL_X] = infoIndependent[4]
+        newState[self.BALL_Y] = infoIndependent[5]
+        newState[self.ABLE_KICK] = infoIndependent[6]
+        newState[self.CENTER_PROXIMITY] = infoIndependent[7]
+        newState[self.GOAL_ANGLE] = infoIndependent[8]
+        newState[self.GOAL_OPENING] = infoIndependent[9]
+        #newState[self.LAST_ACTION_SUCESS] = infoIndependent[10]
+        
+        #---- Friend Features
+        for i in range(self.numberFriends):
+             #Values from one of the friends
+             newState[getattr(self, 'FRIEND'+str(i+1)+'_GOAL_OPENING')] = infoFriend[i][0]
+             newState[getattr(self, 'FRIEND'+str(i+1)+'_OPP_PROXIMITY')] = infoFriend[i][1]
+             newState[getattr(self, 'FRIEND'+str(i+1)+'_PASS_OPENING')] = infoFriend[i][2]
+             newState[getattr(self, 'FRIEND'+str(i+1)+'_X')] = infoFriend[i][3]
+             newState[getattr(self, 'FRIEND'+str(i+1)+'_Y')] = infoFriend[i][4]
+             newState[getattr(self, 'FRIEND'+str(i+1)+'_NUMBER')] = infoFriend[i][5]
+        #---- Enemy Features
+        for i in range(self.numberOpponents):
+             #Values from one of the friends
+             newState[getattr(self, 'OPP'+str(i+1)+'_X')] = infoEnemies[i][0]
+             newState[getattr(self, 'OPP'+str(i+1)+'_Y')] = infoEnemies[i][1]
+             newState[getattr(self, 'OPP'+str(i+1)+'_NUMBER')] = infoEnemies[i][2]     
+        #Now, the state is built
+        return newState
+                            
+                  
+            
     #-----------------------------------
     #Variables that are valid and are in the same position for all parameters
     #-----------------------------------

@@ -180,6 +180,7 @@ def main():
     parameter.source_folder = parameter.source_folder + parameter.domain + "/source/"
     
     
+    
 
     
     for trial in range(parameter.init_trials,parameter.end_trials+1):
@@ -206,6 +207,8 @@ def main():
         #Load target Task
         environment_target,target_task = domain.build_environment(taskFile=parameter.task_path,limitSteps=200,taskName = 'target')
         
+        import time
+        time.sleep(2)
         #Generate Curriculum for target task
         curriculum.generate_curriculum(target_task, parameter.source_folder,workFolder)
         
@@ -218,8 +221,11 @@ def main():
         while not curriculum.empty_curriculum():
             task = curriculum.draw_task()
             termination.init_task()
+            print("*****Initiating new task")
             #Initiate task
             environment = domain.build_environment_from_task(task=task,limitSteps=200)
+            import time
+            time.sleep(2)
             
             #environment = environment_target
             environment.start_episode()
@@ -236,7 +242,9 @@ def main():
                 #Check if it is time to policy evaluation and the agent is training in the target task
                 if task==target_task and evaluate_now(totalEpisodes,totalSteps,parameter,lastEpisodeFinished):
 #--------------------------------------- Policy Evaluation---------------------------------------------
-                    
+                    environment_target = domain.build_environment_from_task(task=target_task,limitSteps=200)
+                    import time
+                    time.sleep(2)
                     agent.set_exploring(False)
                     agent.connect_env(environment_target)
                     stepsToFinish = 0
@@ -280,7 +288,7 @@ def main():
                     agent.set_exploring(True) 
                     environment_target.finish_learning() 
                     #Rebuild environment for target task
-                    environment_target = domain.build_environment_from_task(task=target_task,limitSteps=200)
+                    
                     
                     print("*******Eval OK: EP:"+str(episodes)+" Steps:"+str(totalSteps)+" - Duration: "+str(stepsToFinish) + " - Goal Perc: "+ "{:.2f}".format(numGoals))
 #-----------------------------------End Policy Evaluation---------------------------------------------
