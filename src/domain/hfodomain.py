@@ -378,7 +378,7 @@ def init_server(self,taskParam,limitFrames):
         #Build all commands correspondent to parameters
         agentsParam = " --offense-agents 1 --offense-npcs "+str(numberFriends)
         opponentsParam = " --defense-npcs "+str(numberOpponents)
-        opStrategy = " --offense-team base --defense-team " + opStrategy
+        opStrategy = " --offense-team helios --defense-team " + opStrategy
         initDist = " --ball-x-min "+str(xMin) + " --ball-x-max "+str(xMax)
         seedParam = " --seed "+str(seed)
         framesParam = " --frames-per-trial "+ str(limitFrames)
