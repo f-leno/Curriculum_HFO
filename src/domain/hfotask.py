@@ -61,6 +61,15 @@ class HFOTask(Task):
         return hash(taskTuple)
     
 
+    def init_state(self):
+        """Returns a list composed of one element for each friend and enemy agents"""
+        mockState = []
+        for i in range(self.numberFriends):
+            mockState.append(["friend",0])
+        for i in range(self.numberEnemies):
+            mockState.append(["enemy",0])
+        return mockState
+    
     
     def transfer_potential(self,targetTask):
         """Calculates the transfer potential between two tasks
@@ -70,8 +79,8 @@ class HFOTask(Task):
         
         """
         sourceTask = self
-        stateSpaceSource = 100 * (1-sourceTask.distance) * (1+ sourceTask.numberFriends + sourceTask.numberEnemies)
-        stateSpaceTarget = 100 * (1-targetTask.distance) * (1+ targetTask.numberFriends + targetTask.numberEnemies)
+        stateSpaceSource = sourceTask.state_space()
+        stateSpaceTarget = targetTask.state_space()
         
         qInCommon = 100 * \
                     min(1-sourceTask.distance, 1-targetTask.distance) * \
@@ -79,6 +88,15 @@ class HFOTask(Task):
                     
         transferPot = qInCommon / (1 + stateSpaceTarget - stateSpaceSource)
         return transferPot
+    
+            
+    def state_space(self):
+        """Returns the state space of this task"""
+        return  100 * (1-self.distance) * (1+ self.numberFriends+self.numberEnemies)
+         
+    def number_objects(self):
+        """Returns the number of objects if the object-oriented description is used."""
+        return self.numberEnemies + self.numberFriends
     
     
 def is_contained(featuresSource,featuresTarget):

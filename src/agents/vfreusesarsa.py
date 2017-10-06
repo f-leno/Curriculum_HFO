@@ -112,8 +112,11 @@ class VFReuseSARSA(SARSA):
             #If the target task has less friends, then only the closest ones are considered
             infoEnemies = infoEnemies[0:enemiesSource]
         #Other info are simply copied
-        infoIndependent = managerTarget.get_independent_info(currentCompleteState)    
-        
+        infoIndependent = managerTarget.get_independent_info(currentCompleteState)   
+        #In case the source task does not have any enemy but the current has, it is necessary
+        #to remove the "OPPONENT_PROXIMITY"
+        if enemiesSource == 0 and enemiesCurrent > 0:
+            del infoIndependent[0]
         state = managerSource.build_state(infoFriend,infoEnemies,infoIndependent)
         state = managerSource.filter_features(managerSource.reorderFeatures(state))
         #The approximation function is then used

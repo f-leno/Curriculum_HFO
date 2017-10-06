@@ -34,22 +34,39 @@ def task_similarity(source_task,target_task):
     # This code should be modified to a domain-independent code
     #----------------------------------------------------------------------------
     #After counting the objects, the value for each class is defined
-    for key in quantClass.keys():
-        if key=='treasure':
-            totValue = max(source_task.num_treasures(),target_task.num_treasures())
-        elif key=='fire':
-            totValue = max(source_task.num_fires(),target_task.num_fires())
-        elif key=='pit':
-            totValue = max(source_task.num_pits(),target_task.num_pits())
-        elif key=='agent':
-            totValue = 1
-        objValue += float(quantClass[key]) / totValue
-                        
+    if source_task.get_domain_task() == "HFOTask":
+        #deals separately with each domain, here with HFO
+        for key in quantClass.keys():
+            if key=="friend":
+                totValue = max(source_task.numberFriends,target_task.numberFriends)
+            elif key=='enemy':
+                totValue = max(source_task.numberEnemies,target_task.numberEnemies)
+            objValue += float(quantClass[key]) / totValue
+        #Continuar aqui
+        targetStateSpace = target_task.state_space()
+        
+        intersecStates = 100 * (1-max(source_task.distance,target_task.distance)) * \
+              (1+ min(source_task.numberFriends,target_task.numberFriends) + min(source_task.numberEnemies,target_task.numberEnemies))
+              
+        intersecStates /= targetStateSpace
+    else: #Code for the GridWorld Domain
+        for key in quantClass.keys():
+            if key=='treasure':
+                totValue = max(source_task.num_treasures(),target_task.num_treasures())
+            elif key=='fire':
+                totValue = max(source_task.num_fires(),target_task.num_fires())
+            elif key=='pit':
+                totValue = max(source_task.num_pits(),target_task.num_pits())
+            elif key=='agent':
+                totValue = 1
+            objValue += float(quantClass[key]) / totValue
+        #intersection of states
+        intersecStates = float(min(source_task.get_sizeX(),target_task.get_sizeX()) * min(source_task.get_sizeY(),target_task.get_sizeY()))
+        intersecStates /= target_task.state_space()
+                            
         
      
-    #intersection of states
-    intersecStates = float(min(source_task.get_sizeX(),target_task.get_sizeX()) * min(source_task.get_sizeY(),target_task.get_sizeY()))
-    intersecStates /= target_task.get_sizeX()*target_task.get_sizeY()
+    
     
     #--------------------------------------------------------------------------
     # End of code to be changed

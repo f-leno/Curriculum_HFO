@@ -6,18 +6,18 @@ Implementation of the Object-Oriented Curriculum Generation (with given source t
 @author: Felipe Leno
 """
 
-from __future__ import division
-from svetlikcurriculum import SvetlikCurriculum
+
+from curriculum.svetlikcurriculum import SvetlikCurriculum
 
 import OOUtil
 
 
 class ObjectOrientedCurriculum(SvetlikCurriculum):
     
-    def generate_curriculum(self,target_task, sourceFolder,workFolder,thresholdTask = 4):
+    def generate_curriculum(self,target_task, sourceFolder,workFolder,thresholdTask = 2.5):
         super(ObjectOrientedCurriculum,self).generate_curriculum(target_task=target_task,sourceFolder=sourceFolder,
              workFolder=workFolder,thresholdTask=thresholdTask)
-    def generate_curriculum_from_tasks(self,target_task, taskList,thresholdTask = 3.2):
+    def generate_curriculum_from_tasks(self,target_task, taskList,thresholdTask = 2.5):
         super(ObjectOrientedCurriculum,self).generate_curriculum_from_tasks(target_task=target_task,taskList=taskList,
              thresholdTask=thresholdTask)
         
@@ -36,11 +36,11 @@ class ObjectOrientedCurriculum(SvetlikCurriculum):
         
         
         
-        sizeStateSpaceSource = currentTask.get_sizeX() * currentTask.get_sizeY() 
-        sizeStateSpaceTarget = target_task.get_sizeX() * target_task.get_sizeY()
+        sizeStateSpaceSource = currentTask.state_space()
+        sizeStateSpaceTarget = target_task.state_space()
         
-        numObjSource = currentTask.num_pits() + currentTask.num_fires()
-        numObjTarget = currentTask.num_pits() + currentTask.num_fires()
+        numObjSource = currentTask.number_objects()
+        numObjTarget = target_task.number_objects()
                       
         transferPot = simSource / (simMax * (sizeStateSpaceSource*(numObjSource+1)) / (sizeStateSpaceTarget*(numObjTarget+1)))
         #transferPot = simSource / (simMax * sizeStateSpaceSource / sizeStateSpaceTarget)

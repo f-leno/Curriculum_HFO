@@ -28,21 +28,20 @@ from threading import Thread
 class HFODomain(Domain):
     
     def build_environment(self,taskFile,limitSteps,taskName = None):
-        """Instantiates an object representing the environment in this domain.
+        """Instantiates an object representing the task in this domain.
             --taskFile = The path for a file containing the description of a task in this domain
             --limitSteps = The maximum number of steps to be executed per episode.
             --taskName = optional parameter defining the task name.
             returns:
-                --environment: The desired environment
                 --task: The task according to the given file.
         """
         #Building the task
         task = HFOTask(filePath=taskFile,taskName=taskName)
         
         #Bulding the enviornment
-        environment = HFOEnv(taskParam = task.task_features(),limitFrames = limitSteps)
+        #environment = HFOEnv(taskParam = task.task_features(),limitFrames = limitSteps)
         
-        return environment,task
+        return task
         
        
     def build_environment_from_task(self,task,limitSteps):
@@ -378,7 +377,7 @@ def init_server(self,taskParam,limitFrames):
         #Build all commands correspondent to parameters
         agentsParam = " --offense-agents 1 --offense-npcs "+str(numberFriends)
         opponentsParam = " --defense-npcs "+str(numberOpponents)
-        opStrategy = " --offense-team helios --defense-team " + opStrategy
+        opStrategy = " --offense-team base --defense-team " + opStrategy
         initDist = " --ball-x-min "+str(xMin) + " --ball-x-max "+str(xMax)
         seedParam = " --seed "+str(seed)
         framesParam = " --frames-per-trial "+ str(limitFrames)

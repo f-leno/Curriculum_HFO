@@ -205,27 +205,29 @@ class HFOStateManager(object):
         if self.numberOpponents > 0:
             if len(infoIndependent) != 10:
                 raise ValueError("A wrong number of parameters was specified for the 'build_state' function. "+
-                              str(len(infoIndependent))+" opponent parameters informed, 11 required.")
+                              str(len(infoIndependent))+" opponent parameters informed, 10 required.")
         else:
             if len(infoIndependent) != 9:
                     raise ValueError("A wrong number of parameters was specified for the 'build_state' function. "+
-                              str(len(infoIndependent))+" opponent parameters informed, 10 required.")
+                              str(len(infoIndependent))+" opponent parameters informed, 9 required.")
                     
         newState = [None]*(self.LAST_ACTION_SUCESS)
        
+        startIndex = 0
         #---- Independent Features
         if self.numberOpponents > 0:
            newState[self.OPPONENT_PROXIMITY] = infoIndependent[0]
+           startIndex += 1
            
-        newState[self.X_POSITION] = infoIndependent[1]
-        newState[self.Y_POSITION] = infoIndependent[2]
-        newState[self.ORIENTATION] = infoIndependent[3]
-        newState[self.BALL_X] = infoIndependent[4]
-        newState[self.BALL_Y] = infoIndependent[5]
-        newState[self.ABLE_KICK] = infoIndependent[6]
-        newState[self.CENTER_PROXIMITY] = infoIndependent[7]
-        newState[self.GOAL_ANGLE] = infoIndependent[8]
-        newState[self.GOAL_OPENING] = infoIndependent[9]
+        newState[self.X_POSITION] = infoIndependent[startIndex]
+        newState[self.Y_POSITION] = infoIndependent[startIndex+1]
+        newState[self.ORIENTATION] = infoIndependent[startIndex+2]
+        newState[self.BALL_X] = infoIndependent[startIndex+3]
+        newState[self.BALL_Y] = infoIndependent[startIndex+4]
+        newState[self.ABLE_KICK] = infoIndependent[startIndex+5]
+        newState[self.CENTER_PROXIMITY] = infoIndependent[startIndex+6]
+        newState[self.GOAL_ANGLE] = infoIndependent[startIndex+7]
+        newState[self.GOAL_OPENING] = infoIndependent[startIndex+8]
         #newState[self.LAST_ACTION_SUCESS] = infoIndependent[10]
         
         #---- Friend Features

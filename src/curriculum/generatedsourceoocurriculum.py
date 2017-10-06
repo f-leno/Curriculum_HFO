@@ -7,12 +7,13 @@ Code to automaticaly generate source tasks and build a curriculum
 """
 
 
-from objectorientedcurriculum import ObjectOrientedCurriculum
+from curriculum.objectorientedcurriculum import ObjectOrientedCurriculum
 
 import os
 import random
 import copy
 import math
+import numpy as np
 
 
 class GeneratedSourceOOCurriculum(ObjectOrientedCurriculum):
@@ -23,7 +24,7 @@ class GeneratedSourceOOCurriculum(ObjectOrientedCurriculum):
     
     
     def generate_curriculum(self,target_task, sourceFolder,workFolder,thresholdTask = 1,repGeneration = 10):
-        self.workFolder = workFolder
+        self.workFolder = workFolder 
         self.target_task = target_task
         self.repGeneration = repGeneration
         
@@ -41,15 +42,8 @@ class GeneratedSourceOOCurriculum(ObjectOrientedCurriculum):
         return super(GeneratedSourceOOCurriculum,self).read_folder(self.workFolder)
      
     def generate_tasks(self,sourceFolder):
-        #Simplify function in the algorithm
-       simpleSet = [
-                        [5,5],
-                        #[2,2],
-                        [3,3],
-                        [7,7],
-                        #[5,1],
-                        #[1,5]
-                    ]
+
+       
        
        random.seed(self.seed)
        
@@ -60,17 +54,70 @@ class GeneratedSourceOOCurriculum(ObjectOrientedCurriculum):
        for item in dirContent:
            if item.endswith(".task"):
                os.remove(self.workFolder+ item)
+               
+       if self.target_task.get_domain_task() == "HFOTask":
+           self.generate_hfo()
+       else:
+            self.generate_gridworld()
        
-       num_fires = self.target_task.num_fires()
-       num_pits = self.target_task.num_pits()
+    def generate_hfo(self):
+        """Generates the set of source tasks for the hfo domain"""
+              #Simplify function in the algorithm
+        #In this case the simple set is the distance
+        simpleSet = []
+        
+        dist = self.target_task.distance
+        
+        #Generate various distances
+        for i in np.arange(dist,1.0,0.1):
+            simpleSet.append(i)
+        
+        numFriends = self.target_task.numberFriends
+        numEnemies = self.target_task.numberEnemies
+        
+        #Generates tasks as in the algorithm
+        for i in range(self.repGeneration):
+           for y in range(0,min(numFriends,numEnemies)+1):
+               #Draw q objects from each class
+               if numFriends > numEnemies:
+                    numFriends = random.choice(range(y,numFriends+1))
+                    numEnemies = random.choice(range(0,numEnemies+1))
+               else:
+                    numFriends = random.choice(range(0,numFriends+1))
+                    numEnemies = random.choice(range(y,numEnemies+1))
+               
+               #Draw F from Fsimple
+               distance = random.choice(simpleSet)
+               enStrategy = self.target_task.strategy
+               #Stores state in file
+               state = str(numFriends) + ";" + str(numEnemies) + ";" + enStrategy + ";" + str(distance) + ";" + str(random.randint(0,1000))
+               
+               fileName = self.workFolder + "friends_" + str(numFriends) + '_enemies_' + str(numEnemies) + '_dist_' + str(int(distance*10)) + enStrategy + '.task'
+               with open(fileName,'w') as opFile:
+                   opFile.write(state)
+                   opFile.close()
+        
+    def generate_gridworld(self):
+        """Generates the set of source tasks for the GridWorld domain."""
+        #Simplify function in the algorithm
+        simpleSet = [
+                        [5,5],
+                        #[2,2],
+                        [3,3],
+                        [7,7],
+                        #[5,1],
+                        #[1,5]
+                    ]
+        num_fires = self.target_task.num_fires()
+        num_pits = self.target_task.num_pits()
        
-       listOfTasks = []
-       allTreasures,allPits,allFires = self.split_state(self.target_task.init_state())
+        
+        allTreasures,allPits,allFires = self.split_state(self.target_task.init_state())
        
 
        
-       #Generates tasks as in the algorithm
-       for i in range(self.repGeneration):
+        #Generates tasks as in the algorithm
+        for i in range(self.repGeneration):
            for y in range(0,min(num_fires,num_pits)+1):
                #Draw q objects from each class
                if num_fires > num_pits:
@@ -94,6 +141,7 @@ class GeneratedSourceOOCurriculum(ObjectOrientedCurriculum):
                with open(fileName,'w') as opFile:
                    opFile.write(state)
                    opFile.close()
+        
             
     def build_init_state(self,taskSize,allTreasures,allPits,allFires):
         """Builds the initial state and returns it in textual format"""

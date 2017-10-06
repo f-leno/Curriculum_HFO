@@ -47,9 +47,9 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-t','--task_path', default='./tasks/')
     parser.add_argument('-a','--algorithm',  default='Dummy') 
-    parser.add_argument('-e','--learning_time',type=int, default=8000)
-    parser.add_argument('-te','--type_evaluation',choices=['episode','steps'], default='episode')
-    parser.add_argument('-i','--evaluation_interval',type=int, default=100)
+    parser.add_argument('-e','--learning_time',type=int, default=300)
+    parser.add_argument('-te','--type_evaluation',choices=['episode','steps'], default='episodes')
+    parser.add_argument('-i','--evaluation_interval',type=int, default=5)
     parser.add_argument('-d','--evaluation_duration',type=int, default=100)
     parser.add_argument('-s','--seed',type=int, default=12345)
     parser.add_argument('-l','--log_folder',default='./log/')
@@ -193,7 +193,7 @@ def main():
         #Output Files
         eval_csv_file = open(logFolder + "_eval", "w")
         eval_csv_writer = csv.writer(eval_csv_file)
-        eval_csv_writer.writerow((parameter.type_evaluation,"steps_completed","reward"))
+        eval_csv_writer.writerow((parameter.type_evaluation,"steps_completed","reward","goal_perc"))
         eval_csv_file.flush()
         
         print('***** %s: Start Trial' % str(trial))            
@@ -205,7 +205,9 @@ def main():
         
         
         #Load target Task
-        environment_target,target_task = domain.build_environment(taskFile=parameter.task_path,limitSteps=200,taskName = 'target')
+        target_task = domain.build_environment(taskFile=parameter.task_path,limitSteps=200,taskName = 'target')
+        
+        workFolder += parameter.domain + '/'
         
         import time
         time.sleep(2)
@@ -325,7 +327,7 @@ def main():
             environment.finish_learning()    
         #Close result files
         eval_csv_file.close()
-        environment_target.finish_learning()             
+         
     
     
     

@@ -150,5 +150,14 @@ class GridWorldTask(Task):
         return pot
         
         
+    
+    def state_space(self):
+        """Returns the state space of this task"""
+        return self.get_sizeX() * self.get_sizeY() 
+        sizeStateSpaceTarget = target_task.get_sizeX() * target_task.get_sizeY()
+        
 
+    def number_objects(self):
+        """Returns the number of objects if the object-oriented description is used."""
+        return self.num_pits() + self.currentTask.num_fires()
 

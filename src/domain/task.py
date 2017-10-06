@@ -27,9 +27,18 @@ class Task(object):
     def __init__(self, filePath=None,taskName="noName",taskData=None):
         self.name = taskName
         
-        
-        
-        
+    def get_domain_task(self):
+        """Returns the name of the class of the task object, indicating
+        to which domain it belongs"""
+        return type(self).__name__
+    @abc.abstractmethod      
+    def state_space(self):
+        """Returns the state space of this task"""
+        pass
+    @abc.abstractmethod      
+    def number_objects(self):
+        """Returns the number of objects if the object-oriented description is used."""
+        pass
         
     @abc.abstractmethod       
     def transfer_potential(self,targetTask):
