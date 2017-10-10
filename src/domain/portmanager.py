@@ -8,7 +8,7 @@ Controls the port number for automatic hfo task creation
 import pickle
 import os
 
-portFilePath = "/home/leno/gitProjects/Curriculum_HFO/src/.ports"
+portFilePath = "./.ports"
 initialPort = 12345
 
 def get_free_port():

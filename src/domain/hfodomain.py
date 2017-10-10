@@ -61,7 +61,7 @@ class HFOEnv(object):
     serverPort = None
     hfoObj = None
     #Path for the bin folder
-    serverPath = '/home/leno/gitProjects/Curriculum_HFO/HFO/bin/'#"../HFO/bin/"
+    serverPath = "../HFO/bin/"#'/home/leno/gitProjects/Curriculum_HFO/HFO/bin/'#"../HFO/bin/"
     #Server subprocess to be finished later
     serverProcess = None
     clientProcess = None
