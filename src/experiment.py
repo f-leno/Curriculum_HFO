@@ -56,7 +56,7 @@ def get_args():
     parser.add_argument('-sf','--source_folder',default='./tasks/')
     parser.add_argument('-tf','--temp_folder',default='./temp/')
     parser.add_argument('-it','--init_trials',type=int, default=1)
-    parser.add_argument('-et','--end_trials',type=int, default=10)
+    parser.add_argument('-et','--end_trials',type=int, default=100)
     parser.add_argument('-ca','--curriculum_alg',default='NoneCurriculum')
     parser.add_argument('-ter','--termination',default="Termination10Episodes")
     parser.add_argument('-do','--domain',choices=['GridWorld','HFODomain'],default="HFODomain")

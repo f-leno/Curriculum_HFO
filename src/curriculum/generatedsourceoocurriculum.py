@@ -23,7 +23,7 @@ class GeneratedSourceOOCurriculum(ObjectOrientedCurriculum):
     repGeneration = None
     
     
-    def generate_curriculum(self,target_task, sourceFolder,workFolder,thresholdTask = 1,repGeneration = 10):
+    def generate_curriculum(self,target_task, sourceFolder,workFolder,thresholdTask = 2.3,repGeneration = 10):
         self.workFolder = workFolder 
         self.target_task = target_task
         self.repGeneration = repGeneration
@@ -69,7 +69,7 @@ class GeneratedSourceOOCurriculum(ObjectOrientedCurriculum):
         dist = self.target_task.distance
         
         #Generate various distances
-        for i in np.arange(dist,1.0,0.1):
+        for i in np.arange(dist,1.0,0.2):
             simpleSet.append(i)
         
         numFriends = self.target_task.numberFriends

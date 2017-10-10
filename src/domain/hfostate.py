@@ -203,11 +203,11 @@ class HFOStateManager(object):
             raise ValueError("A wrong number of parameters was specified for the 'build_state' function. "+
                               str(len(infoEnemies))+" opponent parameters informed, "+str(self.numberOpponents)+" required.")
         if self.numberOpponents > 0:
-            if len(infoIndependent) != 10:
+            if len(infoIndependent) not in [9,10]:
                 raise ValueError("A wrong number of parameters was specified for the 'build_state' function. "+
                               str(len(infoIndependent))+" opponent parameters informed, 10 required.")
         else:
-            if len(infoIndependent) != 9:
+            if len(infoIndependent) not in [9,10]:
                     raise ValueError("A wrong number of parameters was specified for the 'build_state' function. "+
                               str(len(infoIndependent))+" opponent parameters informed, 9 required.")
                     
@@ -216,8 +216,31 @@ class HFOStateManager(object):
         startIndex = 0
         #---- Independent Features
         if self.numberOpponents > 0:
-           newState[self.OPPONENT_PROXIMITY] = infoIndependent[0]
+           #If OPPONENT_PROXIMITY was given
+           if len(infoIndependent) == 10:
+               newState[self.OPPONENT_PROXIMITY] = infoIndependent[0]
+           else:
+               #If no distance was specified, we need to calculate it
+               proximity = float('inf')
+               x = infoIndependent[0]
+               y = infoIndependent[1]
+               for enemies in infoEnemies:
+                   dist = math.hypot(enemies[0]- x, enemies[1]- y)
+                   if dist < proximity:
+                       proximity = dist
+               if proximity == float('inf'):
+                    proximity = 1.0
+               newState[self.OPPONENT_PROXIMITY] = proximity
+           #If we have opponents in the new task but they were not informed,
+           #some mock opponents are created
+           if len(infoEnemies) == 0:
+                for i in range(self.numberOpponents):
+                    infoEnemies.append([1.0,1.0,0.0])
            startIndex += 1
+        
+        if self.numberFriends > 0 and len(infoFriend) == 0:
+             for i in range(self.numberFriends):  
+                 infoFriend.append([0.0,1.0,0.0,1.0,1.0,0.0])
            
         newState[self.X_POSITION] = infoIndependent[startIndex]
         newState[self.Y_POSITION] = infoIndependent[startIndex+1]
