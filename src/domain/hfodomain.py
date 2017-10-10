@@ -385,7 +385,7 @@ def init_server(self,taskParam,limitFrames):
         
 
         #Including the name of the executable, default parameters, and the port in the command
-        serverCommand = self.serverPath + "HFO --fullstate --offense-on-ball 12 --no-logging --headless " + \
+        serverCommand = "#!/bin/sh\n"+self.serverPath + "HFO --fullstate --offense-on-ball 12 --no-logging --headless " + \
              "--port " +str(self.serverPort)
                          
         #Joining all the commands
