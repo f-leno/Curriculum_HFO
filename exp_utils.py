@@ -179,11 +179,14 @@ def cumulative_experiment_data(source,startingFrom=500):
         values = np.array(listToSort)
         trials = values[:,0]
         data = values[:,1:]
-        
+
+        firstIndex = 0
         for rep in range(1,data.shape[0]):
             if trials[rep] > startingFrom:
                 for index in range(data.shape[1]):
                     data[rep][index] = data[rep-1][index] + data[rep][index]
+            else:
+                firstIndex += 1
         
         
         update = summarize_data(data)
@@ -214,7 +217,8 @@ def cumulative_experiment_data(source,startingFrom=500):
             csvwriter.writerow((headerLine))
             csvfile.flush()
 
-            for i in range(sum(trials.shape)):
+
+            for i in range(firstIndex,sum(trials.shape)):
                 newrow = [trials[i]]
                 for j in update.T[i]:
                     newrow.append("{:.2f}".format(j))
@@ -354,15 +358,15 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-s','--source',default='/home/leno/gitProjects/Curriculum_HFO/src/log/HFODomain/SARSA-NoneCurriculum')
-    parser.add_argument('-r','--runs',type=int, default=5)
+    parser.add_argument('-s','--source',default='/Users/leno/gitProjects/Curriculum_HFO/src/log/HFODomain/SARSA-NoneCurriculum')
+    parser.add_argument('-r','--runs',type=int, default=50)
     return parser.parse_args()
 
 def main():
     parameter = get_args()
     collect_experiment_data(source=parameter.source, runs=parameter.runs)
-    summarize_experiment_data(parameter.source)
-    cumulative_experiment_data(parameter.source)
+    #summarize_experiment_data(parameter.source)
+    cumulative_experiment_data(parameter.source,startingFrom = 6000)
 
 if __name__ == '__main__':
     main()
