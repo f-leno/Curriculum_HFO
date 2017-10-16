@@ -1,0 +1,1100 @@
+rcssserver-15.2.2
+
+Copyright (C) 1995, 1996, 1997, 1998, 1999 Electrotechnical Laboratory.
+2000 - RoboCup Soccer Simulator Maintenance Group.
+
+SERVERPARAM
+Passou Instance
+Config dir
+USING BOOST
+Not booost
+Before config path
+"/home/leno/.rcssserver/"server.conf
+After exception
+Before initBuilder
+Before CSVSaver
+Before Conf Parser
+efore Help Requested
+SIGACTION
+STDINIT
+Using given Simulator Random Seed: 123
+CSVSaver: Ready
+STDOutSaver: Ready
+Using simulator's random seed as Hetero Player Seed: 123
+After Hetero: 
+wind factor: rand: 0.000000, vector: (0.000000, 0.000000)
+After Createobj: 
+Before logger: 
+After logger: 
+BOOST
+Creating team Agent2d (base)
+Creating team Helios
+Launch npc base_left-1
+
+Hit CTRL-C to exit
+A new (v8) offline coach connected
+A new (v14) player (base_left 1) connected.
+Launch npc base_left-2
+A player disconnected : (base_left 1)
+A new (v14) player (base_left 2) connected.
+Launch npc base_left-3
+A player disconnected : (base_left 2)
+A new (v14) player (base_left 3) connected.
+Launch npc base_left-4
+A player disconnected : (base_left 3)
+A new (v14) player (base_left 4) connected.
+Launch npc base_left-5
+A player disconnected : (base_left 4)
+A new (v14) player (base_left 5) connected.
+Launch npc base_left-6
+A player disconnected : (base_left 5)
+A new (v14) player (base_left 6) connected.
+Launch npc base_left-7
+A player disconnected : (base_left 6)
+A new (v14) player (base_left 7) connected.
+Launch npc base_left-8
+A player disconnected : (base_left 7)
+A new (v14) player (base_left 8) connected.
+Launch npc base_left-9
+A player disconnected : (base_left 8)
+A new (v14) player (base_left 9) connected.
+Launch npc base_left-10
+A player disconnected : (base_left 9)
+A new (v14) player (base_left 10) connected.
+Waiting for player-controlled agent base_left-0: config_dir=/home/leno/gitProjects/Curriculum_HFO/HFO/bin/teams/base/config/formations-dt, server_port=26630, server_addr=localhost, team_name=base_left, play_goalie=False
+A player disconnected : (base_left 10)
+A new (v14) player (base_left 11) connected.
+Launch npc HELIOS_right-1
+A new (v15) player (HELIOS_right 1) connected.
+Launch npc HELIOS_right-2
+A new (v15) player (HELIOS_right 2) connected.
+Launch npc HELIOS_right-3
+A new (v15) player (HELIOS_right 3) connected.
+Launch npc HELIOS_right-4
+A player disconnected : (HELIOS_right 3)
+A new (v15) player (HELIOS_right 4) connected.
+Launch npc HELIOS_right-5
+A player disconnected : (HELIOS_right 4)
+A new (v15) player (HELIOS_right 5) connected.
+Launch npc HELIOS_right-6
+A player disconnected : (HELIOS_right 5)
+A new (v15) player (HELIOS_right 6) connected.
+Launch npc HELIOS_right-7
+A player disconnected : (HELIOS_right 6)
+A new (v15) player (HELIOS_right 7) connected.
+Launch npc HELIOS_right-8
+A player disconnected : (HELIOS_right 7)
+A new (v15) player (HELIOS_right 8) connected.
+Launch npc HELIOS_right-9
+A player disconnected : (HELIOS_right 8)
+A new (v15) player (HELIOS_right 9) connected.
+Launch npc HELIOS_right-10
+A player disconnected : (HELIOS_right 9)
+A new (v15) player (HELIOS_right 10) connected.
+Launch npc HELIOS_right-11
+A player disconnected : (HELIOS_right 10)
+A new (v15) player (HELIOS_right 11) connected.
+Checking all players connected
+Starting game
+A player disconnected : (HELIOS_right 11)
+HFORef using seed: 123
+EndOfTrial: 1 / 1 76 GOAL-2
+EndOfTrial: 1 / 2 190 OUT_OF_BOUNDS
+EndOfTrial: 1 / 3 287 OUT_OF_BOUNDS
+EndOfTrial: 2 / 4 356 GOAL-11
+EndOfTrial: 2 / 5 558 OUT_OF_TIME
+EndOfTrial: 2 / 6 760 OUT_OF_TIME
+EndOfTrial: 2 / 7 823 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 2 / 8 1025 OUT_OF_TIME
+EndOfTrial: 2 / 9 1085 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 2 / 10 1154 OUT_OF_BOUNDS
+EndOfTrial: 2 / 11 1247 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 2 / 12 1300 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 2 / 13 1427 OUT_OF_BOUNDS
+EndOfTrial: 2 / 14 1493 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 2 / 15 1518 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 2 / 16 1617 OUT_OF_BOUNDS
+EndOfTrial: 2 / 17 1704 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 2 / 18 1906 OUT_OF_TIME
+EndOfTrial: 3 / 19 2035 GOAL-11
+EndOfTrial: 3 / 20 2208 OUT_OF_BOUNDS
+EndOfTrial: 4 / 21 2280 GOAL-11
+rcssserver-15.2.2
+
+Copyright (C) 1995, 1996, 1997, 1998, 1999 Electrotechnical Laboratory.
+2000 - RoboCup Soccer Simulator Maintenance Group.
+
+SERVERPARAM
+Passou Instance
+Config dir
+USING BOOST
+Not booost
+Before config path
+"/home/leno/.rcssserver/"server.conf
+After exception
+Before initBuilder
+Before CSVSaver
+Before Conf Parser
+efore Help Requested
+SIGACTION
+STDINIT
+Using given Simulator Random Seed: 123
+CSVSaver: Ready
+STDOutSaver: Ready
+Using simulator's random seed as Hetero Player Seed: 123
+After Hetero: 
+wind factor: rand: 0.000000, vector: (0.000000, 0.000000)
+After Createobj: 
+Before logger: 
+After logger: 
+BOOST
+Creating team Agent2d (base)
+Creating team Helios
+Launch npc base_left-1
+
+Hit CTRL-C to exit
+A new (v8) offline coach connected
+A new (v14) player (base_left 1) connected.
+Launch npc base_left-2
+A player disconnected : (base_left 1)
+A new (v14) player (base_left 2) connected.
+Launch npc base_left-3
+A player disconnected : (base_left 2)
+A new (v14) player (base_left 3) connected.
+Launch npc base_left-4
+A player disconnected : (base_left 3)
+A new (v14) player (base_left 4) connected.
+Launch npc base_left-5
+A player disconnected : (base_left 4)
+A new (v14) player (base_left 5) connected.
+Launch npc base_left-6
+A player disconnected : (base_left 5)
+A new (v14) player (base_left 6) connected.
+Launch npc base_left-7
+A player disconnected : (base_left 6)
+A new (v14) player (base_left 7) connected.
+Launch npc base_left-8
+A player disconnected : (base_left 7)
+A new (v14) player (base_left 8) connected.
+Launch npc base_left-9
+A player disconnected : (base_left 8)
+A new (v14) player (base_left 9) connected.
+Launch npc base_left-10
+A player disconnected : (base_left 9)
+A new (v14) player (base_left 10) connected.
+Waiting for player-controlled agent base_left-0: config_dir=/home/leno/gitProjects/Curriculum_HFO/HFO/bin/teams/base/config/formations-dt, server_port=26635, server_addr=localhost, team_name=base_left, play_goalie=False
+A player disconnected : (base_left 10)
+A new (v14) player (base_left 11) connected.
+Launch npc HELIOS_right-1
+A new (v15) player (HELIOS_right 1) connected.
+Launch npc HELIOS_right-2
+A new (v15) player (HELIOS_right 2) connected.
+Launch npc HELIOS_right-3
+A new (v15) player (HELIOS_right 3) connected.
+Launch npc HELIOS_right-4
+A player disconnected : (HELIOS_right 3)
+A new (v15) player (HELIOS_right 4) connected.
+Launch npc HELIOS_right-5
+A player disconnected : (HELIOS_right 4)
+A new (v15) player (HELIOS_right 5) connected.
+Launch npc HELIOS_right-6
+A player disconnected : (HELIOS_right 5)
+A new (v15) player (HELIOS_right 6) connected.
+Launch npc HELIOS_right-7
+A player disconnected : (HELIOS_right 6)
+A new (v15) player (HELIOS_right 7) connected.
+Launch npc HELIOS_right-8
+A player disconnected : (HELIOS_right 7)
+A new (v15) player (HELIOS_right 8) connected.
+Launch npc HELIOS_right-9
+A player disconnected : (HELIOS_right 8)
+A new (v15) player (HELIOS_right 9) connected.
+Launch npc HELIOS_right-10
+A player disconnected : (HELIOS_right 9)
+A new (v15) player (HELIOS_right 10) connected.
+Launch npc HELIOS_right-11
+A player disconnected : (HELIOS_right 10)
+A new (v15) player (HELIOS_right 11) connected.
+Checking all players connected
+EndOfTrial: 4 / 22 2471 OUT_OF_BOUNDS
+Starting game
+A player disconnected : (HELIOS_right 11)
+HFORef using seed: 123
+EndOfTrial: 4 / 23 2511 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 4 / 24 2657 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 0 / 1 94 OUT_OF_BOUNDS
+EndOfTrial: 1 / 2 154 GOAL-11
+EndOfTrial: 4 / 25 2766 OUT_OF_BOUNDS
+EndOfTrial: 1 / 3 241 OUT_OF_BOUNDS
+EndOfTrial: 4 / 26 2828 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 2 / 4 317 GOAL-11
+EndOfTrial: 4 / 27 2903 OUT_OF_BOUNDS
+EndOfTrial: 2 / 5 343 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 5 / 28 2975 GOAL-11
+EndOfTrial: 2 / 6 424 OUT_OF_BOUNDS
+EndOfTrial: 3 / 7 484 GOAL-11
+EndOfTrial: 3 / 8 563 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 5 / 29 3177 OUT_OF_TIME
+EndOfTrial: 3 / 9 639 OUT_OF_BOUNDS
+EndOfTrial: 6 / 30 3240 GOAL-11
+EndOfTrial: 4 / 10 698 GOAL-2
+EndOfTrial: 6 / 31 3310 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 4 / 11 789 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 7 / 32 3390 GOAL-11
+EndOfTrial: 5 / 12 858 GOAL-11
+EndOfTrial: 6 / 13 924 GOAL-11
+EndOfTrial: 7 / 14 992 GOAL-11
+EndOfTrial: 7 / 33 3592 OUT_OF_TIME
+EndOfTrial: 7 / 15 1020 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 8 / 34 3655 GOAL-11
+EndOfTrial: 9 / 35 3713 GOAL-2
+EndOfTrial: 7 / 16 1167 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 7 / 17 1243 OUT_OF_BOUNDS
+EndOfTrial: 9 / 36 3862 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 7 / 18 1331 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 9 / 37 3920 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 8 / 19 1435 GOAL-11
+EndOfTrial: 9 / 38 4032 OUT_OF_BOUNDS
+EndOfTrial: 8 / 20 1517 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 8 / 21 1575 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 8 / 22 1617 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 9 / 39 4193 OUT_OF_BOUNDS
+EndOfTrial: 8 / 23 1698 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 8 / 24 1725 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 9 / 40 4395 OUT_OF_TIME
+EndOfTrial: 8 / 25 1846 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 8 / 26 1889 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 9 / 27 2024 GOAL-11
+EndOfTrial: 9 / 41 4597 OUT_OF_TIME
+EndOfTrial: 9 / 28 2065 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 9 / 29 2145 OUT_OF_BOUNDS
+EndOfTrial: 9 / 30 2210 OUT_OF_BOUNDS
+EndOfTrial: 9 / 42 4799 OUT_OF_TIME
+EndOfTrial: 10 / 31 2265 GOAL-11
+EndOfTrial: 10 / 32 2328 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 9 / 43 5001 OUT_OF_TIME
+EndOfTrial: 10 / 33 2530 OUT_OF_TIME
+EndOfTrial: 10 / 34 2591 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 9 / 44 5203 OUT_OF_TIME
+EndOfTrial: 10 / 35 2691 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 10 / 45 5255 GOAL-2
+EndOfTrial: 11 / 46 5324 GOAL-2
+EndOfTrial: 10 / 36 2803 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 10 / 37 2894 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 11 / 47 5526 OUT_OF_TIME
+rcssserver-15.2.2
+
+Copyright (C) 1995, 1996, 1997, 1998, 1999 Electrotechnical Laboratory.
+2000 - RoboCup Soccer Simulator Maintenance Group.
+
+SERVERPARAM
+Passou Instance
+Config dir
+USING BOOST
+Not booost
+Before config path
+"/home/leno/.rcssserver/"server.conf
+After exception
+Before initBuilder
+Before CSVSaver
+Before Conf Parser
+efore Help Requested
+SIGACTION
+STDINIT
+Using given Simulator Random Seed: 123
+CSVSaver: Ready
+STDOutSaver: Ready
+Using simulator's random seed as Hetero Player Seed: 123
+After Hetero: 
+wind factor: rand: 0.000000, vector: (0.000000, 0.000000)
+After Createobj: 
+Before logger: 
+After logger: 
+BOOST
+Creating team Agent2d (base)
+Creating team Helios
+Launch npc base_left-1
+
+Hit CTRL-C to exit
+A new (v8) offline coach connected
+A new (v14) player (base_left 1) connected.
+Launch npc base_left-2
+A player disconnected : (base_left 1)
+A new (v14) player (base_left 2) connected.
+Launch npc base_left-3
+A player disconnected : (base_left 2)
+A new (v14) player (base_left 3) connected.
+EndOfTrial: 10 / 38 3029 CAPTURED_BY_DEFENSE-2
+Launch npc base_left-4
+A player disconnected : (base_left 3)
+A new (v14) player (base_left 4) connected.
+Launch npc base_left-5
+A player disconnected : (base_left 4)
+A new (v14) player (base_left 5) connected.
+Launch npc base_left-6
+EndOfTrial: 11 / 48 5606 OUT_OF_BOUNDS
+A player disconnected : (base_left 5)
+A new (v14) player (base_left 6) connected.
+Launch npc base_left-7
+A player disconnected : (base_left 6)
+A new (v14) player (base_left 7) connected.
+Launch npc base_left-8
+A player disconnected : (base_left 7)
+A new (v14) player (base_left 8) connected.
+Launch npc base_left-9
+A player disconnected : (base_left 8)
+A new (v14) player (base_left 9) connected.
+Launch npc base_left-10
+A player disconnected : (base_left 9)
+A new (v14) player (base_left 10) connected.
+Waiting for player-controlled agent base_left-0: config_dir=/home/leno/gitProjects/Curriculum_HFO/HFO/bin/teams/base/config/formations-dt, server_port=26640, server_addr=localhost, team_name=base_left, play_goalie=False
+EndOfTrial: 11 / 39 3103 GOAL-2
+A player disconnected : (base_left 10)
+A new (v14) player (base_left 11) connected.
+Launch npc HELIOS_right-1
+A new (v15) player (HELIOS_right 1) connected.
+Launch npc HELIOS_right-2
+A new (v15) player (HELIOS_right 2) connected.
+Launch npc HELIOS_right-3
+A new (v15) player (HELIOS_right 3) connected.
+Launch npc HELIOS_right-4
+A player disconnected : (HELIOS_right 3)
+A new (v15) player (HELIOS_right 4) connected.
+Launch npc HELIOS_right-5
+A player disconnected : (HELIOS_right 4)
+A new (v15) player (HELIOS_right 5) connected.
+Launch npc HELIOS_right-6
+A player disconnected : (HELIOS_right 5)
+A new (v15) player (HELIOS_right 6) connected.
+Launch npc HELIOS_right-7
+A player disconnected : (HELIOS_right 6)
+A new (v15) player (HELIOS_right 7) connected.
+Launch npc HELIOS_right-8
+A player disconnected : (HELIOS_right 7)
+A new (v15) player (HELIOS_right 8) connected.
+Launch npc HELIOS_right-9
+A player disconnected : (HELIOS_right 8)
+A new (v15) player (HELIOS_right 9) connected.
+Launch npc HELIOS_right-10
+A player disconnected : (HELIOS_right 9)
+A new (v15) player (HELIOS_right 10) connected.
+Launch npc HELIOS_right-11
+A player disconnected : (HELIOS_right 10)
+A new (v15) player (HELIOS_right 11) connected.
+Checking all players connected
+Starting game
+A player disconnected : (HELIOS_right 11)
+HFORef using seed: 123
+EndOfTrial: 11 / 49 5808 OUT_OF_TIME
+EndOfTrial: 11 / 40 3256 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 11 / 50 6010 OUT_OF_TIME
+EndOfTrial: 11 / 41 3458 OUT_OF_TIME
+EndOfTrial: 0 / 1 176 OUT_OF_BOUNDS
+EndOfTrial: 11 / 51 6078 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 0 / 2 268 OUT_OF_BOUNDS
+EndOfTrial: 1 / 3 341 GOAL-11
+EndOfTrial: 11 / 42 3660 OUT_OF_TIME
+EndOfTrial: 11 / 43 3688 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 1 / 4 417 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 11 / 52 6280 OUT_OF_TIME
+EndOfTrial: 1 / 5 554 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 11 / 44 3890 OUT_OF_TIME
+EndOfTrial: 1 / 6 615 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 11 / 53 6482 OUT_OF_TIME
+EndOfTrial: 1 / 7 663 OUT_OF_BOUNDS
+EndOfTrial: 11 / 54 6559 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 12 / 45 4015 GOAL-11
+EndOfTrial: 11 / 55 6630 OUT_OF_BOUNDS
+EndOfTrial: 1 / 8 829 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 12 / 46 4108 OUT_OF_BOUNDS
+EndOfTrial: 12 / 56 6687 GOAL-11
+EndOfTrial: 1 / 9 888 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 12 / 47 4172 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 1 / 10 953 OUT_OF_BOUNDS
+EndOfTrial: 1 / 11 1044 OUT_OF_BOUNDS
+EndOfTrial: 12 / 57 6889 OUT_OF_TIME
+EndOfTrial: 12 / 48 4374 OUT_OF_TIME
+EndOfTrial: 1 / 12 1124 OUT_OF_BOUNDS
+EndOfTrial: 13 / 58 7025 GOAL-11
+EndOfTrial: 13 / 49 4480 GOAL-11
+EndOfTrial: 1 / 13 1227 OUT_OF_BOUNDS
+EndOfTrial: 13 / 59 7101 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 1 / 14 1294 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 14 / 50 4564 GOAL-11
+EndOfTrial: 1 / 15 1321 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 13 / 60 7183 OUT_OF_BOUNDS
+EndOfTrial: 14 / 51 4633 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 1 / 16 1387 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 15 / 52 4695 GOAL-11
+EndOfTrial: 13 / 61 7276 OUT_OF_BOUNDS
+EndOfTrial: 14 / 62 7356 GOAL-11
+EndOfTrial: 15 / 53 4800 OUT_OF_BOUNDS
+EndOfTrial: 1 / 17 1589 OUT_OF_TIME
+EndOfTrial: 14 / 63 7415 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 1 / 18 1647 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 14 / 64 7474 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 1 / 19 1702 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 14 / 65 7551 OUT_OF_BOUNDS
+EndOfTrial: 15 / 54 5002 OUT_OF_TIME
+EndOfTrial: 15 / 55 5020 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 1 / 20 1799 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 14 / 66 7647 OUT_OF_BOUNDS
+EndOfTrial: 15 / 56 5090 OUT_OF_BOUNDS
+EndOfTrial: 15 / 67 7717 GOAL-11
+EndOfTrial: 15 / 68 7771 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 2 / 21 1954 GOAL-11
+EndOfTrial: 15 / 57 5231 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 15 / 58 5247 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 15 / 69 7828 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 3 / 22 2021 GOAL-11
+EndOfTrial: 15 / 59 5383 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 16 / 70 7984 GOAL-11
+EndOfTrial: 3 / 23 2223 OUT_OF_TIME
+EndOfTrial: 3 / 24 2247 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 3 / 25 2337 OUT_OF_BOUNDS
+EndOfTrial: 15 / 60 5585 OUT_OF_TIME
+EndOfTrial: 3 / 26 2363 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 16 / 71 8186 OUT_OF_TIME
+EndOfTrial: 16 / 61 5665 GOAL-11
+EndOfTrial: 3 / 27 2435 OUT_OF_BOUNDS
+EndOfTrial: 3 / 28 2462 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 16 / 72 8262 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 3 / 29 2536 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 16 / 73 8349 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 16 / 62 5867 OUT_OF_TIME
+EndOfTrial: 3 / 30 2650 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 16 / 63 5954 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 3 / 31 2722 OUT_OF_BOUNDS
+EndOfTrial: 16 / 74 8551 OUT_OF_TIME
+EndOfTrial: 16 / 75 8609 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 3 / 32 2837 OUT_OF_BOUNDS
+EndOfTrial: 3 / 33 2869 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 17 / 64 6110 GOAL-11
+EndOfTrial: 17 / 76 8693 GOAL-11
+EndOfTrial: 17 / 65 6153 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 4 / 34 2935 GOAL-11
+EndOfTrial: 17 / 77 8760 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 4 / 35 2981 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 18 / 66 6238 GOAL-11
+EndOfTrial: 4 / 36 3041 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 18 / 67 6354 OUT_OF_BOUNDS
+EndOfTrial: 4 / 37 3146 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 18 / 68 6397 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 17 / 78 8962 OUT_OF_TIME
+EndOfTrial: 18 / 69 6455 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 4 / 38 3264 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 18 / 70 6494 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 4 / 39 3342 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 17 / 79 9164 OUT_OF_TIME
+EndOfTrial: 4 / 40 3403 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 4 / 41 3484 OUT_OF_BOUNDS
+EndOfTrial: 18 / 71 6696 OUT_OF_TIME
+EndOfTrial: 5 / 42 3537 GOAL-11
+EndOfTrial: 18 / 72 6770 OUT_OF_BOUNDS
+EndOfTrial: 5 / 43 3602 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 17 / 80 9355 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 17 / 81 9425 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 5 / 44 3772 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 18 / 73 6972 OUT_OF_TIME
+EndOfTrial: 5 / 45 3838 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 18 / 74 7047 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 17 / 82 9627 OUT_OF_TIME
+EndOfTrial: 5 / 46 3947 OUT_OF_BOUNDS
+EndOfTrial: 18 / 83 9707 GOAL-11
+EndOfTrial: 18 / 75 7194 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 18 / 84 9793 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 5 / 47 4124 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 5 / 48 4204 OUT_OF_BOUNDS
+EndOfTrial: 18 / 76 7396 OUT_OF_TIME
+EndOfTrial: 5 / 49 4248 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 18 / 85 9995 OUT_OF_TIME
+EndOfTrial: 18 / 77 7486 OUT_OF_BOUNDS
+EndOfTrial: 18 / 86 10053 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 6 / 50 4320 GOAL-11
+EndOfTrial: 18 / 78 7565 OUT_OF_BOUNDS
+EndOfTrial: 18 / 87 10146 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 7 / 51 4414 GOAL-11
+EndOfTrial: 7 / 52 4466 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 8 / 53 4529 GOAL-11
+EndOfTrial: 8 / 54 4591 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 18 / 79 7767 OUT_OF_TIME
+EndOfTrial: 18 / 88 10348 OUT_OF_TIME
+EndOfTrial: 9 / 55 4638 GOAL-11
+EndOfTrial: 18 / 80 7845 OUT_OF_BOUNDS
+EndOfTrial: 18 / 81 7897 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 9 / 56 4723 OUT_OF_BOUNDS
+EndOfTrial: 18 / 89 10448 OUT_OF_BOUNDS
+EndOfTrial: 18 / 90 10492 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 19 / 82 7983 GOAL-11
+EndOfTrial: 9 / 57 4925 OUT_OF_TIME
+EndOfTrial: 18 / 91 10694 OUT_OF_TIME
+EndOfTrial: 9 / 58 4993 OUT_OF_BOUNDS
+EndOfTrial: 19 / 83 8185 OUT_OF_TIME
+EndOfTrial: 10 / 59 5060 GOAL-2
+EndOfTrial: 18 / 92 10785 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 19 / 84 8279 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 18 / 93 10862 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 10 / 60 5182 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 18 / 94 10958 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 19 / 85 8419 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 19 / 86 8547 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 10 / 61 5384 OUT_OF_TIME
+EndOfTrial: 18 / 95 11113 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 19 / 87 8577 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 10 / 62 5465 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 19 / 88 8690 OUT_OF_BOUNDS
+EndOfTrial: 10 / 63 5532 OUT_OF_BOUNDS
+EndOfTrial: 18 / 96 11239 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 19 / 89 8892 OUT_OF_TIME
+EndOfTrial: 10 / 64 5734 OUT_OF_TIME
+EndOfTrial: 18 / 97 11441 OUT_OF_TIME
+EndOfTrial: 10 / 65 5798 OUT_OF_BOUNDS
+EndOfTrial: 18 / 98 11575 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 19 / 90 9094 OUT_OF_TIME
+EndOfTrial: 10 / 66 5986 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 18 / 99 11738 OUT_OF_BOUNDS
+EndOfTrial: 19 / 91 9206 OUT_OF_BOUNDS
+EndOfTrial: 10 / 67 6094 OUT_OF_BOUNDS
+EndOfTrial: 18 / 100 11811 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 10 / 68 6147 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 19 / 92 9408 OUT_OF_TIME
+EndOfTrial: 10 / 69 6271 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 10 / 70 6299 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 10 / 71 6325 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 19 / 93 9516 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 10 / 72 6395 OUT_OF_BOUNDS
+EndOfTrial: 10 / 73 6460 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 19 / 94 9608 OUT_OF_BOUNDS
+EndOfTrial: 10 / 74 6483 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 10 / 75 6523 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 20 / 95 9677 GOAL-11
+EndOfTrial: 20 / 96 9742 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 10 / 76 6675 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 11 / 77 6741 GOAL-11
+EndOfTrial: 11 / 78 6801 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 20 / 97 9944 OUT_OF_TIME
+EndOfTrial: 12 / 79 6867 GOAL-11
+EndOfTrial: 20 / 98 10032 OUT_OF_BOUNDS
+EndOfTrial: 12 / 80 6941 OUT_OF_BOUNDS
+EndOfTrial: 20 / 99 10084 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 13 / 81 6993 GOAL-11
+EndOfTrial: 14 / 82 7073 GOAL-11
+EndOfTrial: 20 / 100 10198 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 14 / 83 7233 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 14 / 84 7300 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 14 / 85 7502 OUT_OF_TIME
+EndOfTrial: 14 / 86 7565 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 14 / 87 7627 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 14 / 88 7794 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 14 / 89 7944 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 14 / 90 7990 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 14 / 91 8036 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 14 / 92 8093 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 15 / 93 8166 GOAL-2
+EndOfTrial: 16 / 94 8230 GOAL-11
+rcssserver-15.2.2
+
+Copyright (C) 1995, 1996, 1997, 1998, 1999 Electrotechnical Laboratory.
+2000 - RoboCup Soccer Simulator Maintenance Group.
+
+SERVERPARAM
+Passou Instance
+Config dir
+USING BOOST
+Not booost
+Before config path
+"/home/leno/.rcssserver/"server.conf
+After exception
+Before initBuilder
+Before CSVSaver
+Before Conf Parser
+efore Help Requested
+SIGACTION
+STDINIT
+Using given Simulator Random Seed: 123
+CSVSaver: Ready
+STDOutSaver: Ready
+Using simulator's random seed as Hetero Player Seed: 123
+After Hetero: 
+wind factor: rand: 0.000000, vector: (0.000000, 0.000000)
+After Createobj: 
+Before logger: 
+After logger: 
+BOOST
+Creating team Agent2d (base)
+Creating team Helios
+Launch npc base_left-1
+
+Hit CTRL-C to exit
+A new (v8) offline coach connected
+A new (v14) player (base_left 1) connected.
+Launch npc base_left-2
+A player disconnected : (base_left 1)
+A new (v14) player (base_left 2) connected.
+Launch npc base_left-3
+A player disconnected : (base_left 2)
+A new (v14) player (base_left 3) connected.
+Launch npc base_left-4
+A player disconnected : (base_left 3)
+A new (v14) player (base_left 4) connected.
+Launch npc base_left-5
+A player disconnected : (base_left 4)
+A new (v14) player (base_left 5) connected.
+Launch npc base_left-6
+A player disconnected : (base_left 5)
+A new (v14) player (base_left 6) connected.
+Launch npc base_left-7
+A player disconnected : (base_left 6)
+A new (v14) player (base_left 7) connected.
+Launch npc base_left-8
+A player disconnected : (base_left 7)
+A new (v14) player (base_left 8) connected.
+Launch npc base_left-9
+A player disconnected : (base_left 8)
+A new (v14) player (base_left 9) connected.
+Launch npc base_left-10
+A player disconnected : (base_left 9)
+A new (v14) player (base_left 10) connected.
+Waiting for player-controlled agent base_left-0: config_dir=/home/leno/gitProjects/Curriculum_HFO/HFO/bin/teams/base/config/formations-dt, server_port=15335, server_addr=localhost, team_name=base_left, play_goalie=False
+A player disconnected : (base_left 10)
+A new (v14) player (base_left 11) connected.
+Launch npc HELIOS_right-1
+A new (v15) player (HELIOS_right 1) connected.
+Launch npc HELIOS_right-2
+A new (v15) player (HELIOS_right 2) connected.
+Launch npc HELIOS_right-3
+A new (v15) player (HELIOS_right 3) connected.
+Launch npc HELIOS_right-4
+A player disconnected : (HELIOS_right 3)
+A new (v15) player (HELIOS_right 4) connected.
+Launch npc HELIOS_right-5
+A player disconnected : (HELIOS_right 4)
+A new (v15) player (HELIOS_right 5) connected.
+Launch npc HELIOS_right-6
+A player disconnected : (HELIOS_right 5)
+A new (v15) player (HELIOS_right 6) connected.
+EndOfTrial: 16 / 95 8363 CAPTURED_BY_DEFENSE-1
+Launch npc HELIOS_right-7
+A player disconnected : (HELIOS_right 6)
+A new (v15) player (HELIOS_right 7) connected.
+Launch npc HELIOS_right-8
+A player disconnected : (HELIOS_right 7)
+A new (v15) player (HELIOS_right 8) connected.
+Launch npc HELIOS_right-9
+A player disconnected : (HELIOS_right 8)
+A new (v15) player (HELIOS_right 9) connected.
+Launch npc HELIOS_right-10
+A player disconnected : (HELIOS_right 9)
+A new (v15) player (HELIOS_right 10) connected.
+Launch npc HELIOS_right-11
+A player disconnected : (HELIOS_right 10)
+A new (v15) player (HELIOS_right 11) connected.
+Checking all players connected
+Starting game
+A player disconnected : (HELIOS_right 11)
+HFORef using seed: 123
+EndOfTrial: 16 / 96 8436 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 16 / 97 8520 OUT_OF_BOUNDS
+EndOfTrial: 0 / 1 84 OUT_OF_BOUNDS
+EndOfTrial: 16 / 98 8616 OUT_OF_BOUNDS
+EndOfTrial: 0 / 2 183 OUT_OF_BOUNDS
+EndOfTrial: 16 / 99 8702 OUT_OF_BOUNDS
+EndOfTrial: 0 / 3 272 OUT_OF_BOUNDS
+EndOfTrial: 0 / 4 375 OUT_OF_BOUNDS
+EndOfTrial: 16 / 100 8904 OUT_OF_TIME
+EndOfTrial: 0 / 5 577 OUT_OF_TIME
+EndOfTrial: 0 / 6 665 OUT_OF_BOUNDS
+rcssserver-15.2.2
+
+Copyright (C) 1995, 1996, 1997, 1998, 1999 Electrotechnical Laboratory.
+2000 - RoboCup Soccer Simulator Maintenance Group.
+
+SERVERPARAM
+Passou Instance
+Config dir
+USING BOOST
+Not booost
+Before config path
+"/home/leno/.rcssserver/"server.conf
+After exception
+Before initBuilder
+Before CSVSaver
+Before Conf Parser
+efore Help Requested
+SIGACTION
+STDINIT
+Using given Simulator Random Seed: 123
+CSVSaver: Ready
+STDOutSaver: Ready
+Using simulator's random seed as Hetero Player Seed: 123
+After Hetero: 
+wind factor: rand: 0.000000, vector: (0.000000, 0.000000)
+After Createobj: 
+Before logger: 
+After logger: 
+BOOST
+Creating team Agent2d (base)
+Creating team Helios
+
+Hit CTRL-C to exit
+A new (v8) offline coach connected
+Launch npc base_left-1
+A new (v14) player (base_left 1) connected.
+Launch npc base_left-2
+A player disconnected : (base_left 1)
+A new (v14) player (base_left 2) connected.
+Launch npc base_left-3
+A player disconnected : (base_left 2)
+A new (v14) player (base_left 3) connected.
+Launch npc base_left-4
+A player disconnected : (base_left 3)
+A new (v14) player (base_left 4) connected.
+Launch npc base_left-5
+A player disconnected : (base_left 4)
+A new (v14) player (base_left 5) connected.
+Launch npc base_left-6
+A player disconnected : (base_left 5)
+A new (v14) player (base_left 6) connected.
+Launch npc base_left-7
+A player disconnected : (base_left 6)
+A new (v14) player (base_left 7) connected.
+Launch npc base_left-8
+A player disconnected : (base_left 7)
+A new (v14) player (base_left 8) connected.
+Launch npc base_left-9
+A player disconnected : (base_left 8)
+A new (v14) player (base_left 9) connected.
+Launch npc base_left-10
+A player disconnected : (base_left 9)
+A new (v14) player (base_left 10) connected.
+Waiting for player-controlled agent base_left-0: config_dir=/home/leno/gitProjects/Curriculum_HFO/HFO/bin/teams/base/config/formations-dt, server_port=15340, server_addr=localhost, team_name=base_left, play_goalie=False
+EndOfTrial: 0 / 7 736 OUT_OF_BOUNDS
+A player disconnected : (base_left 10)
+A new (v14) player (base_left 11) connected.
+Launch npc HELIOS_right-1
+A new (v15) player (HELIOS_right 1) connected.
+Launch npc HELIOS_right-2
+A new (v15) player (HELIOS_right 2) connected.
+Launch npc HELIOS_right-3
+A new (v15) player (HELIOS_right 3) connected.
+Launch npc HELIOS_right-4
+A player disconnected : (HELIOS_right 3)
+A new (v15) player (HELIOS_right 4) connected.
+Launch npc HELIOS_right-5
+A player disconnected : (HELIOS_right 4)
+A new (v15) player (HELIOS_right 5) connected.
+Launch npc HELIOS_right-6
+A player disconnected : (HELIOS_right 5)
+A new (v15) player (HELIOS_right 6) connected.
+Launch npc HELIOS_right-7
+A player disconnected : (HELIOS_right 6)
+A new (v15) player (HELIOS_right 7) connected.
+Launch npc HELIOS_right-8
+A player disconnected : (HELIOS_right 7)
+A new (v15) player (HELIOS_right 8) connected.
+Launch npc HELIOS_right-9
+A player disconnected : (HELIOS_right 8)
+A new (v15) player (HELIOS_right 9) connected.
+Launch npc HELIOS_right-10
+A player disconnected : (HELIOS_right 9)
+A new (v15) player (HELIOS_right 10) connected.
+Launch npc HELIOS_right-11
+A player disconnected : (HELIOS_right 10)
+A new (v15) player (HELIOS_right 11) connected.
+Checking all players connected
+EndOfTrial: 0 / 8 852 CAPTURED_BY_DEFENSE-1
+Starting game
+A player disconnected : (HELIOS_right 11)
+HFORef using seed: 123
+EndOfTrial: 0 / 9 937 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 1 / 10 997 GOAL-2
+EndOfTrial: 0 / 1 74 OUT_OF_BOUNDS
+EndOfTrial: 0 / 2 176 OUT_OF_BOUNDS
+EndOfTrial: 1 / 11 1199 OUT_OF_TIME
+EndOfTrial: 0 / 3 292 OUT_OF_BOUNDS
+EndOfTrial: 2 / 12 1271 GOAL-11
+EndOfTrial: 2 / 13 1369 OUT_OF_BOUNDS
+EndOfTrial: 0 / 4 494 OUT_OF_TIME
+EndOfTrial: 0 / 5 518 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 2 / 14 1571 OUT_OF_TIME
+EndOfTrial: 2 / 15 1596 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 0 / 6 701 OUT_OF_BOUNDS
+EndOfTrial: 2 / 16 1666 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 2 / 17 1760 OUT_OF_BOUNDS
+EndOfTrial: 0 / 7 903 OUT_OF_TIME
+EndOfTrial: 3 / 18 1860 GOAL-11
+EndOfTrial: 0 / 8 991 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 3 / 19 2062 OUT_OF_TIME
+EndOfTrial: 0 / 9 1193 OUT_OF_TIME
+EndOfTrial: 0 / 10 1267 OUT_OF_BOUNDS
+EndOfTrial: 3 / 20 2264 OUT_OF_TIME
+EndOfTrial: 0 / 11 1469 OUT_OF_TIME
+rcssserver-15.2.2
+
+Copyright (C) 1995, 1996, 1997, 1998, 1999 Electrotechnical Laboratory.
+2000 - RoboCup Soccer Simulator Maintenance Group.
+
+SERVERPARAM
+Passou Instance
+Config dir
+USING BOOST
+Not booost
+Before config path
+"/home/leno/.rcssserver/"server.conf
+After exception
+Before initBuilder
+Before CSVSaver
+Before Conf Parser
+efore Help Requested
+SIGACTION
+STDINIT
+Using given Simulator Random Seed: 123
+CSVSaver: Ready
+STDOutSaver: Ready
+Using simulator's random seed as Hetero Player Seed: 123
+After Hetero: 
+wind factor: rand: 0.000000, vector: (0.000000, 0.000000)
+After Createobj: 
+Before logger: 
+After logger: 
+BOOST
+Creating team Agent2d (base)
+Creating team Helios
+Launch npc base_left-1
+
+Hit CTRL-C to exit
+A new (v8) offline coach connected
+A new (v14) player (base_left 1) connected.
+Launch npc base_left-2
+A player disconnected : (base_left 1)
+A new (v14) player (base_left 2) connected.
+Launch npc base_left-3
+A player disconnected : (base_left 2)
+A new (v14) player (base_left 3) connected.
+Launch npc base_left-4
+A player disconnected : (base_left 3)
+A new (v14) player (base_left 4) connected.
+EndOfTrial: 3 / 21 2466 OUT_OF_TIME
+Launch npc base_left-5
+A player disconnected : (base_left 4)
+A new (v14) player (base_left 5) connected.
+Launch npc base_left-6
+A player disconnected : (base_left 5)
+A new (v14) player (base_left 6) connected.
+Launch npc base_left-7
+A player disconnected : (base_left 6)
+A new (v14) player (base_left 7) connected.
+Launch npc base_left-8
+A player disconnected : (base_left 7)
+A new (v14) player (base_left 8) connected.
+Launch npc base_left-9
+A player disconnected : (base_left 8)
+A new (v14) player (base_left 9) connected.
+Launch npc base_left-10
+A player disconnected : (base_left 9)
+A new (v14) player (base_left 10) connected.
+Waiting for player-controlled agent base_left-0: config_dir=/home/leno/gitProjects/Curriculum_HFO/HFO/bin/teams/base/config/formations-dt, server_port=15345, server_addr=localhost, team_name=base_left, play_goalie=False
+A player disconnected : (base_left 10)
+A new (v14) player (base_left 11) connected.
+Launch npc HELIOS_right-1
+A new (v15) player (HELIOS_right 1) connected.
+Launch npc HELIOS_right-2
+A new (v15) player (HELIOS_right 2) connected.
+Launch npc HELIOS_right-3
+A new (v15) player (HELIOS_right 3) connected.
+Launch npc HELIOS_right-4
+A player disconnected : (HELIOS_right 3)
+A new (v15) player (HELIOS_right 4) connected.
+Launch npc HELIOS_right-5
+A player disconnected : (HELIOS_right 4)
+A new (v15) player (HELIOS_right 5) connected.
+Launch npc HELIOS_right-6
+A player disconnected : (HELIOS_right 5)
+A new (v15) player (HELIOS_right 6) connected.
+Launch npc HELIOS_right-7
+A player disconnected : (HELIOS_right 6)
+A new (v15) player (HELIOS_right 7) connected.
+Launch npc HELIOS_right-8
+A player disconnected : (HELIOS_right 7)
+A new (v15) player (HELIOS_right 8) connected.
+Launch npc HELIOS_right-9
+A player disconnected : (HELIOS_right 8)
+A new (v15) player (HELIOS_right 9) connected.
+Launch npc HELIOS_right-10
+A player disconnected : (HELIOS_right 9)
+A new (v15) player (HELIOS_right 10) connected.
+Launch npc HELIOS_right-11
+A player disconnected : (HELIOS_right 10)
+A new (v15) player (HELIOS_right 11) connected.
+Checking all players connected
+Starting game
+EndOfTrial: 0 / 12 1671 OUT_OF_TIME
+A player disconnected : (HELIOS_right 11)
+HFORef using seed: 123
+EndOfTrial: 3 / 22 2668 OUT_OF_TIME
+EndOfTrial: 0 / 13 1873 OUT_OF_TIME
+EndOfTrial: 0 / 1 100 OUT_OF_BOUNDS
+EndOfTrial: 0 / 2 159 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 3 / 23 2870 OUT_OF_TIME
+EndOfTrial: 1 / 3 238 GOAL-11
+EndOfTrial: 3 / 24 2943 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 0 / 14 2075 OUT_OF_TIME
+EndOfTrial: 0 / 15 2103 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 0 / 16 2197 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 1 / 4 440 OUT_OF_TIME
+EndOfTrial: 3 / 25 3145 OUT_OF_TIME
+EndOfTrial: 1 / 5 501 OUT_OF_BOUNDS
+EndOfTrial: 0 / 17 2399 OUT_OF_TIME
+EndOfTrial: 3 / 26 3347 OUT_OF_TIME
+EndOfTrial: 1 / 6 676 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 1 / 7 747 OUT_OF_BOUNDS
+EndOfTrial: 3 / 27 3440 OUT_OF_BOUNDS
+EndOfTrial: 1 / 8 806 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 3 / 28 3517 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 0 / 18 2601 OUT_OF_TIME
+EndOfTrial: 4 / 29 3596 GOAL-11
+EndOfTrial: 0 / 19 2675 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 1 / 9 936 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 1 / 10 991 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 1 / 11 1051 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 4 / 30 3736 OUT_OF_BOUNDS
+EndOfTrial: 5 / 31 3796 GOAL-11
+EndOfTrial: 0 / 20 2877 OUT_OF_TIME
+EndOfTrial: 1 / 12 1132 OUT_OF_BOUNDS
+EndOfTrial: 2 / 13 1187 GOAL-11
+EndOfTrial: 5 / 32 3889 OUT_OF_BOUNDS
+EndOfTrial: 3 / 14 1242 GOAL-11
+EndOfTrial: 3 / 15 1266 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 0 / 21 3079 OUT_OF_TIME
+EndOfTrial: 4 / 16 1349 GOAL-11
+EndOfTrial: 5 / 33 4091 OUT_OF_TIME
+EndOfTrial: 4 / 17 1432 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 5 / 34 4162 OUT_OF_BOUNDS
+EndOfTrial: 0 / 22 3281 OUT_OF_TIME
+EndOfTrial: 6 / 35 4222 GOAL-2
+EndOfTrial: 4 / 18 1558 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 5 / 19 1635 GOAL-2
+EndOfTrial: 6 / 36 4303 OUT_OF_BOUNDS
+EndOfTrial: 5 / 20 1679 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 5 / 21 1717 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 0 / 23 3483 OUT_OF_TIME
+EndOfTrial: 0 / 24 3517 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 5 / 22 1805 OUT_OF_BOUNDS
+EndOfTrial: 5 / 23 1837 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 6 / 37 4505 OUT_OF_TIME
+EndOfTrial: 0 / 25 3579 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 5 / 24 1865 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 0 / 26 3621 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 5 / 25 1917 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 5 / 26 1943 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 0 / 27 3704 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 6 / 38 4707 OUT_OF_TIME
+EndOfTrial: 18 / 101 11885 CAPTURED_BY_DEFENSE-2
+TotalFrames = 11886, AvgFramesPerTrial = 117.7, AvgFramesPerGoal = 81.5
+Trials             : 101
+Goals              : 18
+Defense Captured   : 38
+Balls Out of Bounds: 19
+Out of Time        : 26
+[start.py] Cleaning up server and other processes
+A player disconnected : (base_left 11)
+A player disconnected : (HELIOS_right 1)
+A player disconnected : (HELIOS_right 2)
+An offline coach disconnected
+
+Server Killed. Exiting...
+
+Saving Results:
+	CSVSaver: saving...
+	CSVSaver: ...disabled
+	STDOutSaver: saving...
+
+Game Results:
+	2017-10-16 08:42:28
+	'base_left' vs 'HELIOS_right'
+	Score: 0 - 0
+ 
+	STDOutSaver: ...saved
+
+Saving Results Complete
+EndOfTrial: 5 / 27 2145 OUT_OF_TIME
+EndOfTrial: 6 / 39 4794 OUT_OF_BOUNDS
+EndOfTrial: 5 / 28 2170 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 0 / 28 3906 OUT_OF_TIME
+EndOfTrial: 6 / 40 4851 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 6 / 29 2245 GOAL-11
+EndOfTrial: 0 / 29 3964 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 7 / 41 4933 GOAL-11
+EndOfTrial: 8 / 42 5017 GOAL-11
+EndOfTrial: 6 / 30 2380 OUT_OF_BOUNDS
+EndOfTrial: 6 / 31 2430 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 0 / 30 4166 OUT_OF_TIME
+EndOfTrial: 6 / 32 2486 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 6 / 33 2525 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 0 / 31 4242 OUT_OF_BOUNDS
+EndOfTrial: 7 / 34 2583 GOAL-11
+EndOfTrial: 8 / 43 5219 OUT_OF_TIME
+EndOfTrial: 7 / 35 2653 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 0 / 32 4401 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 0 / 33 4468 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 8 / 44 5421 OUT_OF_TIME
+EndOfTrial: 0 / 34 4531 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 8 / 45 5482 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 7 / 36 2855 OUT_OF_TIME
+EndOfTrial: 8 / 46 5507 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 7 / 37 2956 OUT_OF_BOUNDS
+EndOfTrial: 7 / 38 3006 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 0 / 35 4733 OUT_OF_TIME
+EndOfTrial: 20 / 101 10271 CAPTURED_BY_DEFENSE-2
+TotalFrames = 10272, AvgFramesPerTrial = 101.7, AvgFramesPerGoal = 84.0
+Trials             : 101
+Goals              : 20
+Defense Captured   : 45
+Balls Out of Bounds: 19
+Out of Time        : 17
+[start.py] Cleaning up server and other processes
+A player disconnected : (base_left 11)
+A player disconnected : (HELIOS_right 1)
+A player disconnected : (HELIOS_right 2)
+An offline coach disconnected
+
+Server Killed. Exiting...
+
+Saving Results:
+	CSVSaver: saving...
+	CSVSaver: ...disabled
+	STDOutSaver: saving...
+
+Game Results:
+	2017-10-16 08:43:13
+	'base_left' vs 'HELIOS_right'
+	Score: 0 - 0
+ 
+	STDOutSaver: ...saved
+
+Saving Results Complete
+EndOfTrial: 8 / 47 5709 OUT_OF_TIME
+EndOfTrial: 0 / 36 4825 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 9 / 48 5770 GOAL-11
+EndOfTrial: 8 / 39 3145 GOAL-11
+EndOfTrial: 9 / 49 5845 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 8 / 40 3210 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 0 / 37 4921 CAPTURED_BY_DEFENSE-2
+EndOfTrial: 10 / 50 5922 GOAL-11
+EndOfTrial: 8 / 41 3315 OUT_OF_BOUNDS
+EndOfTrial: 0 / 38 5016 OUT_OF_BOUNDS
+EndOfTrial: 8 / 42 3404 OUT_OF_BOUNDS
+EndOfTrial: 10 / 51 6124 OUT_OF_TIME
+EndOfTrial: 8 / 43 3504 OUT_OF_BOUNDS
+EndOfTrial: 0 / 39 5218 OUT_OF_TIME
+EndOfTrial: 8 / 44 3545 CAPTURED_BY_DEFENSE-1
+EndOfTrial: 11 / 52 6210 GOAL-11
+EndOfTrial: 1 / 40 5284 GOAL-11
+EndOfTrial: 9 / 45 3596 GOAL-11
+EndOfTrial: 11 / 53 6290 OUT_OF_BOUNDS
+EndOfTrial: 10 / 46 3668 GOAL-11
+EndOfTrial: 2 / 41 5369 GOAL-11
+EndOfTrial: 11 / 47 3737 GOAL-2
+EndOfTrial: 11 / 48 3819 OUT_OF_BOUNDS
+EndOfTrial: 11 / 54 6492 OUT_OF_TIME
+EndOfTrial: 2 / 42 5571 OUT_OF_TIME
