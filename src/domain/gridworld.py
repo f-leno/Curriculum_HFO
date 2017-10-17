@@ -6,20 +6,19 @@ Created on May, 25th, 2017.
 Environment for the gridworld domain
 """
 from scipy.spatial import distance
-import actions
-from domain import Domain
-from gridworldtask import GridWorldTask
+import domain.actions as actions
+from domain.domain import Domain
+from domain.gridworldtask import GridWorldTask
 
 
 class GridWorld(Domain):
     """DOmain Generator"""
     def build_environment(self,taskFile,limitSteps,taskName = None):
-        """Instantiates an object representing the environment in this domain.
+        """Instantiates an object representing the task in this domain.
             --taskFile = The path for a file containing the description of a task in this domain
             --limitSteps = The maximum number of steps to be executed per episode.
             --taskName = optional parameter defining the task name.
             returns:
-                --environment: The desired environment
                 --task: The task according to the given file.
         """
         #Building the task
@@ -30,7 +29,7 @@ class GridWorld(Domain):
                                     sizeX = task.get_sizeX(),sizeY = task.get_sizeY(),
                                     taskState = task.init_state(), limitSteps = limitSteps)
         
-        return environment,task
+        return task
         
        
     def build_environment_from_task(self,task,limitSteps):
@@ -402,6 +401,9 @@ class GridWorldEnv(object):
                  offsetX = -1
                  offsetY = 0 
             return offsetX,offsetY
+    def finish_learning(self):
+        """nothing to execute"""
+        pass
                 
                 
         

@@ -159,5 +159,5 @@ class GridWorldTask(Task):
 
     def number_objects(self):
         """Returns the number of objects if the object-oriented description is used."""
-        return self.num_pits() + self.currentTask.num_fires()
+        return self.num_pits() + self.num_fires()
 

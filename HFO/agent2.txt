@@ -1,0 +1,6 @@
+******************************************************************
+ librcsc 4.1.0
+ Copyright 2000 - 2007. Hidehisa Akiyama.
+ Copyright 2007 - 2011. Hidehisa Akiyama and Hiroki Shimora
+ All rights reserved.
+******************************************************************

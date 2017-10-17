@@ -57,8 +57,8 @@ class PITAMQLearning(QLearning):
             PITAMMappings = self.calculatedPITAM[state]
         else:        
             #First define the PITAM, then initiate the Q-table
-            PITAMMappings = OOUtil.get_PITAM_mappings(state,action,self.previousTasks,self.previousQTables,getOtherActions=self.useBias)
-                         
+            PITAMMappings = OOUtil.get_PITAM_mappings(state,action,self.currentTask,self.previousTasks,self.previousQTables,getOtherActions=self.useBias)
+
             #Stores for later use
             self.calculatedPITAM[state] = PITAMMappings
         

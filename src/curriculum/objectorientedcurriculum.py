@@ -14,10 +14,22 @@ import OOUtil
 
 class ObjectOrientedCurriculum(SvetlikCurriculum):
     
-    def generate_curriculum(self,target_task, sourceFolder,workFolder,thresholdTask = 3.2):
+    def generate_curriculum(self,target_task, sourceFolder,workFolder,thresholdTask = None):
+        # Defines default parameter to each domain
+        if thresholdTask is None:
+            if target_task.get_domain_task() == 'HFOTask':
+                thresholdTask = 3.2
+            elif target_task.get_domain_task() == 'GridWorldTask':
+                thresholdTask = 40
         super(ObjectOrientedCurriculum,self).generate_curriculum(target_task=target_task,sourceFolder=sourceFolder,
              workFolder=workFolder,thresholdTask=thresholdTask)
-    def generate_curriculum_from_tasks(self,target_task, taskList,thresholdTask = 3.2):
+    def generate_curriculum_from_tasks(self,target_task, taskList,thresholdTask = None):
+        # Defines default parameter to each domain
+        if thresholdTask is None:
+            if target_task.get_domain_task() == 'HFOTask':
+                thresholdTask = 3.2
+            elif target_task.get_domain_task() == 'GridWorldTask':
+                thresholdTask = 40
         super(ObjectOrientedCurriculum,self).generate_curriculum_from_tasks(target_task=target_task,taskList=taskList,
              thresholdTask=thresholdTask)
         

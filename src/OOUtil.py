@@ -241,7 +241,7 @@ def get_PITAM_mappings_grid(state,action,targetTask,previousTasks,previousQTable
     #If at least one mapping was found, the relative similarity is calculated
     if len(PITAMMappings) > 0:
          #Get sum of similarity values
-         sumSim = sum(zip(*PITAMMappings)[1])
+         sumSim = sum(list(zip(*PITAMMappings))[1])
            
     #Finishes the similarity calculation
     for pitamTuple in PITAMMappings:
