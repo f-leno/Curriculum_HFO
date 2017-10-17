@@ -15,10 +15,10 @@ from terminationcondition import TerminationCondition
 
 class HFOTermination(TerminationCondition):
     
-    limitation = 300 #Maximum number of episodes per task
+    limitation = 500 #Maximum number of episodes per task
     limitNoGoal = 30 #Maximum number of episodes without goals
     evaluateWindow = 20 #number of episodes to count goal percentage
-    thresholdGoal = 0.7 #Percentage to stop training
+    thresholdGoal = 0.8 #Percentage to stop training
     currentEpisode = 1 
     goalList = []
     lastReward = 0
