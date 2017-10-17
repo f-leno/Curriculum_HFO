@@ -184,6 +184,9 @@ def build_combinations(objects,numberFrom,numberTo):
         for i in range(numberFrom):
             #get_combinations is a recursive function that will build the combination
             returnObjects.extend(get_combinations(objects, i, numberTo,[]))
+    elif numberFrom == numberTo:
+        returnObjects.append(copy.deepcopy(objects))
+
     return returnObjects
             
             

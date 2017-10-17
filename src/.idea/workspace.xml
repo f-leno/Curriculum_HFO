@@ -14,8 +14,28 @@
       <file leaf-file-name="experiment.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/experiment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="30" column="70" lean-forward="true" selection-start-line="30" selection-start-column="70" selection-end-line="30" selection-end-column="70" />
+            <state relative-caret-position="306">
+              <caret line="35" column="39" lean-forward="false" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hfostate.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/domain/hfostate.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3434">
+              <caret line="203" column="0" lean-forward="false" selection-start-line="203" selection-start-column="0" selection-end-line="203" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OOUtil.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OOUtil.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3077">
+              <caret line="182" column="50" lean-forward="false" selection-start-line="182" selection-start-column="50" selection-end-line="182" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -34,8 +54,18 @@
       <file leaf-file-name="hfotermination.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hfotermination.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="374">
+              <caret line="22" column="17" lean-forward="false" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="generatedsourceoocurriculum.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/curriculum/generatedsourceoocurriculum.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="45" column="7" lean-forward="false" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -76,6 +106,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>serverPath</find>
+      <find>buil</find>
+      <find>exte</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -83,6 +115,9 @@
       <list>
         <option value="$PROJECT_DIR$/domain/portmanager.py" />
         <option value="$PROJECT_DIR$/domain/hfodomain.py" />
+        <option value="$PROJECT_DIR$/hfotermination.py" />
+        <option value="$PROJECT_DIR$/OOUtil.py" />
+        <option value="$PROJECT_DIR$/curriculum/generatedsourceoocurriculum.py" />
       </list>
     </option>
   </component>
@@ -123,12 +158,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/experiment.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/curriculum/generatedsourceoocurriculum.py" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -142,7 +177,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Svetlik">
+  <component name="RunManager" selected="Python.PITAM-OO">
     <configuration name="PITAM-Generated" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -156,7 +191,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="src" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiment.py" />
-      <option name="PARAMETERS" value="-a PITAMSARSA -ca GeneratedSourceOOCurriculum -ter HFOTermination -e 100000 -i 2000 -te steps -it 5 -et 50" />
+      <option name="PARAMETERS" value="-a PITAMSARSA -ca GeneratedSourceOOCurriculum -ter HFOTermination -e 100000 -i 2000 -te steps -it 1 -et 50" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="true" />
     </configuration>
@@ -173,7 +208,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="src" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiment.py" />
-      <option name="PARAMETERS" value="-a PITAMSARSA -ca ObjectOrientedCurriculum -ter HFOTermination -e 100000 -i 2000 -te steps -it 16 -et 50" />
+      <option name="PARAMETERS" value="-a PITAMSARSA -ca ObjectOrientedCurriculum -ter HFOTermination -e 100000 -i 2000 -te steps -it 6" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="true" />
     </configuration>
@@ -190,7 +225,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="src" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiment.py" />
-      <option name="PARAMETERS" value="-a PITAMSARSA -ca SvetlikCurriculum -ter HFOTermination -e 100000 -i 2000 -te steps -it 3" />
+      <option name="PARAMETERS" value="-a PITAMSARSA -ca SvetlikCurriculum -ter HFOTermination -e 100000 -i 2000 -te steps -it 8" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="true" />
     </configuration>
@@ -207,7 +242,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="src" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiment.py" />
-      <option name="PARAMETERS" value="-a SARSA -ca NoneCurriculum -ter HFOTermination -e 100000 -i 2000 -te steps -it 15 -et 50" />
+      <option name="PARAMETERS" value="-a SARSA -ca NoneCurriculum -ter HFOTermination -e 100000 -i 2000 -te steps -it 22 -et 50" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="true" />
     </configuration>
@@ -224,7 +259,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="src" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiment.py" />
-      <option name="PARAMETERS" value="-a VFReuseSARSA -ca SvetlikCurriculum -ter HFOTermination -e 100000 -i 2000 -te steps -it 20" />
+      <option name="PARAMETERS" value="-a VFReuseSARSA -ca SvetlikCurriculum -ter HFOTermination -e 100000 -i 2000 -te steps -it 8" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="true" />
     </configuration>
@@ -298,12 +333,98 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/domain/hfostate.py</url>
+          <line>199</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/domain/hfostate.py</url>
+          <line>202</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="6" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/experiment.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="18" column="22" lean-forward="false" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/domain/hfostate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3434">
+          <caret line="203" column="0" lean-forward="false" selection-start-line="203" selection-start-column="0" selection-end-line="203" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OOUtil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3077">
+          <caret line="182" column="50" lean-forward="false" selection-start-line="182" selection-start-column="50" selection-end-line="182" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hfotermination.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="17" lean-forward="false" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/terminationcondition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/domain/portmanager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="19" column="8" lean-forward="false" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/domain/hfodomain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6290">
+          <caret line="387" column="24" lean-forward="false" selection-start-line="387" selection-start-column="24" selection-end-line="387" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/curriculum/generatedsourceoocurriculum.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="45" column="7" lean-forward="true" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiment.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
@@ -406,14 +527,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hfotermination.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/terminationcondition.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -438,10 +551,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/domain/hfostate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3434">
+          <caret line="203" column="0" lean-forward="false" selection-start-line="203" selection-start-column="0" selection-end-line="203" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OOUtil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3077">
+          <caret line="182" column="50" lean-forward="false" selection-start-line="182" selection-start-column="50" selection-end-line="182" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hfotermination.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="17" lean-forward="false" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/curriculum/generatedsourceoocurriculum.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="45" column="7" lean-forward="false" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/experiment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="30" column="70" lean-forward="true" selection-start-line="30" selection-start-column="70" selection-end-line="30" selection-end-column="70" />
+        <state relative-caret-position="306">
+          <caret line="35" column="39" lean-forward="false" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
           <folding />
         </state>
       </provider>
