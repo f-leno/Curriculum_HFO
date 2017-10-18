@@ -18,7 +18,7 @@ from collections import defaultdict
 import scipy as sp
 import scipy.stats
 
-def collect_experiment_data(source='/', runs=2, servers=1, agents=1):
+def collect_experiment_data(source='/', runs=2, servers=1, agents=1, hfo=True):
     # load all agent data
     evalSteps = defaultdict(list)
     evalReward = defaultdict(list)
@@ -35,7 +35,11 @@ def collect_experiment_data(source='/', runs=2, servers=1, agents=1):
                 #print evalFile
                 if os.path.isfile(evalFile):
                     try:
-                        _etime, _estep, _ereward, _egoalP = np.loadtxt(open(evalFile, "rb"), skiprows=1, delimiter=",", unpack=True)
+                        if hfo:
+                            _etime, _estep, _ereward, _egoalP = np.loadtxt(open(evalFile, "rb"), skiprows=1, delimiter=",", unpack=True)
+                        else:
+                            _etime, _estep, _ereward = np.loadtxt(open(evalFile, "rb"), skiprows=1,
+                                                                           delimiter=",", unpack=True)
 
                     except:
                         continue
@@ -47,7 +51,8 @@ def collect_experiment_data(source='/', runs=2, servers=1, agents=1):
                     for i in range(len(_etime)):
                             evalSteps[(agent,_etime[i])].append(_estep[i])
                             evalReward[(agent,_etime[i])].append(_ereward[i])
-                            evalGoal[(agent,_etime[i])].append(_egoalP[i])
+                            if hfo:
+                                evalGoal[(agent,_etime[i])].append(_egoalP[i])
                     #else:
                     #    print("Error " + str(run+1) + " - "+ str(sum(_etime.shape))+" , "+str(sum(evalTrials.shape)))
     with open(os.path.join(source, "_"+ str(0) +"_"+ str(1) +"_AGENT_"+ str(1) +"_RESULTS_eval"), 'r') as f:
@@ -90,17 +95,17 @@ def collect_experiment_data(source='/', runs=2, servers=1, agents=1):
                     newrow.append("{:.2f}".format(i))
                 csvwriter.writerow((newrow))
                 csvfile.flush()
-                
-    with open(os.path.join(source, "__EVAL_goal"), 'w') as csvfile:
-            csvwriter = csv.writer(csvfile)
-            csvwriter.writerow((headerLine))
-            csvfile.flush()
-            for key in evalGoal.keys():
-                newrow = [key[1]]
-                for i in evalGoal[key]:
-                    newrow.append("{:.2f}".format(i*100))
-                csvwriter.writerow((newrow))
+    if hfo:
+        with open(os.path.join(source, "__EVAL_goal"), 'w') as csvfile:
+                csvwriter = csv.writer(csvfile)
+                csvwriter.writerow((headerLine))
                 csvfile.flush()
+                for key in evalGoal.keys():
+                    newrow = [key[1]]
+                    for i in evalGoal[key]:
+                        newrow.append("{:.2f}".format(i*100))
+                    csvwriter.writerow((newrow))
+                    csvfile.flush()
 
 
     
@@ -114,9 +119,11 @@ def summarize_data(data, confidence=0.95):
     return np.asarray([m, m-h, m+h])
 
 
-def summarize_experiment_data(source):
-    values = ["__EVAL_steps", "__EVAL_rewards","__EVAL_goal"]
-    
+def summarize_experiment_data(source,hfo=True):
+    if hfo:
+        values = ["__EVAL_steps", "__EVAL_rewards","__EVAL_goal"]
+    else:
+        values = ["__EVAL_steps", "__EVAL_rewards"]
     for value in values:
         evalFile = os.path.join(source, value)
         #print(evalFile)
@@ -164,9 +171,11 @@ def summarize_experiment_data(source):
                 csvwriter.writerow((newrow))
                 csvfile.flush()
                 
-def cumulative_experiment_data(source,startingFrom=500):
-    values = ["__EVAL_steps", "__EVAL_rewards","__EVAL_goal"]
-    #values = ["__EVAL_goalpercentages", "__EVAL_goaltimes"]
+def cumulative_experiment_data(source,startingFrom=500,hfo=True):
+    if hfo:
+        values = ["__EVAL_steps", "__EVAL_rewards","__EVAL_goal"]
+    else:
+        values = ["__EVAL_steps", "__EVAL_rewards"]
     for value in values:
         evalFile = os.path.join(source, value)
         #print(evalFile)
