@@ -2,3 +2,5 @@ src/log/
 HFO/log/
 HFO/bin/
 HFO/build/
+src/.idea/
+src/.ports
