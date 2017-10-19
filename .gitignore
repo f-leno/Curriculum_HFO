@@ -1,4 +1,6 @@
-src/log/
+src/log/*__EVAL*
+src/log/*__SUMMARY*
+src/log/*__CUMULATIVE*
 HFO/log/
 HFO/bin/
 HFO/build/
