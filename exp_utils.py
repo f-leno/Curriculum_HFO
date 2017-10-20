@@ -119,7 +119,7 @@ def summarize_data(data, confidence=0.95):
     return np.asarray([m, m-h, m+h])
 
 
-def summarize_experiment_data(source,hfo=True):
+def summarize_experiment_data(source, confidence=0.95, hfo=True):
     if hfo:
         values = ["__EVAL_steps", "__EVAL_rewards","__EVAL_goal"]
     else:
@@ -139,7 +139,7 @@ def summarize_experiment_data(source,hfo=True):
         #if value == "__EVAL_goal":
             #Multiplying goal value by 100
             #data = [ [t * 100 for t in listO] for listO in data]
-        update = summarize_data(data)
+        update = summarize_data(data,confidence)
         headerLine = []
         
         with open(evalFile, 'r') as f:
