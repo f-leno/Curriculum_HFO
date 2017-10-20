@@ -3,6 +3,6 @@ src/log/*__SUMMARY*
 src/log/*__CUMULATIVE*
 HFO/log/
 HFO/bin/
-HFO/build/
+HFO/build/*.xml
 src/.idea/
 src/.ports
