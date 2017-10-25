@@ -61,7 +61,7 @@ def build_object():
                           fromlist=[curriculumName]),
                           curriculumName)
     except ImportError as error:
-            print error
+            print (error)
             sys.stderr.write("ERROR: missing python module: " +curriculumName + "\n")
             sys.exit(1)
         
@@ -80,47 +80,63 @@ def generate_target(parameter):
     elif parameter.domain == "HFODomain":
         taskData = "4;4;helios;0.3;123"
         task = HFOTask(taskName='target', taskData=taskData)
-def generate_random_task():
+    return task
+def generate_random_task(domain):
     """Gerates a random task data"""
     taskData = ""
-    possibleX = [2,3,5,7,10]
-    possibleY = [2,3,5,7,10]
-    possibleNumFire = range(10)
-    possibleNumPit = range(10)
-    
-    #Random grid Size
-    randX = random.choice(possibleX)
-    randY = random.choice(possibleY)
-    
-    #including in task data
-    taskData += str(randX)+";"+str(randY)+";agent:1-1;treasure:"+ str(randX)+"-"+str(randY)
-    
-    #Random fire and pit positions
-    numFire = random.choice(possibleNumFire)
-    numPit = random.choice(possibleNumPit)
-    
-    #Generate fires
-    for i in range(numFire):
-        x = random.choice(range(1,randX+1))
-        y = random.choice(range(1,randY+1))
-        taskData += ',fire:'+str(x)+"-"+str(y)
-    #Generate pits
-    for i in range(numPit):
-        x = random.choice(range(1,randX+1))
-        y = random.choice(range(1,randY+1))
-        taskData += ',pit:'+str(x)+"-"+str(y)
+
+    if domain== "Gridworld":
+        possibleX = [2,3,5,7,10]
+        possibleY = [2,3,5,7,10]
+        possibleNumFire = range(10)
+        possibleNumPit = range(10)
+
+        #Random grid Size
+        randX = random.choice(possibleX)
+        randY = random.choice(possibleY)
+
+        #including in task data
+        taskData += str(randX)+";"+str(randY)+";agent:1-1;treasure:"+ str(randX)+"-"+str(randY)
+
+        #Random fire and pit positions
+        numFire = random.choice(possibleNumFire)
+        numPit = random.choice(possibleNumPit)
+
+        #Generate fires
+        for i in range(numFire):
+            x = random.choice(range(1,randX+1))
+            y = random.choice(range(1,randY+1))
+            taskData += ',fire:'+str(x)+"-"+str(y)
+        #Generate pits
+        for i in range(numPit):
+            x = random.choice(range(1,randX+1))
+            y = random.choice(range(1,randY+1))
+            taskData += ',pit:'+str(x)+"-"+str(y)
+    elif domain == "HFODomain":
+        possibleDistance = [0.2,0.3,0.4,0.5,0.6,0.7,0.8]
+        possibleNumFriends = range(11)
+        possibleNumOpponents = range(11)
+        possibleStrategies = ["helios,base"]
+
+        taskData += str(random.choice(possibleNumFriends)) + ";" + str(random.choice(possibleNumOpponents)) + ";"
+        taskData += random.choice(possibleStrategies) + ";" + str(random.choice(possibleDistance)) + ";123"
         
     return taskData
 
-def add_tasks(taskList,numberTasks):
+def add_tasks(taskList,numberTasks,domain):
     """Generates n random tasks"""
     for i in range(numberTasks):
-        randomTask = generate_random_task()
-        taskList.append(Task(taskName=str(len(taskList)+1),taskData=randomTask))
+        randomTask = generate_random_task(domain)
+        if domain == "HFODomain":
+            taskList.append(HFOTask(taskName=str(len(taskList) + 1), taskData=randomTask))
+        elif domain == "GridWorld":
+            taskList.append(GridWorldTask(taskName=str(len(taskList) + 1), taskData=randomTask))
+
+
     return taskList
 def main():
     parameter = get_args()
-    print parameter
+    print (parameter)
    
     random.seed(parameter.seed)
     target_task = generate_target(parameter)
@@ -131,11 +147,15 @@ def main():
         
         curriculum = build_object()
         random.seed(parameter.seed + currentSize)
-        taskList = add_tasks(taskList,parameter.interval_size)
+        taskList = add_tasks(taskList,parameter.interval_size,parameter.domain)
 
         start = timer()
+        if target_task.get_domain_task() == 'HFOTask':
+            thresholdTask = 20
+
+
         #Generate Curriculum for target task
-        curriculum.generate_curriculum_from_tasks(target_task, taskList)
+        curriculum.generate_curriculum_from_tasks(target_task, taskList,thresholdTask = thresholdTask)
         
         end = timer()
         print("Size: "+str(currentSize)+ "-------" + str(end - start))   
