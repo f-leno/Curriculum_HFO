@@ -255,6 +255,38 @@ def cumulative_experiment_data(source,startingFrom=500,hfo=True):
                     newrow.append("{:.2f}".format(j))
                 csvwriter.writerow((newrow))
                 csvfile.flush()
+        #Generates shifted graph (erasing steps in source tasks).
+        #Finds initial step
+        evalFileContent = pd.read_csv(open(evalFile, "rb"), skiprows=0, delimiter=",")
+        values = evalFileContent.values
+        import operator
+        listToSort = values.tolist()
+        listToSort.sort(key=operator.itemgetter(0))
+        values = np.array(listToSort)
+        trials = values[:,0]
+        data = values[:,1:]
+        subtract = trials[0]
+        #Shifts all the void steps
+        for i in range(len(trials)):
+                trials[i] = trials[i] - subtract
+        for rep in range(1, data.shape[0]):
+                for index in range(data.shape[1]):
+                    data[rep][index] = data[rep - 1][index] + data[rep][index]
+        update = summarize_data(data)
+        #Genrates file
+        value = value.replace("CUMULATIVE", "CUM_SHIFTED")
+        with open(os.path.join(source, value), 'w') as csvfile:
+            csvwriter = csv.writer(csvfile)
+
+            csvwriter.writerow((headerLine))
+            csvfile.flush()
+
+            for i in range(sum(trials.shape)):
+                newrow = [trials[i]]
+                for j in update.T[i]:
+                    newrow.append("{:.2f}".format(j))
+                csvwriter.writerow((newrow))
+                csvfile.flush()
                 
 
 def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
@@ -371,20 +403,26 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
     if what == "__SUMMARY_steps":
         #plt.title('Goal Percentage per Trial')
         plt.ylabel('Steps until completed', fontsize=fontSize, fontweight='bold')
-    elif what == "__SUMMARY_rewards":
+    elif what == "__SUMMARY_rewards" or what== "__SHIFTED_rewards":
         #plt.title('Goal Percentage per Trial')
         plt.ylabel('Discounted Reward', fontsize=fontSize, fontweight='bold')
     elif what == "__CUMULATIVE_rewards":
         #plt.title('Goal Percentage per Trial')
-        plt.ylabel('Cumulative Discounted Reward', fontsize=fontSize, fontweight='bold')
+        plt.ylabel('Cumul. Disc. Reward', fontsize=fontSize, fontweight='bold')
+    elif what== "__SUMMARY_goal":
+        plt.ylabel('Goal Percentage', fontsize=fontSize, fontweight='bold')
+    elif what == "__CUMULATIVE_goal":
+        plt.ylabel('Cumulative Goals', fontsize=fontSize, fontweight='bold')
     else:
         #plt.title('Unknown')
         plt.ylabel('Unknown')
-
+    prefix = ""
+    if what== "__SHIFTED_rewards":
+        prefix = "Shifted "
     if episodes:
-        plt.xlabel('Training Episodes', fontsize=fontSize, fontweight='bold')
+        plt.xlabel(prefix+'Training Episodes', fontsize=fontSize, fontweight='bold')
     else:
-        plt.xlabel('Training Steps', fontsize=fontSize, fontweight='bold')
+        plt.xlabel(prefix+'Training Steps', fontsize=fontSize, fontweight='bold')
     plt.legend(loc='best',prop={'size':fontSize, 'weight':'bold'},ncol=nCol)
     plt.tick_params(axis='both', which='major', labelsize=axisSize)
     plt.show()
@@ -400,10 +438,10 @@ def main():
     parameter = get_args()
 
     #--------
-    fileFolder = '/Users/leno/gitProjects/Curriculum_HFO/src/log/GridWorld/'
+    fileFolder = '/Users/leno/gitProjects/Curriculum_HFO/src/log/HFODomain/'
 
     source1 = fileFolder + 'QLearning-NoneCurriculum'
-    source2 = fileFolder + 'PITAMQLearning-GeneratedSourceOOCurriculum'
+    source2 = fileFolder + 'PITAMSARSA-GeneratedSourceOOCurriculum'
     source3 = fileFolder + 'VFReuseQLearning-ObjectOrientedCurriculum'
     source4 = fileFolder + 'VFReuseQLearning-SvetlikCurriculum'
     #--------
@@ -411,9 +449,9 @@ def main():
     #collect_experiment_data(source1, runs=2000, hfo=False)
     #summarize_experiment_data(source1, hfo=False)
     #cumulative_experiment_data(source1, startingFrom=startingCumulative, hfo=False)
-    collect_experiment_data(source2, runs=2000, hfo=False)
-    summarize_experiment_data(source2, hfo=False)
-    cumulative_experiment_data(source2, startingFrom=startingCumulative, hfo=False)
+    collect_experiment_data(source2, runs=2000, hfo=True)
+    summarize_experiment_data(source2, hfo=True)
+    cumulative_experiment_data(source2, startingFrom=startingCumulative, hfo=True)
     #collect_experiment_data(source3, runs=2000, hfo=False)
     #summarize_experiment_data(source3, hfo=False)
     #cumulative_experiment_data(source3, startingFrom=startingCumulative, hfo=False)
