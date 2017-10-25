@@ -170,7 +170,29 @@ def summarize_experiment_data(source, confidence=0.95, hfo=True):
                     newrow.append("{:.2f}".format(j))
                 csvwriter.writerow((newrow))
                 csvfile.flush()
-                
+        #Generates shifted graph (erasing steps in source tasks).
+        #Finds initial step
+        subtract = trials[0]
+        #Shifts all the void steps
+        for i in range(len(trials)):
+                trials[i] = trials[i] - subtract
+        #Genrates file
+        value = value.replace("SUMMARY", "SHIFTED")
+        with open(os.path.join(source, value), 'w') as csvfile:
+            csvwriter = csv.writer(csvfile)
+
+            csvwriter.writerow((headerLine))
+            csvfile.flush()
+
+            for i in range(sum(trials.shape)):
+                newrow = [trials[i]]
+                for j in update.T[i]:
+                    newrow.append("{:.2f}".format(j))
+                csvwriter.writerow((newrow))
+                csvfile.flush()
+
+
+
 def cumulative_experiment_data(source,startingFrom=500,hfo=True):
     if hfo:
         values = ["__EVAL_steps", "__EVAL_rewards","__EVAL_goal"]
@@ -251,7 +273,7 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
     plt.grid(True,color='0.8')
     
     lineWidth = 8.0 if bigFont else 4.0   
-    
+
     with open(os.path.join(source1, what), 'r') as f:
             first_line = f.readline()    
     if first_line.split(',')[0]=='steps':
@@ -351,7 +373,10 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
         plt.ylabel('Steps until completed', fontsize=fontSize, fontweight='bold')
     elif what == "__SUMMARY_rewards":
         #plt.title('Goal Percentage per Trial')
-        plt.ylabel('Cumulative Reward', fontsize=fontSize, fontweight='bold')
+        plt.ylabel('Discounted Reward', fontsize=fontSize, fontweight='bold')
+    elif what == "__CUMULATIVE_rewards":
+        #plt.title('Goal Percentage per Trial')
+        plt.ylabel('Cumulative Discounted Reward', fontsize=fontSize, fontweight='bold')
     else:
         #plt.title('Unknown')
         plt.ylabel('Unknown')
@@ -373,9 +398,36 @@ def get_args():
 
 def main():
     parameter = get_args()
-    collect_experiment_data(source=parameter.source, runs=parameter.runs)
+
+    #--------
+    fileFolder = '/Users/leno/gitProjects/Curriculum_HFO/src/log/GridWorld/'
+
+    source1 = fileFolder + 'QLearning-NoneCurriculum'
+    source2 = fileFolder + 'PITAMQLearning-GeneratedSourceOOCurriculum'
+    source3 = fileFolder + 'VFReuseQLearning-ObjectOrientedCurriculum'
+    source4 = fileFolder + 'VFReuseQLearning-SvetlikCurriculum'
+    #--------
+    startingCumulative = 5000
+    #collect_experiment_data(source1, runs=2000, hfo=False)
+    #summarize_experiment_data(source1, hfo=False)
+    #cumulative_experiment_data(source1, startingFrom=startingCumulative, hfo=False)
+    collect_experiment_data(source2, runs=2000, hfo=False)
+    summarize_experiment_data(source2, hfo=False)
+    cumulative_experiment_data(source2, startingFrom=startingCumulative, hfo=False)
+    #collect_experiment_data(source3, runs=2000, hfo=False)
+    #summarize_experiment_data(source3, hfo=False)
+    #cumulative_experiment_data(source3, startingFrom=startingCumulative, hfo=False)
+    #collect_experiment_data(source4, runs=2000)
+    #summarize_experiment_data(source4)
+    #cumulative_experiment_data(source4, startingFrom=startingCumulative)
+
+    #draw_graph(source1=source1, source2=source2, source3=source3,
+     #                    source4=source4,  # source5=source5,name5=name5,source6=source6,name6=name6,
+     #                    ci=True, yMin=-15, yMax=20, xMin=0, xMax=4500)
+
+    #collect_experiment_data(source=parameter.source, runs=parameter.runs)
     #summarize_experiment_data(parameter.source)
-    cumulative_experiment_data(parameter.source,startingFrom = 6000)
+    #cumulative_experiment_data(parameter.source,startingFrom = 6000)
 
 if __name__ == '__main__':
     main()
