@@ -23,7 +23,7 @@ class GeneratedSourceOOCurriculum(ObjectOrientedCurriculum):
     repGeneration = None
     
     
-    def generate_curriculum(self,target_task, sourceFolder,workFolder,thresholdTask = 1.7,repGeneration = 10):
+    def generate_curriculum(self,target_task, sourceFolder,workFolder,thresholdTask = 2,repGeneration = 10):
         self.workFolder = workFolder 
         self.target_task = target_task
         self.repGeneration = repGeneration
