@@ -22,6 +22,7 @@ class SARSA(Agent):
     #Variable for eligibility trace
     stateActionTrace = None
     alpha = None
+    originalAlpha = None
 
     
     epsilon = None
@@ -35,11 +36,12 @@ class SARSA(Agent):
     initQ = None #Value to initiate Q-table
     foundState = {}
     
-
+    #Backup saved experiments
     def __init__(self, seed=12345,alpha=0.7,epsilon=0.1,initQ = 0, decayRate = 0.92):
-        
+
         self.functions = Agent_Utilities()
-        self.alpha = alpha
+        self.originalAlpha = alpha
+        self.alpha = self.originalAlpha
         self.epsilon = epsilon
         self.qTable = {}
         self.stateActionTrace = {}
@@ -121,7 +123,8 @@ class SARSA(Agent):
         """Performs the standard Q-Learning Update"""
         if self.exploring:
             state = self.tileManager.get_tiles(state)
-            statePrime = self.tileManager.get_tiles(statePrime)
+            statePrimeTiled = self.tileManager.get_tiles(statePrime)
+            #statePrime = self.tileManager.get_tiles(statePrime)
             qValue= self.readQTable(state,action)
             #Checks if a random action was chosen, in this case the stateAction trace
             # is erased (does not make sense anymore)
@@ -129,7 +132,7 @@ class SARSA(Agent):
             #    self.stateActionTrace = {}
             #Choose the next action without exploration
             self.lastChosenAction = self.select_action(statePrime,allowExploration = False)
-            tdError = reward + self.gamma * self.readQTable(statePrime,self.lastChosenAction) - qValue
+            tdError = reward + self.gamma * self.readQTable(statePrimeTiled,self.lastChosenAction) - qValue
             #Updates trace
             self.stateActionTrace[(state,action)] = self.stateActionTrace.get((state,action),0) + 1
             #Updates all state-action pairs in the trace
@@ -151,12 +154,13 @@ class SARSA(Agent):
         
     def finish_episode(self):
         """Initiates the trace"""
-        super(SARSA, self).finish_episode
+        super(SARSA, self).finish_episode()
         self.stateActionTrace = {}
-        
-        
 
-        
+    def finish_learning(self):
+        """Initiates the alpha for new task"""
+        super(SARSA, self).finish_learning()
+        self.alpha = self.originalAlpha
 
 
  

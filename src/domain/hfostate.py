@@ -48,13 +48,22 @@ class HFOStateManager(object):
         #Sorts friends by distance
         self.reorderFeatures(stateFeatures)
         
-        #Remove from the list attributes that do not exist
-        remove = [x for x in remove if x is not None]
-        stateFeatures = np.delete(stateFeatures,remove)
+        #Remove from the list attributes that do not exist - COmmented for new implementation
+        #remove = [x for x in remove if x is not None]
+        #stateFeatures = np.delete(stateFeatures,remove)
+        #return tuple(stateFeatures.tolist())
         
+        #Divides the state features in two lists, one composed of features from friends and another with the additional
+        #variables
+        friendList = [x for x in [self.FRIEND1_GOAL_OPENING,self.FRIEND2_GOAL_OPENING,self.FRIEND3_GOAL_OPENING,self.FRIEND4_GOAL_OPENING] if x is not None]
+        independentList = [x for x in [self.CENTER_PROXIMITY,self.GOAL_ANGLE,self.GOAL_OPENING,self.OPPONENT_PROXIMITY] if x is not None]
+
+        friendVar = np.take(stateFeatures,friendList)
+        independentVar = np.take(stateFeatures, independentList)
+
+        return (tuple(independentVar.tolist()),tuple(friendVar.tolist()))
 
 
-        return tuple(stateFeatures.tolist())
     
     def reorderFeatures(self,stateFeatures):
         """

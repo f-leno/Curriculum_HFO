@@ -136,6 +136,9 @@ class HFOEnv(object):
         
         #Kill the HFO server
         subprocess.call("kill -9 -"+str(self.serverProcess.pid), shell=True)
+        for proc in self.clientProcess:
+            subprocess.call("kill -9 -" + str(proc.pid), shell=True)
+
         time.sleep(2)
         #portmanager.release_port(self.serverPort)
         
@@ -202,6 +205,10 @@ class HFOEnv(object):
         else:
             actionRet = action
             argument = None
+        if hfo.PASS == actionRet and argument is None or argument == 0:
+            print(action)
+            print(stateFeatures)
+            print(self.numberFriends)
         return actionRet, argument  
       
     def step(self):
@@ -375,7 +382,8 @@ def init_server(self,taskParam,limitFrames):
         xMax = avgDist + 0.1
         
         #Build all commands correspondent to parameters
-        agentsParam = " --offense-agents 1 --offense-npcs "+str(numberFriends)
+        #agentsParam = " --offense-agents 1 --offense-npcs "+str(numberFriends)
+        agentsParam = " --offense-agents "+str(numberFriends+1)+" --offense-npcs 0"
         opponentsParam = " --defense-npcs "+str(numberOpponents)
         opStrategy = " --offense-team base --defense-team " + opStrategy
         initDist = " --ball-x-min "+str(xMin) + " --ball-x-max "+str(xMax)
@@ -394,6 +402,14 @@ def init_server(self,taskParam,limitFrames):
         
         #Starting the server
         self.serverProcess = subprocess.Popen(serverCommand, shell=True)
+        time.sleep(2)
+
+        self.clientProcess = []
+        for i in range(numberFriends):
+            #After starting server, starts friends subprocess
+            friendCommand = "python domain/mock_agent.py -p " + str(self.serverPort) + " -o " + str(numberOpponents) + " -f " +str(numberFriends)
+            print(friendCommand)
+            self.clientProcess.append(subprocess.Popen(friendCommand, shell=True))
 
         
         
