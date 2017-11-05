@@ -34,8 +34,8 @@ class HFOStateManager(object):
                   #self.GOAL_ANGLE,
                   #self.GOAL_OPENING,
                   #self.OPPONENT_PROXIMITY,
-                  #self.FRIEND1_GOAL_OPENING,self.FRIEND2_GOAL_OPENING,self.FRIEND3_GOAL_OPENING,self.FRIEND4_GOAL_OPENING,
-                  self.FRIEND1_OPP_PROXIMITY,self.FRIEND2_OPP_PROXIMITY,self.FRIEND3_OPP_PROXIMITY,self.FRIEND4_OPP_PROXIMITY,
+                  self.FRIEND1_GOAL_OPENING,self.FRIEND2_GOAL_OPENING,self.FRIEND3_GOAL_OPENING,self.FRIEND4_GOAL_OPENING,
+                  #self.FRIEND1_OPP_PROXIMITY,self.FRIEND2_OPP_PROXIMITY,self.FRIEND3_OPP_PROXIMITY,self.FRIEND4_OPP_PROXIMITY,
                   self.FRIEND1_PASS_OPENING,self.FRIEND2_PASS_OPENING,self.FRIEND3_PASS_OPENING,self.FRIEND4_PASS_OPENING,
                   self.FRIEND1_X,self.FRIEND2_X,self.FRIEND3_X,self.FRIEND4_X,
                   self.FRIEND1_Y,self.FRIEND2_Y,self.FRIEND3_Y,self.FRIEND4_Y,
@@ -55,7 +55,7 @@ class HFOStateManager(object):
         
         #Divides the state features in two lists, one composed of features from friends and another with the additional
         #variables
-        friendList = [x for x in [self.FRIEND1_GOAL_OPENING,self.FRIEND2_GOAL_OPENING,self.FRIEND3_GOAL_OPENING,self.FRIEND4_GOAL_OPENING] if x is not None]
+        friendList = [x for x in [self.FRIEND1_OPP_PROXIMITY,self.FRIEND2_OPP_PROXIMITY,self.FRIEND3_OPP_PROXIMITY,self.FRIEND4_OPP_PROXIMITY] if x is not None]
         independentList = [x for x in [self.CENTER_PROXIMITY,self.GOAL_ANGLE,self.GOAL_OPENING,self.OPPONENT_PROXIMITY] if x is not None]
 
         friendVar = np.take(stateFeatures,friendList)
