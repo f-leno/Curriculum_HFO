@@ -43,7 +43,7 @@ def main():
       if features[5] == 1.0:
           #If OPPONENT_PROXIMITY smaller than 0.3, passes the ball
           #print("GOAL OPENING "+str( features[8] ))
-          if argument.opponents > 0 and abs(features[9]) > 0.7:
+          if False:#argument.opponents > 0 and abs(features[9]) > 0.7:
               hfo.act(DRIBBLE)
               #print("SHOOTING")
           else:
