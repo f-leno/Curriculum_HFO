@@ -32,6 +32,7 @@ class HFODomain(Domain):
             --taskFile = The path for a file containing the description of a task in this domain
             --limitSteps = The maximum number of steps to be executed per episode.
             --taskName = optional parameter defining the task name.
+            --agentsControl number of agents that will be controlled by learning algorithms
             returns:
                 --task: The task according to the given file.
         """
@@ -44,7 +45,7 @@ class HFODomain(Domain):
         return task
         
        
-    def build_environment_from_task(self,task,limitSteps):
+    def build_environment_from_task(self,task,limitSteps,agentsControl = 1):
         """Builds the environment from previously built tasks.
            --task = The Task Object
            --limitSteps = The maximum number of steps to be executed per episode.
@@ -52,7 +53,7 @@ class HFODomain(Domain):
                --environment: The desired environment
         """
         #Bulding the enviornment
-        environment = HFOEnv(taskParam = task.task_features(),limitFrames = limitSteps)
+        environment = HFOEnv(taskParam = task.task_features(),limitFrames = limitSteps,agentsControl=agentsControl)
         
         return environment
     
@@ -89,36 +90,49 @@ class HFOEnv(object):
     stepRequest = None
     #Variable to control when to erase other threads
     clearServer = None
+    #The number of agents that will be controlled by learning alg.
+    agentsControl = None
+
     
     
     
-    def __init__(self,taskParam,limitFrames = 200):
+    def __init__(self,taskParam,limitFrames = 200,agentsControl=1):
         """Initiates the HFO environment"""
         #Returns a port that is not being used
         self.serverPort = portmanager.get_free_port()
         #self.serverPort = 2000
         self.numberFriends = taskParam[0]
         self.numberOpponents =  taskParam[1]
+
+        self.applyAction = [None]*agentsControl
+        self.actionParameter = [None]*agentsControl
+
+        self.agentsControl = agentsControl
+        self.lastAction = [None]*agentsControl
+        self.hfoObj = []
+        for i in range(agentsControl):
+            self.hfoObj.append(hfo.HFOEnvironment())
+
         
-        self.hfoObj = hfo.HFOEnvironment()
-        
-        self.stepRequest = False
+        self.stepRequest = [False]*agentsControl
         self.clearServer = False
         #self.init_server(taskParam,limitFrames)
         
         
         #Initiates a new thread only to avoid an error when loading the strategy.cpp file
         self.terminateThread = False
-        t = Thread(target=init_server, args=(self,taskParam,limitFrames))
+        t = Thread(target=init_server, args=(self,taskParam,limitFrames,agentsControl))
         t.start()
         t.join()
         
         time.sleep(2)
-        
-        #Initiates a new thread to create the server
-        t = Thread(target=connect_server, args=(self,))
-        t.start()
-        time.sleep(1)
+
+
+        #Initiates one thread for each agent controlled by learning algorithms
+        for i in range(self.agentsControl):
+            t = Thread(target=connect_server, args=(self, i))
+            t.start()
+            time.sleep(1)
         #The connection with the server is OK after here.
         
         self.totalEpisodes = 0
@@ -147,23 +161,23 @@ class HFOEnv(object):
         
 
     
-    def all_actions(self,forExploration=False):
+    def all_actions(self,forExploration=False,agentIndex=0):
         """Returns the set of applicable actions for the agent
            in case the agent has the ball, a PASS for each friend, DRIBBLE and SHOOT
            are applicable. Otherwise, only MOVE is applicable
         """
-        fullState = self.hfoObj.getState()
+        fullState = self.hfoObj[agentIndex].getState()
         withBall = fullState[self.stateSpaceManager.ABLE_KICK] == 1.0
                 
         return hfoactions.all_actions(self.numberFriends, withBall, forExploration)  
         
-    def act(self,action):
+    def act(self,action,agentIndex=0):
         """Performs the agent action"""
         #Transforms the action in the agent's point of view to the correct HFO server format
-        self.lastAction = action
-        self.applyAction, self.actionParameter = self.translate_action(action, self.hfoObj.getState())
+        self.lastAction[agentIndex] = action
+        self.applyAction[agentIndex], self.actionParameter[agentIndex] = self.translate_action(action, self.hfoObj[agentIndex].getState())
         #Wait for another thread
-        while not self.applyAction is None:
+        while not self.applyAction[agentIndex] is None:
             pass
 
         
@@ -201,7 +215,9 @@ class HFOEnv(object):
             #Id according to HFO internal code
             friendUNum = listIDs[indexFriend]
             actionRet = hfo.PASS
-            argument = friendUNum                                                        
+            argument = friendUNum
+
+            #print("####### PASS: " + str(friendUNum))
         else:
             actionRet = action
             argument = None
@@ -209,17 +225,20 @@ class HFOEnv(object):
             print(action)
             print(stateFeatures)
             print(self.numberFriends)
+        #print("############# Action Ret: " + str(actionRet) + " , arg: " + str(argument))
         return actionRet, argument  
       
     def step(self):
         """Performs the state transition and returns (statePrime.action,reward)"""   
-        self.stepRequest = True
+        self.stepRequest = [True] * self.agentsControl
         #Wait until another thread completes the step
-        while self.stepRequest:
+        while True in self.stepRequest:
             pass
-        
-        statePrime = self.get_state()
-        action = self.lastAction
+        statePrime = []
+        action = []
+        for agentIndex in range(self.agentsControl):
+            statePrime.append(self.get_state(agentIndex))
+            action.append(self.lastAction[agentIndex])
         reward = self.observe_reward()
         return (statePrime,action,reward)
         
@@ -232,11 +251,11 @@ class HFOEnv(object):
             if self.lastStatus == hfo.GOAL:
                 self.goals += 1
         
-    def get_state(self):
+    def get_state(self, agentIndex=0):
         """Returns the state in the point of view of the agent. 
         The state features are filtered from the full set of features in the HFO server.
         """
-        return self.filter_features(self.hfoObj.getState())
+        return self.filter_features(self.hfoObj[agentIndex].getState())
     
     def filter_features(self,stateFeatures):
         """Removes the irrelevant features from the HFO standard feature set"""   
@@ -268,8 +287,8 @@ class HFOEnv(object):
     def start_episode(self):
         """Start next evaluation episode"""
         self.lastStatus = hfo.IN_GAME
-        self.applyAction = None
-        self.actionParameter = None
+        self.applyAction = [None]*self.agentsControl
+        self.actionParameter = [None]*self.agentsControl
         
     def load_episode(self,episodeInfo):
         """For this domain the server performs the reset
@@ -296,7 +315,7 @@ class HFOEnv(object):
     def step(self):
         self.main.lastStatus = self.hfoObj.step()"""
     
-def connect_server(self):
+def connect_server(self,agentIndex):
         """Connects the client subprocess in the hfo server
             The learning process should be all executed in here because of strange
             errors in the HFO server when executing more than one client at the same time
@@ -305,7 +324,7 @@ def connect_server(self):
         connectPath = self.serverPath+'teams/base/config/formations-dt'
         
         #Connecting in the server
-        serverResponse = self.hfoObj.connectToServer(
+        serverResponse = self.hfoObj[agentIndex].connectToServer(
                 feature_set= hfo.HIGH_LEVEL_FEATURE_SET,
                 config_dir=connectPath,
                 server_port=self.serverPort,
@@ -316,7 +335,7 @@ def connect_server(self):
        
         while not self.clearServer:
             #Wait until one action is chosen
-            while self.applyAction is None and not self.clearServer:
+            while self.applyAction[agentIndex] is None and not self.clearServer:
                 #print("Waiting action")
                 time.sleep(0.0001)
             #Verifies if the agent should stop learning
@@ -325,34 +344,34 @@ def connect_server(self):
                     
                 
             #Send action to HFO server.
-            if self.actionParameter is None:
-                self.hfoObj.act(self.applyAction)
+            if self.actionParameter[agentIndex] is None:
+                self.hfoObj[agentIndex].act(self.applyAction[agentIndex])
             else:
-                self.hfoObj.act(self.applyAction, self.actionParameter)
+                self.hfoObj[agentIndex].act(self.applyAction[agentIndex], self.actionParameter[agentIndex])
              
-            self.applyAction = None
-            self.actionParameter = None
+            self.applyAction[agentIndex] = None
+            self.actionParameter[agentIndex] = None
             #Perform HFO step
-            while not self.stepRequest and not self.clearServer:
+            while not self.stepRequest[agentIndex] and not self.clearServer:
                 time.sleep(0.0001)
             #Should the agent stop learning?
             if self.clearServer:
                 continue
                 
-            self.lastStatus = self.hfoObj.step()
+            self.lastStatus = self.hfoObj[agentIndex].step()
             if(self.lastStatus == hfo.SERVER_DOWN):
-                self.hfoObj.act(hfo.QUIT)
+                self.hfoObj[agentIndex].act(hfo.QUIT)
                 print("%%%%%%% HFO Server Down, Ending Environment")
                 sys.exit(0)  
-            self.stepRequest = False
+            self.stepRequest[agentIndex] = False
         #When the clearServer is set as true, it is time to close the connection
-        self.hfoObj.act(hfo.QUIT)
+        self.hfoObj[agentIndex].act(hfo.QUIT)
         self.clearServer = False
                 
             
             
         
-def init_server(self,taskParam,limitFrames):
+def init_server(self,taskParam,limitFrames,agentsControl):
         """Initiates the server process. Possible task parameters:
            [0] - number of agents in the same team - from 0 to 4
            [1] - number of agents in the other team - from 0 to 5
@@ -380,10 +399,19 @@ def init_server(self,taskParam,limitFrames):
         #Computes min/max distance of the initialization according to avgDist
         xMin = avgDist - 0.1
         xMax = avgDist + 0.1
+
+        #Process the number of agents, if agentsControl is not enough to cover all
+        #the friendly agent positions, npcs are created
+        if agentsControl > numberFriends:
+            numberAgents = numberFriends + 1
+            numberNpcs = 0
+        else:
+            numberAgents = agentsControl
+            numberNpcs = numberFriends - agentsControl + 1
         
         #Build all commands correspondent to parameters
         #agentsParam = " --offense-agents 1 --offense-npcs "+str(numberFriends)
-        agentsParam = " --offense-agents "+str(numberFriends+1)+" --offense-npcs 0"
+        agentsParam = " --offense-agents "+str(numberAgents + numberNpcs)+" --offense-npcs " + str(0) #Npcs are controlled by mock_agent source
         opponentsParam = " --defense-npcs "+str(numberOpponents)
         opStrategy = " --offense-team base --defense-team " + opStrategy
         initDist = " --ball-x-min "+str(xMin) + " --ball-x-max "+str(xMax)
@@ -393,7 +421,8 @@ def init_server(self,taskParam,limitFrames):
         
 
         #Including the name of the executable, default parameters, and the port in the command
-        serverCommand = self.serverPath + "HFO --fullstate --offense-on-ball 12 --no-logging --headless " + \
+        serverCommand = self.serverPath + "HFO --fullstate --offense-on-ball 12" \
+                                          " --no-logging --headless " + \
              "--port " +str(self.serverPort)
                          
         #Joining all the commands
@@ -405,11 +434,12 @@ def init_server(self,taskParam,limitFrames):
         time.sleep(2)
 
         self.clientProcess = []
-        for i in range(numberFriends):
+        for i in range(numberNpcs):
             #After starting server, starts friends subprocess
             friendCommand = "python domain/mock_agent.py -p " + str(self.serverPort) + " -o " + str(numberOpponents) + " -f " +str(numberFriends)
             print(friendCommand)
             self.clientProcess.append(subprocess.Popen(friendCommand, shell=True))
+            time.sleep(1)
 
         
         

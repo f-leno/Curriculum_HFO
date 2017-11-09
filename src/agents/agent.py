@@ -24,6 +24,7 @@ class Agent(object):
     training_steps_total = None
     currentTask = None
     curriculum = None
+    agentIndex = None
     
     
     gamma = 0.9#0.9  #Discount factor for comparing proposals
@@ -36,9 +37,10 @@ class Agent(object):
         
 
        
-    def connect_env(self,environment):
+    def connect_env(self,environment,agentIndex):
         """Connects to the domain environment"""
-        self.environment = environment        
+        self.environment = environment
+        self.agentIndex = agentIndex
         
 
     @abc.abstractmethod

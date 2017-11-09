@@ -55,7 +55,7 @@ class HFOStateManager(object):
         
         #Divides the state features in two lists, one composed of features from friends and another with the additional
         #variables
-        friendList = [x for x in [self.FRIEND1_OPP_PROXIMITY,self.FRIEND2_OPP_PROXIMITY,self.FRIEND3_OPP_PROXIMITY,self.FRIEND4_OPP_PROXIMITY,
+        friendList = [x for x in [self.FRIEND1_GOAL_OPENING,self.FRIEND2_GOAL_OPENING,self.FRIEND3_GOAL_OPENING,self.FRIEND4_GOAL_OPENING,
                                   self.FRIEND1_PASS_OPENING,self.FRIEND2_PASS_OPENING,self.FRIEND3_PASS_OPENING,self.FRIEND4_PASS_OPENING] if x is not None]
         independentList = [x for x in [self.CENTER_PROXIMITY,self.GOAL_ANGLE,self.GOAL_OPENING,self.OPPONENT_PROXIMITY] if x is not None]
 

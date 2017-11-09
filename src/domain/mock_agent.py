@@ -43,8 +43,9 @@ def main():
       if features[5] == 1.0:
           #If OPPONENT_PROXIMITY smaller than 0.3, passes the ball
           #print("GOAL OPENING "+str( features[8] ))
-          if False:#argument.opponents > 0 and abs(features[9]) > 0.7:
-              hfo.act(DRIBBLE)
+          if argument.opponents > 0 and abs(features[9]) < 0.8:
+              #hfo.act(DRIBBLE)
+              hfo.act(SHOOT)
               #print("SHOOTING")
           else:
               #Searching for ids of friends
@@ -58,7 +59,8 @@ def main():
                   initIndex += 3
                   ids.append(features[initIndex])
               friendUnum = random.choice(ids)
-              hfo.act(PASS,friendUnum)
+              #hfo.act(PASS,friendUnum)
+              hfo.act(SHOOT)
               #print("PASSING " + str(friendUnum))
       else:
           hfo.act(MOVE)

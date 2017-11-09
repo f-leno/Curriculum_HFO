@@ -12,12 +12,12 @@ class TileManager():
     memct = 48 #memory for hashtable
     numtilings = 5 #Number of tiles
 
-    memctFriend = 5 #memory for hashtable
-    numtilingsFriend = 2 #Number of tiles
+    memctFriend = 10 #memory for hashtable
+    numtilingsFriend = 5 #Number of tiles
     
     def get_tiles(self,state):
         """Transform a state composed of a group of continous features to tiles"""
-
+        #print(state)
         tiledState = tiles.tiles(self.numtilings,self.memct,state[0]) #Comment [0]
         tiledState.extend(tiles.tiles(self.numtilingsFriend,self.memctFriend,state[1])) #Comment Here
         #Converting to tuple makes the tile coding hashable

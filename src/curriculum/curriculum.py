@@ -19,7 +19,8 @@ class Curriculum(object):
         self.seed = seed
         self.agent = agent
         if agent != None:
-            agent.set_curriculum(self)
+            for agentUnity in agent:
+                agentUnity.set_curriculum(self)
         
     @abc.abstractmethod      
     def print_result(self):
