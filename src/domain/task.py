@@ -44,6 +44,10 @@ class Task(object):
     def transfer_potential(self,targetTask):
         """Calculates the transfer potential between two tasks"""
         pass
+
+    @abc.abstractmethod
+    def agents_on_task(self):
+        """Returns the number of agents in this task"""
     
     
 def is_contained(featuresSource,featuresTarget):

@@ -97,7 +97,10 @@ class HFOTask(Task):
     def number_objects(self):
         """Returns the number of objects if the object-oriented description is used."""
         return self.numberEnemies + self.numberFriends
-    
+
+    def agents_on_task(self):
+        """Returns the number of agents (number of friends + 1)"""
+        return self.numberFriends + 1
     
 def is_contained(featuresSource,featuresTarget):
     """Returns if the features of the target task contains all features from the

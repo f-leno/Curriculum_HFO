@@ -37,7 +37,8 @@ class SARSA(Agent):
     foundState = {}
     
     #Backup saved experiments
-    def __init__(self, seed=12345,alpha=0.7,epsilon=0.1,initQ = 0, decayRate = 0.92):
+    #def __init__(self, seed=12345,alpha=0.7,epsilon=0.1,initQ = 0, decayRate = 0.92):
+    def __init__(self, seed=12345, alpha=0.1, epsilon=0.1, initQ=0, decayRate=0.9):
 
         self.functions = Agent_Utilities()
         self.originalAlpha = alpha

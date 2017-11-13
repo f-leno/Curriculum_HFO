@@ -116,7 +116,8 @@ class SvetlikCurriculum(Curriculum):
     def draw_task(self):
         """ Returns the previously given task"""
         task = self.taskList[0]
-        self.agent.set_current_task(task)
+        for agentObj in self.agents:
+            agentObj.set_current_task(task)
         del self.taskList[0]
         return task
     

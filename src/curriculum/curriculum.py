@@ -13,11 +13,12 @@ class Curriculum(object):
     """
     __metaclass__ = abc.ABCMeta
     seed = None
-    agent = None
+    agents = None
    
     def __init__(self, seed=12345,agent=None):
         self.seed = seed
-        self.agent = agent
+        self.agents = agent
+        #If the set of agents is not null, a reference to the curriculum is created
         if agent != None:
             for agentUnity in agent:
                 agentUnity.set_curriculum(self)

@@ -12,7 +12,7 @@ class TileManager():
     memct = 48 #memory for hashtable
     numtilings = 5 #Number of tiles
 
-    memctFriend = 10 #memory for hashtable
+    memctFriend = 48 #memory for hashtable
     numtilingsFriend = 5 #Number of tiles
     
     def get_tiles(self,state):

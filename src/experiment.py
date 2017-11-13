@@ -200,7 +200,7 @@ def main():
         
         print('***** %s: Start Trial' % str(trial))            
         random.seed(parameter.seed+trial)
-        agent,curriculum,termination,domain = build_objects()
+        agents,curriculum,termination,domain = build_objects()
         
         #links the curriculum algorithm with the learning agent
         #curriculum.set_agent(agent)
@@ -212,7 +212,7 @@ def main():
         workFolder += parameter.domain + '/'
         
         import time
-        time.sleep(2)
+
         #Generate Curriculum for target task
         curriculum.generate_curriculum(target_task, parameter.source_folder,workFolder)
         
@@ -225,10 +225,11 @@ def main():
         while not curriculum.empty_curriculum():
             task = curriculum.draw_task()
             termination.init_task()
+            agentsOnTask = agents[0:task.agents_on_task()]
             print("*****Initiating new task")
             #Initiate task
             environment = domain.build_environment_from_task(task=task,limitSteps=200, agentsControl=parameter.agent_number)
-            import time
+
             time.sleep(2)
             
             #environment = environment_target
@@ -249,9 +250,9 @@ def main():
                     environment_target = domain.build_environment_from_task(task=target_task,limitSteps=200, agentsControl=parameter.agent_number)
                     import time
                     time.sleep(2)
-                    for agentIndex in range(parameter.agent_number):
-                        agent[agentIndex].set_exploring(False)
-                        agent[agentIndex].connect_env(environment_target,agentIndex)
+                    for agentIndex in range(len(agentsOnTask)):
+                        agentsOnTask[agentIndex].set_exploring(False)
+                        agentsOnTask[agentIndex].connect_env(environment_target,agentIndex)
                     stepsToFinish = 0
                     #Executes the number of testing episodes specified in the parameter
                     sumR = 0
@@ -266,15 +267,15 @@ def main():
                                                 
                         while not terminal_target:
                             eval_step += 1
-                            for agentIndex in range(parameter.agent_number):
+                            for agentIndex in range(len(agentsOnTask)):
                                 state = environment_target.get_state(agentIndex)
-                                environment_target.act(agent[agentIndex].select_action(state),agentIndex)
+                                environment_target.act(agentsOnTask[agentIndex].select_action(state),agentIndex)
                             
                             #Process state transition
                             statePrime,action,reward = environment_target.step()        
                             #print(environment_target.lastStatus)
                             sumR += reward * curGamma
-                            curGamma = curGamma * agent[0].gamma
+                            curGamma = curGamma * agentsOnTask[0].gamma
                             
                             if reward==1.0:
                                 numGoals += 1
@@ -293,8 +294,8 @@ def main():
                     eval_csv_file.flush()
 
 
-                    for agentIndex in range(parameter.agent_number):
-                        agent[agentIndex].set_exploring(True)
+                    for agentIndex in range(len(agentsOnTask)):
+                        agentsOnTask[agentIndex].set_exploring(True)
                     environment_target.finish_learning()
                     #Rebuild environment for target task
                     
@@ -305,16 +306,16 @@ def main():
                 totalSteps += 1
                 steps += 1
                 state = []
-                for agentIndex in range(parameter.agent_number):
-                    agent[agentIndex].connect_env(environment,agentIndex)
+                for agentIndex in range(len(agentsOnTask)):
+                    agentsOnTask[agentIndex].connect_env(environment,agentIndex)
                     state.append(environment.get_state(agentIndex))
-                    environment.act(agent[agentIndex].select_action(state[agentIndex]),agentIndex)
+                    environment.act(agentsOnTask[agentIndex].select_action(state[agentIndex]),agentIndex)
                 #Process state transition
                 statePrime,action,reward = environment.step()   
                 if debugImage:
                     g.update_state()
-                for agentIndex in range(parameter.agent_number):
-                    agent[agentIndex].observe_reward(state[agentIndex],action[agentIndex],statePrime[agentIndex],reward)
+                for agentIndex in range(len(agentsOnTask)):
+                    agentsOnTask[agentIndex].observe_reward(state[agentIndex],action[agentIndex],statePrime[agentIndex],reward)
                 termination.observe_step(state,action,statePrime,reward)
                 
                 terminal = environment.is_terminal_state()
@@ -324,14 +325,14 @@ def main():
                     totalEpisodes += 1
                     episodes += 1
                     environment.start_episode()
-                    for agentIndex in range(parameter.agent_number):
-                        agent[agentIndex].finish_episode()
+                    for agentIndex in range(len(agentsOnTask)):
+                        agentsOnTask[agentIndex].finish_episode()
                     termination.finish_episode()
                     lastEpisodeFinished = True
                 else:
                     lastEpisodeFinished = False
-            for agentIndex in range(parameter.agent_number):
-                agent[agentIndex].finish_learning()
+            for agentIndex in range(len(agentsOnTask)):
+                agentsOnTask[agentIndex].finish_learning()
             if debugImage:
                         g.close()
                 

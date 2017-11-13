@@ -56,7 +56,7 @@ class PITAMSARSA(SARSA):
         else:        
             actions = self.environment.all_actions()
             if self.currentTask.get_domain_task() == "HFOTask":
-                completeState = self.environment.hfoObj.getState()
+                completeState = self.environment.hfoObj[self.agentIndex].getState()
                 PITAMMappings = OOUtil.get_PITAM_mappings(completeState,action,self.currentTask,self.previousTasks,self.previousQTables,getOtherActions=self.useBias,allActions=actions,agent=self)
             else:
                 PITAMMappings = OOUtil.get_PITAM_mappings(state,action,self.currentTask,self.previousTasks,self.previousQTables,getOtherActions=self.useBias,allActions=actions,agent=self)

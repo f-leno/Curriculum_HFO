@@ -115,7 +115,7 @@ class HFOEnv(object):
 
         
         self.stepRequest = [False]*agentsControl
-        self.clearServer = False
+        self.clearServer = [False]*agentsControl
         #self.init_server(taskParam,limitFrames)
         
         
@@ -132,9 +132,9 @@ class HFOEnv(object):
         for i in range(self.agentsControl):
             t = Thread(target=connect_server, args=(self, i))
             t.start()
-            time.sleep(1)
+            time.sleep(2)
         #The connection with the server is OK after here.
-        
+        time.sleep(3)
         self.totalEpisodes = 0
         self.goals = 0
         
@@ -143,9 +143,9 @@ class HFOEnv(object):
         
     def clean_connections(self):
         """Cleans all the initiated services and files"""
-        self.clearServer = True
+        self.clearServer = [True]*self.agentsControl
         #Wait until another thread finishes the HFO client
-        while self.clearServer:
+        while True in self.clearServer:
             pass
         
         #Kill the HFO server
@@ -230,7 +230,8 @@ class HFOEnv(object):
       
     def step(self):
         """Performs the state transition and returns (statePrime.action,reward)"""   
-        self.stepRequest = [True] * self.agentsControl
+        for i in range(len(self.stepRequest)):
+            self.stepRequest[i] = True
         #Wait until another thread completes the step
         while True in self.stepRequest:
             pass
@@ -333,13 +334,13 @@ def connect_server(self,agentIndex):
                 play_goalie=False)
         print("%%%% Server connection FeedBack:    " + str(serverResponse))
        
-        while not self.clearServer:
+        while not self.clearServer[agentIndex]:
             #Wait until one action is chosen
-            while self.applyAction[agentIndex] is None and not self.clearServer:
+            while self.applyAction[agentIndex] is None and not self.clearServer[agentIndex]:
                 #print("Waiting action")
                 time.sleep(0.0001)
             #Verifies if the agent should stop learning
-            if self.clearServer:
+            if self.clearServer[agentIndex]:
                 continue
                     
                 
@@ -352,10 +353,10 @@ def connect_server(self,agentIndex):
             self.applyAction[agentIndex] = None
             self.actionParameter[agentIndex] = None
             #Perform HFO step
-            while not self.stepRequest[agentIndex] and not self.clearServer:
+            while not self.stepRequest[agentIndex] and not self.clearServer[agentIndex]:
                 time.sleep(0.0001)
             #Should the agent stop learning?
-            if self.clearServer:
+            if self.clearServer[agentIndex]:
                 continue
                 
             self.lastStatus = self.hfoObj[agentIndex].step()
@@ -366,7 +367,7 @@ def connect_server(self,agentIndex):
             self.stepRequest[agentIndex] = False
         #When the clearServer is set as true, it is time to close the connection
         self.hfoObj[agentIndex].act(hfo.QUIT)
-        self.clearServer = False
+        self.clearServer[agentIndex] = False
                 
             
             
@@ -431,7 +432,7 @@ def init_server(self,taskParam,limitFrames,agentsControl):
         
         #Starting the server
         self.serverProcess = subprocess.Popen(serverCommand, shell=True)
-        time.sleep(2)
+        time.sleep(3)
 
         self.clientProcess = []
         for i in range(numberNpcs):
