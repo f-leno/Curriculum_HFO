@@ -13,7 +13,7 @@ from domain.gridworldtask import GridWorldTask
 
 class GridWorld(Domain):
     """DOmain Generator"""
-    def build_environment(self,taskFile,limitSteps,taskName = None):
+    def build_environment(self,taskFile,limitSteps,taskName = None):#,agentsControl=None):
         """Instantiates an object representing the task in this domain.
             --taskFile = The path for a file containing the description of a task in this domain
             --limitSteps = The maximum number of steps to be executed per episode.
@@ -32,7 +32,7 @@ class GridWorld(Domain):
         return task
         
        
-    def build_environment_from_task(self,task,limitSteps):
+    def build_environment_from_task(self,task,limitSteps):#,agentsControl=None):
         """Builds the environment from previously built tasks.
            --task = The Task Object
            --limitSteps = The maximum number of steps to be executed per episode.
@@ -135,7 +135,7 @@ class GridWorldEnv(object):
             
         
         
-    def act(self,action):
+    def act(self,action):#,agentIndex=None):
         """Performs an action.
         This function performs nothing until the state transition is activated"""
         self.agentAction = action

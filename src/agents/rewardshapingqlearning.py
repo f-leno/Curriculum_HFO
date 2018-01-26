@@ -19,7 +19,7 @@ class RewardShapingQLearning(QLearning):
     
     savedPot = {}
     
-    def __init__(self, seed=12345,alpha=0.5,epsilon=0.1,initQ=0):
+    def __init__(self, seed=12345,alpha=0.9,epsilon=0.1,initQ=0):
         
         super(RewardShapingQLearning, self).__init__(seed=seed,alpha=alpha,epsilon=epsilon,initQ=initQ)
         

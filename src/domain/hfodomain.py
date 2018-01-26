@@ -104,18 +104,19 @@ class HFOEnv(object):
         self.numberFriends = taskParam[0]
         self.numberOpponents =  taskParam[1]
 
-        self.applyAction = [None]*agentsControl
-        self.actionParameter = [None]*agentsControl
+        self.applyAction = None#[None]*agentsControl
+        self.actionParameter = None#[None]*agentsControl
 
-        self.agentsControl = agentsControl
-        self.lastAction = [None]*agentsControl
+        #self.agentsControl = agentsControl
+        self.lastAction = [None]#*agentsControl
         self.hfoObj = []
-        for i in range(agentsControl):
-            self.hfoObj.append(hfo.HFOEnvironment())
+        #for i in range(agentsControl):
+            #self.hfoObj.append(hfo.HFOEnvironment())
+        self.hfoObj = hfo.HFOEnvironment()
 
         
-        self.stepRequest = [False]*agentsControl
-        self.clearServer = [False]*agentsControl
+        self.stepRequest = False#[False]*agentsControl
+        self.clearServer = False#[False]*agentsControl
         #self.init_server(taskParam,limitFrames)
         
         
@@ -129,10 +130,12 @@ class HFOEnv(object):
 
 
         #Initiates one thread for each agent controlled by learning algorithms
-        for i in range(self.agentsControl):
-            t = Thread(target=connect_server, args=(self, i))
-            t.start()
-            time.sleep(2)
+        #for i in range(self.agentsControl):
+            #t = Thread(target=connect_server, args=(self, i))
+            #t.start()
+            #time.sleep(2)
+        t = Thread(target=connect_server, args=(self,))
+        t.start()
         #The connection with the server is OK after here.
         time.sleep(3)
         self.totalEpisodes = 0
@@ -143,9 +146,9 @@ class HFOEnv(object):
         
     def clean_connections(self):
         """Cleans all the initiated services and files"""
-        self.clearServer = [True]*self.agentsControl
+        self.clearServer = True#[True]*self.agentsControl
         #Wait until another thread finishes the HFO client
-        while True in self.clearServer:
+        while self.clearServer:#True in self.clearServer:
             pass
         
         #Kill the HFO server
@@ -161,23 +164,25 @@ class HFOEnv(object):
         
 
     
-    def all_actions(self,forExploration=False,agentIndex=0):
+    def all_actions(self,forExploration=False):#,agentIndex=0):
         """Returns the set of applicable actions for the agent
            in case the agent has the ball, a PASS for each friend, DRIBBLE and SHOOT
            are applicable. Otherwise, only MOVE is applicable
         """
-        fullState = self.hfoObj[agentIndex].getState()
+        #fullState = self.hfoObj[agentIndex].getState()
+        fullState = self.hfoObj.getState()
         withBall = fullState[self.stateSpaceManager.ABLE_KICK] == 1.0
                 
         return hfoactions.all_actions(self.numberFriends, withBall, forExploration)  
         
-    def act(self,action,agentIndex=0):
+    def act(self,action):#,agentIndex=0):
         """Performs the agent action"""
         #Transforms the action in the agent's point of view to the correct HFO server format
-        self.lastAction[agentIndex] = action
-        self.applyAction[agentIndex], self.actionParameter[agentIndex] = self.translate_action(action, self.hfoObj[agentIndex].getState())
+        self.lastAction=action#[agentIndex] = action
+        #self.applyAction[agentIndex], self.actionParameter[agentIndex] = self.translate_action(action, self.hfoObj[agentIndex].getState())
+        self.applyAction, self.actionParameter = self.translate_action(action, self.hfoObj.getState())
         #Wait for another thread
-        while not self.applyAction[agentIndex] is None:
+        while not self.applyAction is None:
             pass
 
         
@@ -230,16 +235,20 @@ class HFOEnv(object):
       
     def step(self):
         """Performs the state transition and returns (statePrime.action,reward)"""   
-        for i in range(len(self.stepRequest)):
-            self.stepRequest[i] = True
+        #for i in range(len(self.stepRequest)):
+        #    self.stepRequest[i] = True
+        self.stepRequest = True
         #Wait until another thread completes the step
-        while True in self.stepRequest:
+        #while True in self.stepRequest:
+        while self.stepRequest:
             pass
-        statePrime = []
-        action = []
-        for agentIndex in range(self.agentsControl):
-            statePrime.append(self.get_state(agentIndex))
-            action.append(self.lastAction[agentIndex])
+        #statePrime = []
+        #action = []
+        #for agentIndex in range(self.agentsControl):
+        #    statePrime.append(self.get_state(agentIndex))
+        #    action.append(self.lastAction[agentIndex])
+        statePrime = self.get_state()
+        action = self.lastAction
         reward = self.observe_reward()
         return (statePrime,action,reward)
         
@@ -252,11 +261,12 @@ class HFOEnv(object):
             if self.lastStatus == hfo.GOAL:
                 self.goals += 1
         
-    def get_state(self, agentIndex=0):
+    def get_state(self):#, agentIndex=0):
         """Returns the state in the point of view of the agent. 
         The state features are filtered from the full set of features in the HFO server.
         """
-        return self.filter_features(self.hfoObj[agentIndex].getState())
+        #return self.filter_features(self.hfoObj[agentIndex].getState())
+        return self.filter_features(self.hfoObj.getState())
     
     def filter_features(self,stateFeatures):
         """Removes the irrelevant features from the HFO standard feature set"""   
@@ -288,8 +298,8 @@ class HFOEnv(object):
     def start_episode(self):
         """Start next evaluation episode"""
         self.lastStatus = hfo.IN_GAME
-        self.applyAction = [None]*self.agentsControl
-        self.actionParameter = [None]*self.agentsControl
+        self.applyAction = None#[None]*self.agentsControl
+        self.actionParameter = None#[None]*self.agentsControl
         
     def load_episode(self,episodeInfo):
         """For this domain the server performs the reset
@@ -316,7 +326,7 @@ class HFOEnv(object):
     def step(self):
         self.main.lastStatus = self.hfoObj.step()"""
     
-def connect_server(self,agentIndex):
+def connect_server(self):#,agentIndex):
         """Connects the client subprocess in the hfo server
             The learning process should be all executed in here because of strange
             errors in the HFO server when executing more than one client at the same time
@@ -325,7 +335,7 @@ def connect_server(self,agentIndex):
         connectPath = self.serverPath+'teams/base/config/formations-dt'
         
         #Connecting in the server
-        serverResponse = self.hfoObj[agentIndex].connectToServer(
+        serverResponse = self.hfoObj.connectToServer(#[agentIndex].connectToServer(
                 feature_set= hfo.HIGH_LEVEL_FEATURE_SET,
                 config_dir=connectPath,
                 server_port=self.serverPort,
@@ -334,40 +344,47 @@ def connect_server(self,agentIndex):
                 play_goalie=False)
         print("%%%% Server connection FeedBack:    " + str(serverResponse))
        
-        while not self.clearServer[agentIndex]:
+        while not self.clearServer:#[agentIndex]:
             #Wait until one action is chosen
-            while self.applyAction[agentIndex] is None and not self.clearServer[agentIndex]:
+            #while self.applyAction[agentIndex] is None and not self.clearServer[agentIndex]:
+            while self.applyAction is None and not self.clearServer:
                 #print("Waiting action")
                 time.sleep(0.0001)
             #Verifies if the agent should stop learning
-            if self.clearServer[agentIndex]:
+            if self.clearServer:
                 continue
                     
                 
             #Send action to HFO server.
-            if self.actionParameter[agentIndex] is None:
-                self.hfoObj[agentIndex].act(self.applyAction[agentIndex])
+            if self.actionParameter is None:#[agentIndex] is None:
+                #self.hfoObj[agentIndex].act(self.applyAction[agentIndex])
+                self.hfoObj.act(self.applyAction)
             else:
-                self.hfoObj[agentIndex].act(self.applyAction[agentIndex], self.actionParameter[agentIndex])
+                #self.hfoObj[agentIndex].act(self.applyAction[agentIndex], self.actionParameter[agentIndex])
+                self.hfoObj.act(self.applyAction, self.actionParameter)
              
-            self.applyAction[agentIndex] = None
-            self.actionParameter[agentIndex] = None
+            #self.applyAction[agentIndex] = None
+            self.applyAction = None
+            #self.actionParameter[agentIndex] = None
+            self.actionParameter = None
             #Perform HFO step
-            while not self.stepRequest[agentIndex] and not self.clearServer[agentIndex]:
+            #while not self.stepRequest[agentIndex] and not self.clearServer[agentIndex]:
+            while not self.stepRequest and not self.clearServer:
                 time.sleep(0.0001)
             #Should the agent stop learning?
-            if self.clearServer[agentIndex]:
+            if self.clearServer:
                 continue
                 
-            self.lastStatus = self.hfoObj[agentIndex].step()
+            #self.lastStatus = self.hfoObj[agentIndex].step()
+            self.lastStatus = self.hfoObj.step()#[agentIndex].step()
             if(self.lastStatus == hfo.SERVER_DOWN):
-                self.hfoObj[agentIndex].act(hfo.QUIT)
+                self.hfoObj.act(hfo.QUIT)#[agentIndex].act(hfo.QUIT)
                 print("%%%%%%% HFO Server Down, Ending Environment")
                 sys.exit(0)  
-            self.stepRequest[agentIndex] = False
+            self.stepRequest = False#[agentIndex] = False
         #When the clearServer is set as true, it is time to close the connection
-        self.hfoObj[agentIndex].act(hfo.QUIT)
-        self.clearServer[agentIndex] = False
+        self.hfoObj.act(hfo.QUIT)#[agentIndex].act(hfo.QUIT)
+        self.clearServer=False#[agentIndex] = False
                 
             
             

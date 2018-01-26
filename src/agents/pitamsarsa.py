@@ -27,7 +27,7 @@ class PITAMSARSA(SARSA):
     
     savedPot = {}
     
-    def __init__(self,seed=12345,alpha=0.7,epsilon=0.1,initQ = 0, decayRate = 0.92):
+    def __init__(self,seed=12345,alpha=0.7,epsilon=0.1,initQ = 0, decayRate = 0.92):#alpha=0.7,epsilon=0.1,initQ = 0, decayRate = 0.92):Given
         
         super(PITAMSARSA, self).__init__(seed=seed,alpha=alpha,epsilon=epsilon,initQ=initQ,decayRate=decayRate)
         
@@ -56,7 +56,8 @@ class PITAMSARSA(SARSA):
         else:        
             actions = self.environment.all_actions()
             if self.currentTask.get_domain_task() == "HFOTask":
-                completeState = self.environment.hfoObj[self.agentIndex].getState()
+                #completeState = self.environment.hfoObj[self.agentIndex].getState()
+                completeState = self.environment.hfoObj.getState()
                 PITAMMappings = OOUtil.get_PITAM_mappings(completeState,action,self.currentTask,self.previousTasks,self.previousQTables,getOtherActions=self.useBias,allActions=actions,agent=self)
             else:
                 PITAMMappings = OOUtil.get_PITAM_mappings(state,action,self.currentTask,self.previousTasks,self.previousQTables,getOtherActions=self.useBias,allActions=actions,agent=self)

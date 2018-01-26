@@ -116,6 +116,8 @@ def get_PITAM_mappings_hfo(completeState,action,targetTask,previousTasks,previou
     completeState = managerTarget.reorderFeatures(completeState)    
         
     for task in previousTasks:
+        if not task.name in previousQTables:
+            continue
         qTable = previousQTables[task.name]
         sourceFeatures = task.task_features()                
         friendsSource = sourceFeatures[0]
@@ -226,6 +228,9 @@ def get_PITAM_mappings_grid(state,action,targetTask,previousTasks,previousQTable
     for task in previousTasks:
           #Get Q-table     
           taskName = task.name
+          #In case the pruned curriculum is used and a source task was skipped
+          if not taskName in previousQTables:
+              continue
           qTable = previousQTables[taskName]
                 
           for stateAction in qTable.keys():

@@ -69,30 +69,29 @@ class GeneratedSourceOOCurriculum(ObjectOrientedCurriculum):
         dist = self.target_task.distance
         
         #Generate various distances
-        for i in np.arange(dist,1.0,0.2):
+        for i in np.arange(dist+0.2,1.0,0.2):
             simpleSet.append(i)
-        
+
         numFriends = self.target_task.numberFriends
         numEnemies = self.target_task.numberEnemies
-        
         #Generates tasks as in the algorithm
         for i in range(self.repGeneration):
            for y in range(0,min(numFriends,numEnemies)+1):
                #Draw q objects from each class
                if numFriends > numEnemies:
-                    numFriends = random.choice(range(y,numFriends+1))
-                    numEnemies = random.choice(range(0,numEnemies+1))
+                    numFriendsTask = random.choice(range(y,numFriends+1))
+                    numEnemiesTask = random.choice(range(0,numEnemies+1))
                else:
-                    numFriends = random.choice(range(0,numFriends+1))
-                    numEnemies = random.choice(range(y,numEnemies+1))
+                    numFriendsTask = random.choice(range(0,numFriends+1))
+                    numEnemiesTask = random.choice(range(y,numEnemies+1))
                
                #Draw F from Fsimple
                distance = random.choice(simpleSet)
                enStrategy = self.target_task.strategy
                #Stores state in file
-               state = str(numFriends) + ";" + str(numEnemies) + ";" + enStrategy + ";" + str(distance) + ";" + str(random.randint(0,1000))
+               state = str(numFriendsTask) + ";" + str(numEnemiesTask) + ";" + enStrategy + ";" + str(distance) + ";" + str(random.randint(0,1000))
                
-               fileName = self.workFolder + "friends_" + str(numFriends) + '_enemies_' + str(numEnemies) + '_dist_' + str(int(distance*10)) + enStrategy + '.task'
+               fileName = self.workFolder + "friends_" + str(numFriendsTask) + '_enemies_' + str(numEnemiesTask) + '_dist_' + str(int(distance*10)) + enStrategy + '.task'
                with open(fileName,'w') as opFile:
                    opFile.write(state)
                    opFile.close()
@@ -104,8 +103,8 @@ class GeneratedSourceOOCurriculum(ObjectOrientedCurriculum):
                         [5,5],
                         #[2,2],
                         [3,3],
-                        [7,7],
-                        #[5,1],
+                        #[7,7],
+                        [5,1],
                         #[1,5]
                     ]
         num_fires = self.target_task.num_fires()

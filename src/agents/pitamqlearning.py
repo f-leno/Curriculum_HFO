@@ -20,14 +20,15 @@ class PITAMQLearning(QLearning):
     calculatedPITAM = {}
     
     useBias = False
-    biasValue = 0.01
+    biasValue = 0.0001
     
     calcAverage = True #If true, the average value is transferred, if false, the maximum is transferred.
     
     savedPot = {}
     
-    def __init__(self, seed=12345,alpha=0.5,epsilon=0.1,initQ=0):
-        
+    #def __init__(self, seed=12345,alpha=0.5,epsilon=0.1,initQ=0): #No curriculum and Svetlik?
+    def __init__(self, seed=12345, alpha=0.9, epsilon=0.1, initQ=0): #OO-GGiven
+    #def __init__(self, seed=12345, alpha=0.95, epsilon=0.1, initQ=0): OO-Generated
         super(PITAMQLearning, self).__init__(seed=seed,alpha=alpha,initQ=initQ)
         
  

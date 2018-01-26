@@ -14,13 +14,13 @@ import csv
 import random
 #from domain.environment import GridWorld
 
-#from domain.graphics_gridworld import GraphicsGridworld
+from domain.graphics_gridworld_pil import GraphicsGridworld
 import os
 #from cmac import CMAC
 
 
 #from agents.agent import Agent
-debugImage=False
+
   
 
 
@@ -60,7 +60,8 @@ def get_args():
     parser.add_argument('-ca','--curriculum_alg',default='NoneCurriculum')
     parser.add_argument('-ter','--termination',default="Termination10Episodes")
     parser.add_argument('-do','--domain',choices=['GridWorld','HFODomain'],default="HFODomain")
-    parser.add_argument('-an', '--agent_number', type=int, default=1)
+    parser.add_argument('-ss', '--screenshot', action='store_true')
+    #parser.add_argument('-an', '--agent_number', type=int, default=1)
 
 
     return parser.parse_args()
@@ -87,7 +88,7 @@ def evaluate_now(episodes,totalSteps,parameter,lastEpisodeFinished):
     """
         Defines if the evaluation should be carried out now
     """
-    
+
     
     if parameter.type_evaluation == 'episode':
         evaluate = episodes  % parameter.evaluation_interval == 0 and lastEpisodeFinished
@@ -104,22 +105,22 @@ def build_objects():
     """
      
     parameter = get_args()
-    AGENT = []
-    for agentIndex in range(parameter.agent_number):
-        agentName = getattr(parameter,"algorithm")
-        print ("Algorithm: "+agentName)
-        try:
-                AgentClass = getattr(
-                   __import__('agents.' + (agentName).lower(),
-                              fromlist=[agentName]),
-                              agentName)
-        except ImportError as error:
-                print (error)
-                sys.stderr.write("ERROR: missing python module: " +agentName + "\n")
-                sys.exit(1)
+    #AGENT = []
+    #for agentIndex in range(parameter.agent_number):
+    agentName = getattr(parameter,"algorithm")
+    print ("Algorithm: "+agentName)
+    try:
+            AgentClass = getattr(
+               __import__('agents.' + (agentName).lower(),
+                          fromlist=[agentName]),
+                          agentName)
+    except ImportError as error:
+            print (error)
+            sys.stderr.write("ERROR: missing python module: " +agentName + "\n")
+            sys.exit(1)
 
-        AGENT.append(AgentClass(seed=parameter.seed))
- 
+    #AGENT.append(AgentClass(seed=parameter.seed))
+    AGENT =  AgentClass(seed=parameter.seed)
     #ok AGENT
         
     
@@ -135,8 +136,9 @@ def build_objects():
             print( error)
             sys.stderr.write("ERROR: missing python module: " +curriculumName + "\n")
             sys.exit(1)
-        
-    CURRICULUM = CurriculumClass(seed=parameter.seed,agent = AGENT)
+    randomState = random.getstate()
+    CURRICULUM = CurriculumClass(seed=random.randint(0,10000),agent = AGENT)
+    random.setstate(randomState)
     
     
     terminationName = getattr(parameter,"termination")
@@ -180,9 +182,8 @@ def main():
     parameter.task_path = parameter.task_path + parameter.domain + "/target.task" 
     #Full path for source tasks
     parameter.source_folder = parameter.source_folder + parameter.domain + "/source/"
-    
-    
-    
+
+    debugImage = parameter.screenshot
 
     
     for trial in range(parameter.init_trials,parameter.end_trials+1):
@@ -200,7 +201,8 @@ def main():
         
         print('***** %s: Start Trial' % str(trial))            
         random.seed(parameter.seed+trial)
-        agents,curriculum,termination,domain = build_objects()
+        #agents,curriculum,termination,domain = build_objects()
+        agent, curriculum, termination, domain = build_objects()
         
         #links the curriculum algorithm with the learning agent
         #curriculum.set_agent(agent)
@@ -225,17 +227,18 @@ def main():
         while not curriculum.empty_curriculum():
             task = curriculum.draw_task()
             termination.init_task()
-            agentsOnTask = agents[0:task.agents_on_task()]
+            #agentsOnTask = agents[0:task.agents_on_task()]
             print("*****Initiating new task")
             #Initiate task
-            environment = domain.build_environment_from_task(task=task,limitSteps=200, agentsControl=parameter.agent_number)
+            environment = domain.build_environment_from_task(task=task,limitSteps=200)#, agentsControl=parameter.agent_number)
 
-            time.sleep(2)
+
             
             #environment = environment_target
             environment.start_episode()
             if debugImage:
-                    g = GraphicsGridworld(environment)
+                g = GraphicsGridworld(environment)
+
             
             episodes = 0
             steps = 0
@@ -247,12 +250,17 @@ def main():
                 #Check if it is time to policy evaluation and the agent is training in the target task
                 if task==target_task and evaluate_now(totalEpisodes,totalSteps,parameter,lastEpisodeFinished):
 #--------------------------------------- Policy Evaluation---------------------------------------------
-                    environment_target = domain.build_environment_from_task(task=target_task,limitSteps=200, agentsControl=parameter.agent_number)
+                    environment_target = domain.build_environment_from_task(task=target_task,limitSteps=200)#, agentsControl=parameter.agent_number)
+
+                    if debugImage:
+                        g = GraphicsGridworld(environment_target)
                     import time
                     time.sleep(2)
-                    for agentIndex in range(len(agentsOnTask)):
-                        agentsOnTask[agentIndex].set_exploring(False)
-                        agentsOnTask[agentIndex].connect_env(environment_target,agentIndex)
+                    #for agentIndex in range(len(agentsOnTask)):
+                        #agentsOnTask[agentIndex].set_exploring(False)
+                        #agentsOnTask[agentIndex].connect_env(environment_target,agentIndex)
+                    agent.set_exploring(False)
+                    agent.connect_env(environment_target)
                     stepsToFinish = 0
                     #Executes the number of testing episodes specified in the parameter
                     sumR = 0
@@ -267,15 +275,19 @@ def main():
                                                 
                         while not terminal_target:
                             eval_step += 1
-                            for agentIndex in range(len(agentsOnTask)):
-                                state = environment_target.get_state(agentIndex)
-                                environment_target.act(agentsOnTask[agentIndex].select_action(state),agentIndex)
+                            #for agentIndex in range(len(agentsOnTask)):
+                                #state = environment_target.get_state(agentIndex)
+                                #environment_target.act(agentsOnTask[agentIndex].select_action(state), agentIndex)
+                            state = environment_target.get_state()
+                            environment_target.act(agent.select_action(state))
+
                             
                             #Process state transition
                             statePrime,action,reward = environment_target.step()        
                             #print(environment_target.lastStatus)
                             sumR += reward * curGamma
-                            curGamma = curGamma * agentsOnTask[0].gamma
+                            #curGamma = curGamma * agentsOnTask[0].gamma
+                            curGamma = curGamma * agent.gamma
                             
                             if reward==1.0:
                                 numGoals += 1
@@ -294,28 +306,38 @@ def main():
                     eval_csv_file.flush()
 
 
-                    for agentIndex in range(len(agentsOnTask)):
-                        agentsOnTask[agentIndex].set_exploring(True)
+                    #for agentIndex in range(len(agentsOnTask)):
+                        #agentsOnTask[agentIndex].set_exploring(True)
+                    agent.set_exploring(True)
                     environment_target.finish_learning()
                     #Rebuild environment for target task
                     
                     
                     print("*******Eval OK: EP:"+str(episodes)+" Steps:"+str(totalSteps)+" - Duration: "+str(stepsToFinish) + " - Goal Perc: "+ "{:.2f}".format(numGoals))
+                    if debugImage:
+                        g = GraphicsGridworld(environment)
 #-----------------------------------End Policy Evaluation---------------------------------------------
                 #One larning step is performed
                 totalSteps += 1
                 steps += 1
+
                 state = []
-                for agentIndex in range(len(agentsOnTask)):
-                    agentsOnTask[agentIndex].connect_env(environment,agentIndex)
-                    state.append(environment.get_state(agentIndex))
-                    environment.act(agentsOnTask[agentIndex].select_action(state[agentIndex]),agentIndex)
+                #for agentIndex in range(len(agentsOnTask)):
+                    #agentsOnTask[agentIndex].connect_env(environment,agentIndex)
+                    #state.append(environment.get_state(agentIndex))
+                    #environment.act(agentsOnTask[agentIndex].select_action(state[agentIndex]),agentIndex)
+                agent.connect_env(environment)
+                #state = environment.get_state(agentIndex)
+                state = environment.get_state()
+                environment.act(agent.select_action(state))
                 #Process state transition
                 statePrime,action,reward = environment.step()   
                 if debugImage:
                     g.update_state()
-                for agentIndex in range(len(agentsOnTask)):
-                    agentsOnTask[agentIndex].observe_reward(state[agentIndex],action[agentIndex],statePrime[agentIndex],reward)
+                    g.save_to_file('./screen/step'+str(totalSteps)+'.png')
+                #for agentIndex in range(len(agentsOnTask)):
+                    #agentsOnTask[agentIndex].observe_reward(state[agentIndex],action[agentIndex],statePrime[agentIndex],reward)
+                agent.observe_reward(state, action, statePrime,reward)
                 termination.observe_step(state,action,statePrime,reward)
                 
                 terminal = environment.is_terminal_state()
@@ -325,20 +347,24 @@ def main():
                     totalEpisodes += 1
                     episodes += 1
                     environment.start_episode()
-                    for agentIndex in range(len(agentsOnTask)):
-                        agentsOnTask[agentIndex].finish_episode()
+                    #for agentIndex in range(len(agentsOnTask)):
+                        #agentsOnTask[agentIndex].finish_episode()
+                    agent.finish_episode()
                     termination.finish_episode()
                     lastEpisodeFinished = True
                 else:
                     lastEpisodeFinished = False
-            for agentIndex in range(len(agentsOnTask)):
-                agentsOnTask[agentIndex].finish_learning()
+            #for agentIndex in range(len(agentsOnTask)):
+                #agentsOnTask[agentIndex].finish_learning()
+            agent.finish_learning()
             if debugImage:
-                        g.close()
+                        g.clear()
                 
             environment.finish_learning()    
         #Close result files
         eval_csv_file.close()
+        if debugImage:
+            g.process_video('./screen/convertVideo.sh')
          
     
     

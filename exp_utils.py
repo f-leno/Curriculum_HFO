@@ -66,7 +66,7 @@ def collect_experiment_data(source='/', runs=2, servers=1, agents=1, hfo=True):
  
     #print('len(evalGoalPercentages) %d --> %s %s' % (len(evalGoalPercentages), str(type(evalGoalPercentages[(1,20)])), str(evalGoalPercentages[(1,20)]) ))
     #print('len(evalGoalTimes) %d --> %s %s' % (len(evalGoalTimes), str(type(evalGoalTimes[(1,20)])), str(evalGoalTimes[(1,20)]) ))
-    
+
 
 
     headerLine = []
@@ -130,8 +130,12 @@ def summarize_experiment_data(source, confidence=0.95, hfo=True):
         #evalFileContent = np.loadtxt(open(evalFile, "rb"), skiprows=1, delimiter=",", unpack=True)
         evalFileContent = pd.read_csv(open(evalFile, "rb"), skiprows=0, delimiter=",")
         values = evalFileContent.values
+        #------------------------------------------------------------------------------------------------------------------
+        #Evaluates the data and removes episodes when they have less than 20% of points when compared to the maximum found
+        # ------------------------------------------------------------------------------------------------------------------
+        values = filter_small_samples(values, 0.2)
         import operator
-        listToSort = values.tolist()
+        listToSort = np.asarray(values).tolist()#.tolist()
         listToSort.sort(key=operator.itemgetter(0))
         values = np.array(listToSort)
         trials = values[:,0]
@@ -204,8 +208,10 @@ def cumulative_experiment_data(source,startingFrom=500,hfo=True):
         #evalFileContent = np.loadtxt(open(evalFile, "rb"), skiprows=1, delimiter=",", unpack=True)
         evalFileContent = pd.read_csv(open(evalFile, "rb"), skiprows=0, delimiter=",")
         values = evalFileContent.values
+        #filters episodes for which less than 20% of the repetitions exist
+        values = filter_small_samples(values, 0.2)
         import operator
-        listToSort = values.tolist()
+        listToSort = np.asarray(values).tolist()
         listToSort.sort(key=operator.itemgetter(0))
         values = np.array(listToSort)
         trials = values[:,0]
@@ -289,20 +295,23 @@ def cumulative_experiment_data(source,startingFrom=500,hfo=True):
                 csvfile.flush()
                 
 
-def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
-               source2 = None, name2 = "Algo2",significant2=None,
-               source3 = None, name3 = "Algo3",significant3=None,
-               source4 = None, name4 = "Algo4",significant4=None,
-               source5 = None, name5 = "Algo5",significant5=None,
-               source6 = None, name6 = "Algo5",significant6=None,
+def draw_graph(source1 = None, name1 = "Algo1",
+               source2 = None, name2 = "Algo2",
+               source3 = None, name3 = "Algo3",
+               source4 = None, name4 = "Algo4",
+               source5 = None, name5 = "Algo5",
+               source6 = None, name6 = "Algo5",
                what = "__SUMMARY_rewards", ci = True,nCol = 1,
                #Parameters introduced to allow plot control
-               xMin = None, xMax = None, yMin=None, yMax=None,bigFont=False
+               xMin = None, xMax = None, yMin=None, yMax=None,bigFont=False,markEvery=None,
                ):
     plt.figure(figsize=(20,6), dpi=300)
     #Background
     plt.gca().set_axis_bgcolor('white')
     plt.grid(True,color='0.8')
+
+    colors = ['#d7191c','#1a9641','#fdae61','#a6d96a','#fee08b','#d9ef8b']
+    # 7570b3 #e7298a #66a61e #e6ab02
     
     lineWidth = 8.0 if bigFont else 4.0   
 
@@ -312,6 +321,9 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
             episodes = False
     else:
             episodes = True
+
+    markerSize = 20 if bigFont else 8
+
     
     if source1 != None:
         summary1File = os.path.join(source1, what)
@@ -319,12 +331,12 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
         X1 = summary1Content[0]
         Y11, Y12, Y13 = summary1Content[1],summary1Content[2],summary1Content[3]
         if ci:
-            plt.fill_between(X1, Y11, Y12, facecolor='#7570b3', alpha=0.2)
-            plt.fill_between(X1, Y11, Y13, facecolor='#7570b3', alpha=0.2)
-        if(not significant1 is None):
-           plt.plot(X1,Y11,label=name1, color='#7570b3', linewidth=lineWidth,markevery=significant1,marker="d",markersize=8)
-        else:
-            plt.plot(X1,Y11,label=name1, color='#7570b3', linewidth=lineWidth)
+            plt.fill_between(X1, Y11, Y12, facecolor=colors[0], alpha=0.2)
+            plt.fill_between(X1, Y11, Y13, facecolor=colors[0], alpha=0.2)
+        #if(not significant1 is None):
+        #   plt.plot(X1,Y11,label=name1, color=colors[0], linewidth=lineWidth,markevery=significant1,marker="o",markersize=markerSize)
+        #else:
+        plt.plot(X1,Y11,label=name1, color=colors[0], linewidth=lineWidth,marker="o",markersize=markerSize,markevery=markEvery)
 
     if source2 != None:
         summary2File = os.path.join(source2, what)
@@ -332,12 +344,12 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
         X2 = summary2Content[0]
         Y21, Y22, Y23 = summary2Content[1],summary2Content[2],summary2Content[3]
         if ci:
-            plt.fill_between(X2, Y21, Y22, facecolor='#e7298a', alpha=0.2)
-            plt.fill_between(X2, Y21, Y23, facecolor='#e7298a', alpha=0.2)
-        if(not significant2 is None):
-            plt.plot(X2,Y21,label=name2, color='#e7298a', linewidth=lineWidth,markevery=significant2,marker="+",markersize=8)
-        else:
-            plt.plot(X2,Y21,label=name2, color='#e7298a', linewidth=lineWidth)
+            plt.fill_between(X2, Y21, Y22, facecolor=colors[1], alpha=0.2)
+            plt.fill_between(X2, Y21, Y23, facecolor=colors[1], alpha=0.2)
+        #if(not significant2 is None):
+        #    plt.plot(X2,Y21,label=name2, color=colors[1], linewidth=lineWidth,markevery=significant2,marker="s",markersize=8)
+        #else:
+        plt.plot(X2,Y21,label=name2, color=colors[1], linewidth=lineWidth,marker="s",markersize=markerSize,markevery=markEvery)
 
     if source3 != None:
         summary3File = os.path.join(source3, what)
@@ -345,12 +357,12 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
         X3 = summary3Content[0]
         Y31, Y32, Y33 = summary3Content[1],summary3Content[2],summary3Content[3]
         if ci:
-            plt.fill_between(X3, Y31, Y32, facecolor='#66a61e', alpha=0.2)
-            plt.fill_between(X3, Y31, Y33, facecolor='#66a61e', alpha=0.2)
-        if(not significant3 is None):
-            plt.plot(X3,Y31,label=name3, color='#66a61e', linewidth=lineWidth,marker="o",markevery=significant3,markersize=8)
-        else:
-            plt.plot(X3,Y31,label=name3, color='#66a61e', linewidth=lineWidth)
+            plt.fill_between(X3, Y31, Y32, facecolor=colors[2], alpha=0.2)
+            plt.fill_between(X3, Y31, Y33, facecolor=colors[2], alpha=0.2)
+        #if(not significant3 is None):
+        #    plt.plot(X3,Y31,label=name3, color=colors[2], linewidth=lineWidth,marker="D",markevery=significant3,markersize=8)
+        #else:
+        plt.plot(X3,Y31,label=name3, color=colors[2], linewidth=lineWidth,marker="D",markersize=markerSize,markevery=markEvery)
 
     if source4 != None:
         summary4File = os.path.join(source4, what)
@@ -358,12 +370,12 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
         X4 = summary4Content[0]
         Y41, Y42, Y43 = summary4Content[1],summary4Content[2],summary4Content[3]
         if ci:
-            plt.fill_between(X4, Y41, Y42, facecolor='#e6ab02', alpha=0.2)
-            plt.fill_between(X4, Y41, Y43, facecolor='#e6ab02', alpha=0.2)
-        if(not significant4 is None):
-            plt.plot(X4,Y41,label=name4, color='#e6ab02', linewidth=lineWidth,markevery=significant4,marker="H",markersize=8)
-        else:
-            plt.plot(X4,Y41,label=name4, color='#e6ab02', linewidth=lineWidth)
+            plt.fill_between(X4, Y41, Y42, facecolor=colors[3], alpha=0.2)
+            plt.fill_between(X4, Y41, Y43, facecolor=colors[3], alpha=0.2)
+        #if(not significant4 is None):
+        #    plt.plot(X4,Y41,label=name4, color=colors[3], linewidth=lineWidth,markevery=significant4,marker="*",markersize=8)
+        #else:
+        plt.plot(X4,Y41,label=name4, color=colors[3], linewidth=lineWidth,marker="*",markersize=markerSize+4,markevery=markEvery)
 
     if source5 != None:
         summary5File = os.path.join(source5, what)
@@ -371,12 +383,12 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
         X5 = summary5Content[0]
         Y51, Y52, Y53 = summary5Content[1],summary5Content[2],summary5Content[3]
         if ci:
-            plt.fill_between(X5, Y51, Y52, facecolor='black', alpha=0.2)
-            plt.fill_between(X5, Y51, Y53, facecolor='black', alpha=0.2)
-        if(not significant5 is None):
-            plt.plot(X5,Y51,label=name5, color='black', linewidth=lineWidth,markevery=significant5,marker="x",markersize=8)
-        else:
-            plt.plot(X5,Y51,label=name5, color='black', linewidth=lineWidth)
+            plt.fill_between(X5, Y51, Y52, facecolor=colors[4], alpha=0.2)
+            plt.fill_between(X5, Y51, Y53, facecolor=colors[4], alpha=0.2)
+        #if(not significant5 is None):
+        #    plt.plot(X5,Y51,label=name5, color=colors[4], linewidth=lineWidth,markevery=significant5,marker="x",markersize=8)
+        #else:
+        plt.plot(X5,Y51,label=name5, color=colors[4], linewidth=lineWidth,marker="x",markersize=markerSize,markevery=markEvery)
             
     if source6 != None:
         summary6File = os.path.join(source6, what)
@@ -384,12 +396,12 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
         X6 = summary6Content[0]
         Y61, Y62, Y63 = summary6Content[1],summary6Content[2],summary6Content[3]
         if ci:
-            plt.fill_between(X6, Y61, Y62, facecolor='black', alpha=0.2)
-            plt.fill_between(X6, Y61, Y63, facecolor='black', alpha=0.2)
-        if(not significant6 is None):
-            plt.plot(X6,Y61,label=name6, color='#999999', linewidth=lineWidth,markevery=significant6,marker="^",markersize=8)
-        else:
-            plt.plot(X6,Y61,label=name6, color='#999999', linewidth=lineWidth)
+            plt.fill_between(X6, Y61, Y62, facecolor=colors[5], alpha=0.2)
+            plt.fill_between(X6, Y61, Y63, facecolor=colors[5], alpha=0.2)
+        #if(not significant6 is None):
+        ##    plt.plot(X6,Y61,label=name6, color=colors[5], linewidth=lineWidth,markevery=significant6,marker="^",markersize=8)
+        #else:
+        plt.plot(X6,Y61,label=name6, color=colors[5], linewidth=lineWidth,marker="^",markersize=markerSize)
             
     if not yMin is None:
             plt.ylim([yMin,yMax])
@@ -411,13 +423,13 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
         plt.ylabel('Cumul. Disc. Reward', fontsize=fontSize, fontweight='bold')
     elif what== "__SUMMARY_goal":
         plt.ylabel('Goal Percentage', fontsize=fontSize, fontweight='bold')
-    elif what == "__CUMULATIVE_goal":
+    elif what in ["__CUMULATIVE_goal","__CUM_SHIFTED_goal"]:
         plt.ylabel('Cumulative Goals', fontsize=fontSize, fontweight='bold')
     else:
         #plt.title('Unknown')
         plt.ylabel('Unknown')
     prefix = ""
-    if what== "__SHIFTED_rewards":
+    if "SHIFTED" in what:
         prefix = "Shifted "
     if episodes:
         plt.xlabel(prefix+'Training Episodes', fontsize=fontSize, fontweight='bold')
@@ -426,6 +438,20 @@ def draw_graph(source1 = None, name1 = "Algo1", significant1=None,
     plt.legend(loc='best',prop={'size':fontSize, 'weight':'bold'},ncol=nCol)
     plt.tick_params(axis='both', which='major', labelsize=axisSize)
     plt.show()
+
+def filter_small_samples(data,percentage):
+    """
+      ------------------------------------------------------------------------------------------------------------------
+      Evaluates the data and removes episodes when they have less than <percentage>% of points when compared to the maximum found
+      ------------------------------------------------------------------------------------------------------------------
+    """
+    # Number of repetitions in which this step was seen
+    countValids = [np.count_nonzero(~np.isnan(data[x])) - 1 for x in range(len(data))]
+    maxCount = max(countValids)
+    # deletes positions for good if the number of examples is less than 20% of the repetitions
+    data = [data[index] for index, value in enumerate(countValids) if value > percentage * maxCount]
+    return data
+
 
 
 def get_args():
@@ -438,10 +464,10 @@ def main():
     parameter = get_args()
 
     #--------
-    fileFolder = '/Users/leno/gitProjects/Curriculum_HFO/src/log/HFODomain/'
+    fileFolder = '/home/leno/gitProjects/Curriculum_HFO/src/log/HFODomain/'
 
     source1 = fileFolder + 'QLearning-NoneCurriculum'
-    source2 = fileFolder + 'PITAMSARSA-GeneratedSourceOOCurriculum'
+    source2 = fileFolder + 'PITAMSARSA-PrunedCurriculum'
     source3 = fileFolder + 'VFReuseQLearning-ObjectOrientedCurriculum'
     source4 = fileFolder + 'VFReuseQLearning-SvetlikCurriculum'
     #--------

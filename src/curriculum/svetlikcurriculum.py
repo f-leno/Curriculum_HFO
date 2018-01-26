@@ -40,7 +40,7 @@ class SvetlikCurriculum(Curriculum):
             if target_task.get_domain_task() == 'HFOTask':
                 thresholdTask = 0.75
             elif target_task.get_domain_task() == 'GridWorldTask':
-                thresholdTask = 3.5
+                thresholdTask = 0.8
 
 
         setOfTasks = self.read_folder(sourceFolder)
@@ -116,8 +116,9 @@ class SvetlikCurriculum(Curriculum):
     def draw_task(self):
         """ Returns the previously given task"""
         task = self.taskList[0]
-        for agentObj in self.agents:
-            agentObj.set_current_task(task)
+        #for agentObj in self.agents:
+        #    agentObj.set_current_task(task)
+        self.agent.set_current_task(task)
         del self.taskList[0]
         return task
     

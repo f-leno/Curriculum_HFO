@@ -5,9 +5,10 @@ Graphic representation of the Gridworld
 @author: Leno
 """
 
-import Tkinter
+import tkinter
 import os
 from PIL import Image, ImageTk
+import pyscreenshot as ImageGrab #Only works for Linux (Maybe use ImageGrab from PIL package for Windows/Mac)
 
 class GraphicsGridworld():
     width = 800
@@ -15,6 +16,8 @@ class GraphicsGridworld():
     window = None
     canvas = None
     imageFolder = os.path.dirname(os.path.abspath(__file__))
+
+    imageRepo = [] #preventing garbage collection
     
     #Images
     agent = None
@@ -26,11 +29,13 @@ class GraphicsGridworld():
     squareY = None
     sizeX = None
     sizeY = None
+
+
     
     
     def __init__(self,environment):
         """Visual illustration of the Gridworld domain. Needs a link with the GridWorld class (environment.py)"""
-        self.window = Tkinter.Tk()
+        self.window = tkinter.Tk()
         
         self.sizeX = environment.sizeX
         self.sizeY = environment.sizeY
@@ -38,31 +43,36 @@ class GraphicsGridworld():
         if self.squareX==1:
              self.width / self.sizeY
         else:
-            self.squareX = self.width / self.sizeX
+            self.squareX = int(self.width / self.sizeX)
         if self.sizeY==1:
-             self.squareY = self.height / self.sizeX
+             self.squareY = int(self.height / self.sizeX)
         else:
-             self.squareY = self.height / self.sizeY
+             self.squareY = int(self.height / self.sizeY)
         
-        self.canvas = Tkinter.Canvas(self.window,width=self.squareX * self.sizeX, height=self.squareY * self.sizeY)
-        
+        self.canvas = tkinter.Canvas(self.window,width=self.squareX * self.sizeX, height=self.squareY * self.sizeY)
+
+
         
         
         image = Image.open(self.imageFolder + "/agent.png")
         image = image.resize((self.squareX, self.squareY), Image.ANTIALIAS)
         self.agent = ImageTk.PhotoImage(image)
+        self.imageRepo.append(image)
         
         image = Image.open(self.imageFolder + "/treasure.png")
         image = image.resize((self.squareX, self.squareY), Image.ANTIALIAS)
-        self.treasure = ImageTk.PhotoImage(image)        
-  
+        self.treasure = ImageTk.PhotoImage(image)
+        self.imageRepo.append(image)
+
         image = Image.open(self.imageFolder + "/fire.png")
         image = image.resize((self.squareX, self.squareY), Image.ANTIALIAS)
         self.fire = ImageTk.PhotoImage(image)
-        
+        self.imageRepo.append(image)
+
         image = Image.open(self.imageFolder + "/pit.png")
         image = image.resize((self.squareX, self.squareY), Image.ANTIALIAS)
         self.pit = ImageTk.PhotoImage(image)
+        self.imageRepo.append(image)
 
         #Link to environment object        
         self.environment = environment
@@ -102,6 +112,7 @@ class GraphicsGridworld():
         self.canvas.pack()
         self.canvas.update()
         self.window.update()
+
         
         #self.window.mainloop()
         
@@ -113,7 +124,7 @@ class GraphicsGridworld():
         if x>=1 and x<=self.sizeX and y>=1 and y<=self.sizeY:
             realX = self.squareX*(x-1)
             realY = self.squareY*(y-1)
-            self.canvas.create_image(realX, realY, image = image, anchor = Tkinter.NW,tags = 'obj')
+            self.canvas.create_image(realX, realY, image = image, anchor = tkinter.NW,tags = 'obj')
 
     def clear(self):
         self.canvas.delete('obj')        
@@ -121,6 +132,13 @@ class GraphicsGridworld():
     def close(self):
         self.window.destroy()
         
-        
+    def save_to_file(self,fileName):
+        grab = ImageGrab.grab(bbox=(self.canvas.winfo_rootx(),
+                                    self.canvas.winfo_rooty(),
+                                    self.canvas.winfo_rootx()+self.canvas.winfo_width(),
+                                    self.canvas.winfo_rooty() + self.canvas.winfo_height(),
+                                    ))
+        grab.save(fileName)
+
         
 

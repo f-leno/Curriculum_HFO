@@ -12,8 +12,8 @@ from terminationcondition import TerminationCondition
 class Termination10Episodes(TerminationCondition):
     
     tolerance = 0.01 #Tolerance in % of cummulative reward differences
-    limitation = 10 #Maximum number of episodes per task
-    consecutive = 2
+    limitation = 30#10 #Maximum number of episodes per task
+    consecutive = 2#2
     currentEpisode = 1
     rewardList = []
     currentSumReward = 0

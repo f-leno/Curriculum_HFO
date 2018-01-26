@@ -20,7 +20,7 @@ class ObjectOrientedCurriculum(SvetlikCurriculum):
             if target_task.get_domain_task() == 'HFOTask':
                 thresholdTask = 3.2
             elif target_task.get_domain_task() == 'GridWorldTask':
-                thresholdTask = 40
+                thresholdTask = 42#40
         super(ObjectOrientedCurriculum,self).generate_curriculum(target_task=target_task,sourceFolder=sourceFolder,
              workFolder=workFolder,thresholdTask=thresholdTask)
     def generate_curriculum_from_tasks(self,target_task, taskList,thresholdTask = None):
@@ -29,7 +29,7 @@ class ObjectOrientedCurriculum(SvetlikCurriculum):
             if target_task.get_domain_task() == 'HFOTask':
                 thresholdTask = 3.2
             elif target_task.get_domain_task() == 'GridWorldTask':
-                thresholdTask = 40
+                thresholdTask = 42
         super(ObjectOrientedCurriculum,self).generate_curriculum_from_tasks(target_task=target_task,taskList=taskList,
              thresholdTask=thresholdTask)
         

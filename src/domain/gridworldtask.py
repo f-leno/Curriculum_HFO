@@ -144,7 +144,9 @@ class GridWorldTask(Task):
                 #If equivalent state exists
                 if all(x in distTarget for x in distSource):
                     applicable += 1
-                    
+
+        if(sizeXSource*sizeYSource > sizeXTarget*sizeYTarget):
+            return 0
         #Now, calculates potential
         pot = float(applicable) / (1 + sizeXTarget*sizeYTarget - sizeXSource*sizeYSource)
         return pot

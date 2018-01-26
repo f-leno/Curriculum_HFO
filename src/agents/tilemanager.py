@@ -13,7 +13,7 @@ class TileManager():
     numtilings = 5 #Number of tiles
 
     memctFriend = 48 #memory for hashtable
-    numtilingsFriend = 5 #Number of tiles
+    numtilingsFriend = 2 #Number of tiles
     
     def get_tiles(self,state):
         """Transform a state composed of a group of continous features to tiles"""

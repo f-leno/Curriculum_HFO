@@ -37,10 +37,10 @@ class Agent(object):
         
 
        
-    def connect_env(self,environment,agentIndex):
+    def connect_env(self,environment):#,agentIndex):
         """Connects to the domain environment"""
         self.environment = environment
-        self.agentIndex = agentIndex
+        #self.agentIndex = agentIndex
         
 
     @abc.abstractmethod

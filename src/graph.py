@@ -97,6 +97,13 @@ class Graph(object):
             if len(self.inEdges[k])==0:
                 nodes.append(k)
         return nodes
+    def zero_outDegree_nodes(self):
+        """Returns all nodes with zero in-degree"""
+        nodes = []
+        for k in self._graph.keys():
+            if len(self._graph[k])==0:
+                nodes.append(k)
+        return nodes
     def remove_edges_from(self,node):
         """Remove all edges from the node"""
         destin = self._graph[node]
@@ -106,6 +113,9 @@ class Graph(object):
         
     def list_children(self,node):
         return self.inEdges[node]
+
+    def list_parents(self,node):
+        return self._graph[node]
     
     def all_nodes(self):
         return self._graph.keys()
