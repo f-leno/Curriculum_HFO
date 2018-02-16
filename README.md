@@ -9,7 +9,7 @@ Paper bib entry: <br><br>
  @inproceedings{SilvaAndCosta2018,<br>
   author    = {Silva, Felipe Leno Da and <br>
   			       Anna Helena Reali Costa},<br>
-  title     = {{Object-Oriented CUrriculum Generation for Reinforcement Learning}},<br>
+  title     = {{Object-Oriented Curriculum Generation for Reinforcement Learning}},<br>
   booktitle = {Proceedings of the 17th International Conference on Autonomous Agents and Multiagent Systems (AAMAS)},<br>
     year      = {2018}<br>
  }
