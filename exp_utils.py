@@ -265,8 +265,9 @@ def cumulative_experiment_data(source,startingFrom=500,hfo=True):
         #Finds initial step
         evalFileContent = pd.read_csv(open(evalFile, "rb"), skiprows=0, delimiter=",")
         values = evalFileContent.values
+        values = filter_small_samples(values, 0.2)
         import operator
-        listToSort = values.tolist()
+        listToSort = np.asarray(values).tolist()
         listToSort.sort(key=operator.itemgetter(0))
         values = np.array(listToSort)
         trials = values[:,0]
@@ -421,7 +422,7 @@ def draw_graph(source1 = None, name1 = "Algo1",
     elif what == "__CUMULATIVE_rewards":
         #plt.title('Goal Percentage per Trial')
         plt.ylabel('Cumul. Disc. Reward', fontsize=fontSize, fontweight='bold')
-    elif what== "__SUMMARY_goal":
+    elif what in ["__SUMMARY_goal","__SHIFTED_goal"]:
         plt.ylabel('Goal Percentage', fontsize=fontSize, fontweight='bold')
     elif what in ["__CUMULATIVE_goal","__CUM_SHIFTED_goal"]:
         plt.ylabel('Cumulative Goals', fontsize=fontSize, fontweight='bold')
@@ -432,9 +433,9 @@ def draw_graph(source1 = None, name1 = "Algo1",
     if "SHIFTED" in what:
         prefix = "Shifted "
     if episodes:
-        plt.xlabel(prefix+'Training Episodes', fontsize=fontSize, fontweight='bold')
+        plt.xlabel(prefix+'Learning Episodes', fontsize=fontSize, fontweight='bold')
     else:
-        plt.xlabel(prefix+'Training Steps', fontsize=fontSize, fontweight='bold')
+        plt.xlabel(prefix+'Learning Steps', fontsize=fontSize, fontweight='bold')
     plt.legend(loc='best',prop={'size':fontSize, 'weight':'bold'},ncol=nCol)
     plt.tick_params(axis='both', which='major', labelsize=axisSize)
     plt.show()
